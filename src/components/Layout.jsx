@@ -6,10 +6,10 @@ import Footer from './footer';
 
 const inter = Inter({ subsets: ['latin'] })
 
-const Layout = ({ children, onDataReceived }) => {
+const Layout = ({ children }) => {
   return (
     <>
-      <Nav onDataReceived={onDataReceived}/>
+      <Nav />
           <main className={`${inter.className}` + " p-12"}>
               {children}
           </main>

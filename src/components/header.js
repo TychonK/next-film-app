@@ -2,22 +2,17 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
+export default function Nav() {
+  const [query, setQuery] = useState("");
 
-export default function Nav({ onDataReceived }) {
   const router = useRouter()
-
-  const [query, setQuery] = useState('')
 
   const hadleChange = (e) => {
     setQuery(e.target.value)
   }
 
   const handleSubmit = () => {
-    
-    if (router.pathname !== "/movies") {
-     router.push('/movies')
-    }
-    onDataReceived(query);
+    router.push(`/movies?search=${query}`)
   }
 
   return (
@@ -53,7 +48,7 @@ export default function Nav({ onDataReceived }) {
                 " flex items-center px-4 -mb-1 border-b-2 border-transparent"
               }
             >
-              Movies
+              Movies search
             </Link>
           </li>
         </ul>

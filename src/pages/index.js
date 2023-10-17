@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import axios from 'axios';
-import { useRouter } from "next/router";
+import useSWR from "swr";
 
-import Layout from '@/components/Layout';
 import Loader from '@/components/loader';
 import Card from '@/components/card';
 
@@ -11,15 +10,16 @@ const API_BEARER = process.env.NEXT_PUBLIC_API_BEARER;
 axios.defaults.headers.common["Authorization"] = "Bearer ".concat(API_BEARER);
 
 export default function Home() {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const router = useRouter();
+  const { data, error, isLoading } = useSWR(
+    "https://api.themoviedb.org/3/trending/movie/week?language=en-US",
+    fetchData
+  );
 
-  const fetchData = async () => {
-    setLoading(true)
+  async function fetchData (url) {
     const dataObj = {}
+
     await axios
-      .get("https://api.themoviedb.org/3/trending/movie/week?language=en-US")
+      .get(url)
       .then(function (res) {
         dataObj.films = res.data.results;
       })
@@ -37,22 +37,18 @@ export default function Home() {
       })
       .finally(() => {
         console.log(dataObj)
-        setData(dataObj)
-        setLoading(false);
       });
+    return dataObj
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   return (
-    <Layout>
+    <>
       <h1 className="text-4xl font-bold leadi md:text-5xl text-center">
         Check out the latest week's trends
       </h1>
 
-      {loading && <Loader />}
+      {isLoading && <Loader />}
+      {error && <p>no data was received</p>}
 
       <ul className="flex flex-row flex-wrap justify-around">
         {data &&
@@ -68,6 +64,6 @@ export default function Home() {
             return <Card movData={mov} genres={movGenres} />;
           })}
       </ul>
-    </Layout>
+    </>
   );
 }
