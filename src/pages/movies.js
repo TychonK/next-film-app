@@ -5,14 +5,25 @@ import { useRouter } from "next/router";
 
 import Loader from "@/components/loader";
 import Card from "@/components/card";
-import Custom404 from "./404";
+import Placeholder from "@/components/placehoder";
+import NotFound from "@/components/notFound";
 
-const API_BEARER = process.env.NEXT_PUBLIC_API_BEARER;
+import { fetchGenres } from "@/lib/fetchGenres";
+import { initAxios } from "@/lib/axios";
 
-axios.defaults.headers.common["Authorization"] = "Bearer ".concat(API_BEARER);
+initAxios();
 
-export default function Home() {
-  const router = useRouter()
+export async function getStaticProps() {
+  const allGenres = await fetchGenres();
+  return {
+    props: {
+      genres: allGenres.genres,
+    },
+  };
+}
+
+export default function Home({ genres }) {
+  const router = useRouter();
   const { search } = router.query;
 
   const { data, error, isLoading } = useSWR(
@@ -23,10 +34,10 @@ export default function Home() {
   async function fetchData(url) {
     const dataObj = {};
 
-    if (search == undefined) {
-      return
+    if (search == undefined || search == '') {
+      return;
     }
-    
+
     await axios
       .get(url)
       .then(function (res) {
@@ -34,43 +45,43 @@ export default function Home() {
       })
       .catch((er) => {
         console.log(er);
-      }); 
-
-    await axios
-      .get("https://api.themoviedb.org/3/genre/movie/list?language=en")
-      .then(function (res) {
-        dataObj.genres = res.data.genres;
-      })
-      .catch((er) => {
-        console.log(er);
-      })
-      .finally(() => {
-        console.log(dataObj);
       });
+    if (dataObj.films.length == 0) {
+      throw new Error("No films found by such query");
+    }
     return dataObj;
   }
 
   return (
     <>
       <h1 className="text-4xl font-bold leadi md:text-5xl">
-        { !search ? "Search for movies and more..." : `The search results for ${search}` }
+        {!search ? (
+          "Search for movies and more..."
+        ) : (
+          <>
+            The search results for{" "}
+            <span className="italic underline">{search}</span>
+          </>
+        )}
       </h1>
 
-      {isLoading && <Loader />}
+      {isLoading && <Placeholder />}
 
       <ul className="flex flex-row flex-wrap justify-around">
+        {error && <NotFound/>}
         {data &&
           data.films.map((mov) => {
             const movGenres = [];
 
             mov.genre_ids.forEach((id) => {
-              data.genres.forEach((genre) => {
+              genres.forEach((genre) => {
                 genre.id == id && movGenres.push(genre.name);
               });
             });
 
             return <Card movData={mov} genres={movGenres} />;
-          })}
+          })
+        }
       </ul>
     </>
   );

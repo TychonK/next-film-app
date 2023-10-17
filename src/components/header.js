@@ -2,12 +2,14 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
+
+
 export default function Nav() {
   const [query, setQuery] = useState("");
 
   const router = useRouter()
 
-  const hadleChange = (e) => {
+  const hadleChange = async (e) => {
     setQuery(e.target.value)
   }
 
@@ -16,7 +18,7 @@ export default function Nav() {
   }
 
   return (
-     <header className="p-4 bg-gray-800 text-gray-100">
+    <header className="p-4 bg-gray-800 text-gray-100">
       <div className="container flex justify-between h-16 mx-auto">
         <ul className="items-stretch hidden space-x-3 lg:flex">
           <li className="flex">
@@ -87,11 +89,16 @@ export default function Nav() {
             </span>
             <input
               onChange={hadleChange}
+              onKeyDown={e => {
+                if (e.key === "Enter") {
+                  handleSubmit();
+                }
+              }}
               value={query}
               type="search"
               name="Search"
               placeholder="Search..."
-              className="w-32 py-2 pl-10 text-sm rounded-md sm:w-auto focus:outline-none bg-gray-800 text-gray-100 focus:bg-gray-900"
+              className="w-32 py-2 pl-10 text-base rounded-md sm:w-auto focus:outline-none bg-gray-800 text-gray-100 focus:bg-gray-900"
             />
           </div>
           <button

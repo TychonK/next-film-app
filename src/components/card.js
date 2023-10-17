@@ -14,9 +14,7 @@ export default function Card(props) {
           </span>
           <h2 className="text-xl font-semibold tracki">{movData.title}</h2>
           <div className="flex items-center text-xs">
-            <span>
-                        {genres.join(", ")}
-            </span>
+            <span>{genres.join(", ")}</span>
           </div>
           <div className="flex items-center space-x-2 text-yellow-500">
             <svg
@@ -28,6 +26,11 @@ export default function Card(props) {
             </svg>
             <span className="text-xl font-bold">
               {movData.vote_average.toFixed(1)}
+            </span>
+            <span className="">
+              {"("}
+                {movData.vote_count}
+              {")"}
             </span>
           </div>
           <div>
