@@ -46,21 +46,23 @@ export default function Home({ genres }) {
       </h1>
 
       {isLoading && <Loader />}
+      {/* flex-row flex-wrap justify-around */}
+      <div className="horizontal-fade relative">
+        <ul className="relative scroll-container pb-1 flex overflow-x-scroll rounded-md">
+          {data &&
+            data.films.map((mov) => {
+              const movGenres = [];
 
-      <ul className="flex flex-row flex-wrap justify-around">
-        {data &&
-          data.films.map((mov) => {
-            const movGenres = [];
-
-            mov.genre_ids.forEach((id) => {
-              genres.forEach((genre) => {
-                genre.id == id && movGenres.push(genre.name);
+              mov.genre_ids.forEach((id) => {
+                genres.forEach((genre) => {
+                  genre.id == id && movGenres.push(genre.name);
+                });
               });
-            });
 
-            return <Card movData={mov} genres={movGenres} />;
-          })}
-      </ul>
+              return <Card movData={mov} genres={movGenres} />;
+            })}
+        </ul>
+      </div>
     </>
   );
 }

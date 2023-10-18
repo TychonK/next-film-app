@@ -12,3 +12,29 @@ main {
   font-weight: 600;
   color: transparent;
 }
+
+.horizontal-fade::after {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      right: -15px;
+      bottom: 0;
+      pointer-events: none;
+      background-image: linear-gradient(to right, rgba(255,255,255,0) 30%, white 60%);
+      width: 5%;
+    }
+
+.scroll-container::-webkit-scrollbar {
+  height:8px;
+  width: 8px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px;
+}
+
+.scroll-container::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
