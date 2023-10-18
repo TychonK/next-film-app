@@ -4,7 +4,7 @@ import useSWR from "swr";
 import { useRouter } from "next/router";
 
 import Loader from "@/components/loader";
-import Card from "@/components/card";
+import Card from "@/components/CardFilm";
 import Placeholder from "@/components/placehoder";
 import NotFound from "@/components/notFound";
 
@@ -27,14 +27,14 @@ export default function Home({ genres }) {
   const { search } = router.query;
 
   const { data, error, isLoading } = useSWR(
-    `https://api.themoviedb.org/3/search/movie?query=${search}&include_adult=true&language=en-US`,
+    `https://api.themoviedb.org/3/search/movie?query=${search}&include_adult=false&language=en-US`,
     fetchData
   );
 
   async function fetchData(url) {
     const dataObj = {};
 
-    if (search == undefined || search == '') {
+    if (search == undefined || search == "") {
       return;
     }
 
@@ -65,10 +65,14 @@ export default function Home({ genres }) {
         )}
       </h1>
 
-      {isLoading && <Placeholder />}
+      {isLoading && (
+        <div className="flex flex-row flex-wrap">
+          <Placeholder number={8} />
+        </div>
+      )}
 
       <ul className="flex flex-row flex-wrap justify-around">
-        {error && <NotFound/>}
+        {error && <NotFound />}
         {data &&
           data.films.map((mov) => {
             const movGenres = [];
@@ -80,8 +84,7 @@ export default function Home({ genres }) {
             });
 
             return <Card movData={mov} genres={movGenres} />;
-          })
-        }
+          })}
       </ul>
     </>
   );

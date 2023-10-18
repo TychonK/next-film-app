@@ -1,4 +1,4 @@
-export default function Card(props) {
+export default function CardMov(props) {
     const {movData, genres} = props
   const baseUrlImg = "https://image.tmdb.org/t/p/w500/";
   const baseUrlBackdrop = "https://image.tmdb.org/t/p/w780/";

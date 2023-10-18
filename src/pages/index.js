@@ -1,9 +1,12 @@
-import React from 'react';
-import axios from 'axios';
+import React from "react";
+import axios from "axios";
 import useSWR from "swr";
 
-import Loader from '@/components/loader';
-import Card from '@/components/card';
+import Loader from "@/components/loader";
+import Title2 from "@/components/title2";
+import CardFilm from "@/components/CardFilm";
+import CardTv from "@/components/CardTv";
+import CardPpl from "@/components/CardPpl";
 
 import { fetchGenres } from "@/lib/fetchGenres";
 import { initAxios } from "@/lib/axios";
@@ -20,13 +23,35 @@ export async function getStaticProps() {
 }
 
 export default function Home({ genres }) {
-  const { data, error, isLoading } = useSWR(
+  const {
+    data: filmData,
+    error: filmError,
+    isLoading: filmIsLoading,
+  } = useSWR(
     "https://api.themoviedb.org/3/trending/movie/week?language=en-US",
-    fetchData
+    fetchFilmData
   );
 
-  async function fetchData (url) {
-    const dataObj = {}
+  const {
+    data: tvData,
+    error: tvError,
+    isLoading: tvIsLoading,
+  } = useSWR(
+    "https://api.themoviedb.org/3/trending/tv/week?language=en-US",
+    fetchTvData
+    );
+  
+    const {
+      data: pplData,
+      error: pplError,
+      isLoading: pplIsLoading,
+      } = useSWR(
+        "https://api.themoviedb.org/3/trending/person/week?language=en-US",
+        fetchPplData
+    );
+
+  async function fetchFilmData(url) {
+    const dataObj = {};
 
     await axios
       .get(url)
@@ -35,22 +60,50 @@ export default function Home({ genres }) {
       })
       .catch((er) => {
         console.log(er);
+      });
+    return dataObj;
+  }
+
+  async function fetchTvData(url) {
+    const dataObj = {};
+
+    await axios
+      .get(url)
+      .then(function (res) {
+        dataObj.tv = res.data.results;
       })
-    return dataObj
-  };
+      .catch((er) => {
+        console.log(er);
+      });
+    return dataObj;
+  }
+
+  async function fetchPplData(url) {
+    const dataObj = {};
+
+    await axios
+      .get(url)
+      .then(function (res) {
+        dataObj.ppl = res.data.results;
+      })
+      .catch((er) => {
+        console.log(er);
+      });
+    return dataObj;
+  }
 
   return (
     <>
       <h1 className="text-4xl font-bold leadi md:text-5xl text-center">
-        Check out the latest week's trends
+        The latest week's trends:
       </h1>
 
-      {isLoading && <Loader />}
-      {/* flex-row flex-wrap justify-around */}
-      <div className="horizontal-fade relative">
+      <div className="horizontal-fade relative mt-32">
+        <Title2 text="Movies" />
+        {filmIsLoading && <Loader />}
         <ul className="relative scroll-container pb-1 flex overflow-x-scroll rounded-md">
-          {data &&
-            data.films.map((mov) => {
+          {filmData &&
+            filmData.films.map((mov) => {
               const movGenres = [];
 
               mov.genre_ids.forEach((id) => {
@@ -59,7 +112,37 @@ export default function Home({ genres }) {
                 });
               });
 
-              return <Card movData={mov} genres={movGenres} />;
+              return <CardFilm movData={mov} genres={movGenres} />;
+            })}
+        </ul>
+      </div>
+
+      <div className="horizontal-fade relative mt-32">
+        <Title2 text="Series" />
+        {tvIsLoading && <Loader />}
+        <ul className="relative scroll-container pb-1 flex overflow-x-scroll rounded-md">
+          {tvData &&
+            tvData.tv.map((tv) => {
+              const movGenres = [];
+
+              tv.genre_ids.forEach((id) => {
+                genres.forEach((genre) => {
+                  genre.id == id && movGenres.push(genre.name);
+                });
+              });
+
+              return <CardTv tvData={tv} genres={movGenres} />;
+            })}
+        </ul>
+      </div>
+
+      <div className="horizontal-fade relative mt-32">
+        <Title2 text="People" />
+        {pplIsLoading && <Loader />}
+        <ul className="relative scroll-container pb-1 flex overflow-x-scroll rounded-md">
+          {pplData &&
+            pplData.ppl.map((person) => {
+              return <CardPpl personData={person} />;
             })}
         </ul>
       </div>
