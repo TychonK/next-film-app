@@ -5,3 +5,10 @@
 main {
     min-height: 80vh;
 }
+
+.fading-text {
+  background-image: linear-gradient(to bottom, #ffffff, #ffffff 50%, transparent 90%);
+  background-clip: text;
+  font-weight: 600;
+  color: transparent;
+}

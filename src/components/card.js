@@ -2,7 +2,7 @@ export default function Card(props) {
     const {movData, genres} = props
     const baseUrlImg = "https://image.tmdb.org/t/p/w500/";
     return (
-      <li className="mt-8 w-64 p-6 rounded-md shadow-md bg-gray-900 text-gray-50">
+      <li className="cursor-pointer relative h-card mt-8 w-64 p-6 rounded-md shadow-md bg-gray-900 text-gray-50">
         <img
           src={baseUrlImg + movData.poster_path}
           alt="Movie poster"
@@ -12,7 +12,12 @@ export default function Card(props) {
           <span className="block text-xs font-medium tracki uppercase text-violet-400">
             {movData.release_date}
           </span>
-          <h2 className="text-xl font-semibold tracki">{movData.title}</h2>
+          <h2
+            className="text-xl font-semibold tracki truncate"
+            title={movData.title}
+          >
+            {movData.title}
+          </h2>
           <div className="flex items-center text-xs">
             <span>{genres.join(", ")}</span>
           </div>
@@ -29,13 +34,18 @@ export default function Card(props) {
             </span>
             <span className="">
               {"("}
-                {movData.vote_count}
+              {movData.vote_count}
               {")"}
             </span>
           </div>
-          <div>
-            <p className="text-justify overflow-hidden">{movData.overview}</p>
+          <div className="h-28">
+            <p className="max-h-full text-justify fading-text overflow-hidden">
+              {movData.overview}
+            </p>
           </div>
+        </div>
+        <div className="flex flex-col absolute bottom-0 left-0 right-0 items-center justify-center pb-5 rounded-b-md text-white">
+          <p className="text-xl font-semibold leadi">...</p>
         </div>
       </li>
     );
