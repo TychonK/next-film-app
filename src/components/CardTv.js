@@ -14,7 +14,7 @@ export default function CardTv(props) {
             alt="Movie poster"
             className="object-cover object-center w-full rounded-md h-72 bg-gray-500"
           />
-          <div className="mt-6">
+          <div className="mt-4">
             <span className="block text-xs font-medium tracki uppercase text-violet-400">
               {tvData.first_air_date}
             </span>
@@ -64,7 +64,13 @@ export default function CardTv(props) {
             backgroundPosition: "center",
           }}
         >
-          <span className="block text-center font-medium tracki uppercase text-white-400">
+          <h2 className="text-3xl font-thin text-center" title={tvData.name}>
+            {tvData.name}
+          </h2>
+          <span className="block text-center font-light italic mt-2">
+            {genres.join(", ")}
+          </span>
+          <span className="block text-center font-medium tracki uppercase text-white-400 mt-2">
             first air on: <br /> {tvData.first_air_date}
           </span>
           <div className="flex flex-col items-center text-yellow-500 mt-2">

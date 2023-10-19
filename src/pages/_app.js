@@ -1,7 +1,7 @@
-import '@/styles/globals.css'
-import '@/styles/card.css'
+import "@/styles/globals.css";
+import "@/styles/card.css";
 
-import Layout from '@/components/Layout';
+import Layout from "@/pages/Layout";
 
 export default function App({ Component, pageProps }) {
   return (

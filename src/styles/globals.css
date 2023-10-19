@@ -25,6 +25,10 @@ main {
       width: 5%;
     }
 
+.scroll-container {
+  scroll-behavior: smooth;
+}
+
 .scroll-container::-webkit-scrollbar {
   height:8px;
   width: 8px;

@@ -14,7 +14,7 @@ export default function CardMov(props) {
             alt="Movie poster"
             className="object-cover object-center w-full rounded-md h-72 bg-gray-500"
           />
-          <div className="mt-6">
+          <div className="mt-4">
             <span className="block text-xs font-medium tracki uppercase text-violet-400">
               {movData.release_date}
             </span>
@@ -67,8 +67,14 @@ export default function CardMov(props) {
             backgroundPosition: "center",
           }}
         >
-          <span className="block text-center font-medium tracki uppercase text-white-400">
-            release date: <br/> {movData.release_date}
+          <h2 className="text-3xl font-thin text-center" title={movData.title}>
+            {movData.title}
+          </h2>
+          <span className="block text-center font-light italic mt-2">
+            {genres.join(", ")}
+          </span>
+          <span className="block text-center font-normal tracki uppercase text-white-400 mt-2">
+            release date: <br /> {movData.release_date}
           </span>
           <div className="flex flex-col items-center text-yellow-500 mt-2">
             <svg

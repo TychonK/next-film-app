@@ -2,8 +2,9 @@ import React from "react";
 import axios from "axios";
 import useSWR from "swr";
 
+import ScrollContainer from "@/components/ScrollContainer";
 import Loader from "@/components/loader";
-import Title2 from "@/components/title2";
+import Title2 from "@/components/Title2";
 import CardFilm from "@/components/CardFilm";
 import CardTv from "@/components/CardTv";
 import CardPpl from "@/components/CardPpl";
@@ -45,7 +46,7 @@ export default function Home({ genres }) {
       data: pplData,
       error: pplError,
       isLoading: pplIsLoading,
-      } = useSWR(
+    } = useSWR(
         "https://api.themoviedb.org/3/trending/person/week?language=en-US",
         fetchPplData
     );
@@ -100,8 +101,10 @@ export default function Home({ genres }) {
 
       <div className="horizontal-fade relative mt-32">
         <Title2 text="Movies" />
+
         {filmIsLoading && <Loader />}
-        <ul className="relative scroll-container pb-1 flex overflow-x-scroll rounded-md">
+
+        <ScrollContainer scrollTime={3000} containerId="movie">
           {filmData &&
             filmData.films.map((mov) => {
               const movGenres = [];
@@ -114,13 +117,15 @@ export default function Home({ genres }) {
 
               return <CardFilm movData={mov} genres={movGenres} />;
             })}
-        </ul>
+        </ScrollContainer>
       </div>
 
       <div className="horizontal-fade relative mt-32">
         <Title2 text="Series" />
+
         {tvIsLoading && <Loader />}
-        <ul className="relative scroll-container pb-1 flex overflow-x-scroll rounded-md">
+
+        <ScrollContainer scrollTime={3200} containerId="tv">
           {tvData &&
             tvData.tv.map((tv) => {
               const movGenres = [];
@@ -133,18 +138,20 @@ export default function Home({ genres }) {
 
               return <CardTv tvData={tv} genres={movGenres} />;
             })}
-        </ul>
+        </ScrollContainer>
       </div>
 
       <div className="horizontal-fade relative mt-32">
         <Title2 text="People" />
+
         {pplIsLoading && <Loader />}
-        <ul className="relative scroll-container pb-1 flex overflow-x-scroll rounded-md">
+
+        <ScrollContainer scrollTime={3500} containerId="ppl">
           {pplData &&
             pplData.ppl.map((person) => {
               return <CardPpl personData={person} />;
             })}
-        </ul>
+        </ScrollContainer>
       </div>
     </>
   );
