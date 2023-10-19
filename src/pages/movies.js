@@ -75,6 +75,9 @@ export default function Home({ genres }) {
         {error && <NotFound />}
         {data &&
           data.films.map((mov) => {
+            if (mov.overview.length == 0) {
+              return null
+            }
             const movGenres = [];
 
             mov.genre_ids.forEach((id) => {
@@ -84,7 +87,8 @@ export default function Home({ genres }) {
             });
 
             return <Card movData={mov} genres={movGenres} />;
-          })}
+          })
+          }
       </ul>
     </>
   );
