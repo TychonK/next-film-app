@@ -95,8 +95,8 @@ export default function Home({ genres }) {
 
   return (
     <>
-      <h1 className="text-4xl font-bold leadi md:text-5xl text-center">
-        The latest week's trends:
+      <h1 className="text-6xl md:text-9xl uppercase font-medium leadi text-center text-transparent bg-clip-text bg-gradient-to-b from-purple-700 to-pink-600">
+        Trending
       </h1>
 
       <div className="horizontal-fade relative mt-32">

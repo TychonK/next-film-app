@@ -10,7 +10,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <Nav />
-          <main className={`${inter.className}` + " p-12"}>
+          <main className={`${inter.className}` + " p-12 pl-16 pr-16"}>
               {children}
           </main>
       <Footer />
