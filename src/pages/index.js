@@ -9,21 +9,23 @@ import CardFilm from "@/components/CardFilm";
 import CardTv from "@/components/CardTv";
 import CardPpl from "@/components/CardPpl";
 
-import { fetchGenres } from "@/lib/fetchGenres";
+import { fetchGenresMov, fetchGenresTv } from "@/lib/fetchGenres";
 import { initAxios } from "@/lib/axios";
 
 initAxios();
 
 export async function getStaticProps() {
-  const allGenres = await fetchGenres();
+  const allGenresMov = await fetchGenresMov();
+  const allGenresTv = await fetchGenresTv();
   return {
     props: {
-      genres: allGenres.genres,
+      genresMov: allGenresMov.genres,
+      genresTv: allGenresTv.genres,
     },
   };
 }
 
-export default function Home({ genres }) {
+export default function Home({ genresMov, genresTv }) {
   const {
     data: filmData,
     error: filmError,
@@ -99,28 +101,28 @@ export default function Home({ genres }) {
         Trending
       </h1>
 
-      <div className="horizontal-fade relative mt-32">
-        <Title2 text="Movies" />
+      <div className="horizontal-fade relative">   
+          <Title2 text="Movies" />
 
-        {filmIsLoading && <Loader />}
+          {filmIsLoading && <Loader />}
 
-        <ScrollContainer scrollTime={3000} containerId="movie">
-          {filmData &&
-            filmData.films.map((mov) => {
-              const movGenres = [];
+          <ScrollContainer scrollTime={3000} containerId="movie">
+            {filmData &&
+              filmData.films.map((mov) => {
+                const movGenres = [];
 
-              mov.genre_ids.forEach((id) => {
-                genres.forEach((genre) => {
-                  genre.id == id && movGenres.push(genre.name);
+                mov.genre_ids.forEach((id) => {
+                  genresMov.forEach((genre) => {
+                    genre.id == id && movGenres.push(genre.name);
+                  });
                 });
-              });
 
-              return <CardFilm movData={mov} genres={movGenres} />;
-            })}
-        </ScrollContainer>
+                return <CardFilm movData={mov} genres={movGenres} />;
+              })}
+          </ScrollContainer>
       </div>
 
-      <div className="horizontal-fade relative mt-32">
+      <div className="horizontal-fade relative">
         <Title2 text="Series" />
 
         {tvIsLoading && <Loader />}
@@ -131,7 +133,7 @@ export default function Home({ genres }) {
               const movGenres = [];
 
               tv.genre_ids.forEach((id) => {
-                genres.forEach((genre) => {
+                genresTv.forEach((genre) => {
                   genre.id == id && movGenres.push(genre.name);
                 });
               });
@@ -141,7 +143,7 @@ export default function Home({ genres }) {
         </ScrollContainer>
       </div>
 
-      <div className="horizontal-fade relative mt-32">
+      <div className="horizontal-fade relative">
         <Title2 text="People" />
 
         {pplIsLoading && <Loader />}

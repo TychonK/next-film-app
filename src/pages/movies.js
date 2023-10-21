@@ -7,13 +7,13 @@ import Card from "@/components/CardFilm";
 import Placeholder from "@/components/placehoder";
 import NotFound from "@/components/notFound";
 
-import { fetchGenres } from "@/lib/fetchGenres";
+import { fetchGenresMov } from "@/lib/fetchGenres";
 import { initAxios } from "@/lib/axios";
 
 initAxios();
 
 export async function getStaticProps() {
-  const allGenres = await fetchGenres();
+  const allGenres = await fetchGenresMov();
   return {
     props: {
       genres: allGenres.genres,

@@ -6,7 +6,7 @@ export default function CardTv(props) {
     return (
       <li
         style={{ minWidth: "260px", maxWidth: "260px" }}
-        className="card cursor-pointer mr-8 mt-8 relative p-6 rounded-md shadow-md bg-gray-900 text-gray-50"
+        className="card mr-8 mt-8 relative p-6 rounded-md shadow-md bg-gray-900 text-gray-50"
       >
         <div className="front-content">
           <img

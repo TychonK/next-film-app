@@ -1,12 +1,18 @@
+import Link from "next/link";
+
 export default function CardMov(props) {
-    const {movData, genres} = props
+  const {movData, genres} = props
   const baseUrlImg = "https://image.tmdb.org/t/p/w500/";
   const baseUrlBackdrop = "https://image.tmdb.org/t/p/w780/";
   
-    return (
+  return (
+    <Link
+      href={`/films/${movData.id}`}
+      className="mr-8 mt-8"
+    >
       <li
         style={{ minWidth: "260px", maxWidth: "260px" }}
-        className="card cursor-pointer mr-8 mt-8 relative p-6 rounded-md shadow-md bg-gray-900 text-gray-50"
+        className="card relative p-6 rounded-md shadow-md bg-gray-900 text-gray-50"
       >
         <div className="front-content">
           <img
@@ -96,5 +102,6 @@ export default function CardMov(props) {
           <p className="text-center mt-2">{movData.overview}</p>
         </div>
       </li>
-    );
+    </Link>
+  );
 }
