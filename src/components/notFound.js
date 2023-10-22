@@ -16,7 +16,7 @@ export default function NotFound() {
           </svg>
         </div>
         <span>
-          Unfortunetely, we couldn't find any results for the query you provided. Please, try changing the query or search something else.
+          Unfortunetely, we couldn't find anything here.
         </span>
       </div>
     );

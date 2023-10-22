@@ -6,10 +6,7 @@ export default function CardMov(props) {
   const baseUrlBackdrop = "https://image.tmdb.org/t/p/w780/";
   
   return (
-    <Link
-      href={`/films/${movData.id}`}
-      className="mr-8 mt-8"
-    >
+    <Link href={`/films/${movData.id}`} className="mr-8 last:mr-0">
       <li
         style={{ minWidth: "260px", maxWidth: "260px" }}
         className="card relative p-6 rounded-md shadow-md bg-gray-900 text-gray-50"

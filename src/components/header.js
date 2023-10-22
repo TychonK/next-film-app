@@ -50,7 +50,7 @@ export default function Nav() {
                 " flex items-center px-4 -mb-1 border-b-2 border-transparent"
               }
             >
-              Movies search
+              Discover
             </Link>
           </li>
         </ul>

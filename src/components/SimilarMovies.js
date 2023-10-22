@@ -5,29 +5,41 @@ import NotFound from "./notFound";
 
 export default function SimilarMovies({ similarData }) {
   if (!similarData || similarData.length === 0) {
-    return <NotFound/>;
-    }
+    return <></>;
+  }
     
-    const sortedData = similarData.sort((a, b) => b.popularity - a.popularity);
+  const sortedData = similarData.sort((a, b) => b.popularity - a.popularity);
 
   return (
     <div className="mb-8">
-      <h2 className="text-2xl font-semibold mb-4">Similar Movies</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      {!similarData && <NotFound />}
+      <h2 className="text-7xl font-semibold mt-16 break-normal break-all">
+        Recommended
+      </h2>
+      <div className="mt-8 flex flex-row flex-wrap gap-12 justify-between">
         {sortedData.slice(0, 8).map((movie) => (
           <Link
             href={`/films/${movie.id}`}
             key={movie.id}
-            className="border rounded-lg overflow-hidden shadow-lg"
+            className="rounded-lg overflow-hidden shadow-lg w-64 duration-200 hover:scale-105"
           >
             <img
-              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              src={
+                movie.poster_path
+                  ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                  : "/no-image.svg"
+              }
               alt={movie.title}
+              className="bg-gray-400"
             />
-            <div className="p-4">
-              <h3 className="text-lg font-semibold">{movie.title}</h3>
-              <p className="text-gray-500">{movie.release_date}</p>
-              <p className="text-gray-700 mt-2">{movie.overview}</p>
+            <div className="p-4 h-full bg-gray-800">
+              <h3
+                className="text-lg font-semibold truncate"
+                title={movie.title}
+              >
+                {movie.title}
+              </h3>
+              <p className="text-gray-400">{movie.release_date}</p>
             </div>
           </Link>
         ))}

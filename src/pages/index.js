@@ -101,33 +101,33 @@ export default function Home({ genresMov, genresTv }) {
         Trending
       </h1>
 
-      <div className="horizontal-fade relative">   
-          <Title2 text="Movies" />
+      <div className="relative rounded-md">
+        <Title2 text="Movies" />
 
-          {filmIsLoading && <Loader />}
+        {filmIsLoading && <Loader />}
 
-          <ScrollContainer scrollTime={3000} containerId="movie">
-            {filmData &&
-              filmData.films.map((mov) => {
-                const movGenres = [];
+        <ScrollContainer containerId="movie">
+          {filmData &&
+            filmData.films.map((mov) => {
+              const movGenres = [];
 
-                mov.genre_ids.forEach((id) => {
-                  genresMov.forEach((genre) => {
-                    genre.id == id && movGenres.push(genre.name);
-                  });
+              mov.genre_ids.forEach((id) => {
+                genresMov.forEach((genre) => {
+                  genre.id == id && movGenres.push(genre.name);
                 });
+              });
 
-                return <CardFilm movData={mov} genres={movGenres} />;
-              })}
-          </ScrollContainer>
+              return <CardFilm movData={mov} genres={movGenres} />;
+            })}
+        </ScrollContainer>
       </div>
 
-      <div className="horizontal-fade relative">
+      <div className="relative rounded-md">
         <Title2 text="Series" />
 
         {tvIsLoading && <Loader />}
 
-        <ScrollContainer scrollTime={3200} containerId="tv">
+        <ScrollContainer containerId="tv">
           {tvData &&
             tvData.tv.map((tv) => {
               const movGenres = [];
@@ -143,12 +143,12 @@ export default function Home({ genresMov, genresTv }) {
         </ScrollContainer>
       </div>
 
-      <div className="horizontal-fade relative">
+      <div className="relative rounded-md">
         <Title2 text="People" />
 
         {pplIsLoading && <Loader />}
 
-        <ScrollContainer scrollTime={3500} containerId="ppl">
+        <ScrollContainer containerId="ppl">
           {pplData &&
             pplData.ppl.map((person) => {
               return <CardPpl personData={person} />;

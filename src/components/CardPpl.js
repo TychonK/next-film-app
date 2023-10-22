@@ -5,10 +5,10 @@ export default function CardPpl(props) {
   const baseUrlImg = "https://image.tmdb.org/t/p/w500/";
 
   return (
-    <Link href={`/people/${personData.id}`}>
+    <Link href={`/people/${personData.id}`} className="mr-8 last:mr-0">
       <li
         style={{ minWidth: "260px", maxWidth: "260px" }}
-        className="card mr-8 mt-8 pb-3 relative rounded-md bg-gray-900 text-gray-50"
+        className="card pb-3 relative rounded-md bg-gray-900 text-gray-50"
       >
         <div className="front-content">
           <img
@@ -44,8 +44,10 @@ export default function CardPpl(props) {
             )}
           </h2>
           <p className="text-center italic mt-2 text-xl font-light">
-            Known as{" "}
-            <span> {personData.known_for_department.replace(/ing/g, "or")} </span>
+            <span>
+              {" "}
+              {personData.known_for_department.replace(/ing/g, "or")}{" "}
+            </span>
           </p>
         </div>
 
@@ -60,7 +62,10 @@ export default function CardPpl(props) {
             backgroundPosition: "center",
           }}
         >
-          <h2 className="text-3xl font-thin text-center" title={personData.name}>
+          <h2
+            className="text-3xl font-thin text-center"
+            title={personData.name}
+          >
             {personData.name}
           </h2>
           <span className="block text-center font-light tracki text-white-400 mt-2">
@@ -80,7 +85,7 @@ export default function CardPpl(props) {
             })}
           </ul>
         </div>
-        </li>
-      </Link>
+      </li>
+    </Link>
   );
 }
