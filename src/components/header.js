@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import Headroom from "react-headroom";
 
@@ -17,12 +17,12 @@ export default function Nav() {
   }
 
   const handleSubmit = () => {
-    router.push(`/movies?search=${query}`)
+    router.push(`/discover?search=${query}`)
   }
 
   return (
-    <Headroom>
-      <header className="p-4 bg-gray-800 text-gray-100  ">
+    <Headroom >
+      <header className="p-4 bg-gray-800 text-gray-100">
         <div className="container flex justify-between h-16 mx-auto relative nav">
           <ul className="items-stretch hidden space-x-3 lg:flex">
             <li className="flex">

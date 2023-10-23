@@ -101,7 +101,7 @@ export default function Home({ genresMov, genresTv }) {
         Trending
       </h1>
       <h2 className="text-xl md:text-2xl uppercase font-medium leadi text-center text-transparent bg-clip-text bg-gradient-to-t from-purple-700 to-pink-600">
-        discover last week's trends <br/> in the world of cinema
+        discover last week's trends <br /> in the world of cinema
       </h2>
 
       <div className="relative rounded-md">
@@ -109,7 +109,7 @@ export default function Home({ genresMov, genresTv }) {
 
         {filmIsLoading && <Loader />}
 
-        <ScrollContainer containerId="movie">
+        <ScrollContainer containerId="movie" btnDark={true}>
           {filmData &&
             filmData.films.map((mov) => {
               const movGenres = [];
@@ -130,7 +130,7 @@ export default function Home({ genresMov, genresTv }) {
 
         {tvIsLoading && <Loader />}
 
-        <ScrollContainer containerId="tv">
+        <ScrollContainer containerId="tv" btnDark={true}>
           {tvData &&
             tvData.tv.map((tv) => {
               const movGenres = [];
@@ -151,7 +151,7 @@ export default function Home({ genresMov, genresTv }) {
 
         {pplIsLoading && <Loader />}
 
-        <ScrollContainer containerId="ppl">
+        <ScrollContainer containerId="ppl" btnDark={true}>
           {pplData &&
             pplData.ppl.map((person) => {
               return <CardPpl personData={person} />;

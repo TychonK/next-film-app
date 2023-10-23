@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ScrollContainer({ children, containerId }) {
+export default function ScrollContainer({ children, containerId, btnDark }) {
   
   const handleScrollForward = () => {
     const container = document.getElementById(containerId);
@@ -46,7 +46,10 @@ export default function ScrollContainer({ children, containerId }) {
     <div className="relative">
       <button
         onClick={handleScrollBack}
-        className="absolute top-1/2 -translate-y-1/2 duration-100 hover:text-blue-500 text-gray-900"
+        className={
+          "absolute top-1/2 -translate-y-1/2 duration-100 hover:text-blue-500 active:text-violet-700 " +
+          `${btnDark ? "text-gray-900" : "text-white"}`
+        }
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -65,13 +68,16 @@ export default function ScrollContainer({ children, containerId }) {
       </button>
       <ul
         id={containerId}
-        className="relative scroll-container pb-2 flex overflow-y-hidden overflow-x-scroll rounded-md mx-4 md:mx-20"
+        className="flex scroll-container mx-4 md:mx-20 mt-8 pb-3 overflow-y-hidden overflow-x-scroll rounded-md"
       >
         {children}
       </ul>
       <button
         onClick={handleScrollForward}
-        className="absolute top-1/2 -translate-y-1/2 right-0 duration-100 hover:text-blue-500 text-gray-900"
+        className={
+          "absolute top-1/2 -translate-y-1/2 right-0 duration-100 hover:text-blue-500 active:text-violet-700 " +
+          `${btnDark ? "text-gray-900" : "text-white"}`
+        }
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

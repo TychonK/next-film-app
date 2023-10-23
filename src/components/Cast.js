@@ -15,8 +15,11 @@ export default function Cast({ castData }) {
       {(!sortedCastData || sortedCastData.length == 0) && <NotFound />}
       {sortedCastData.map((person) => {
         return (
-          <Link href={`/people/${person.id}`}>
-            <li className="flex flex-col justify-center h-full w-full p-4 duration-200 hover:scale-105 text-center rounded-md md:w-96 lg:w-80 xl:w-64 bg-gray-100 text-gray-800">
+          <Link href={`/people/${person.id}`} className="mr-8 last:mr-0">
+            <li
+              className="flex flex-col justify-center h-full w-full p-4 duration-200 hover:scale-105 text-center rounded-md w-32 md:w-64 lg:w-80 xl:w-96 bg-gray-100 text-gray-800"
+              style={{ minWidth: "200px", maxWidth: "220px" }}
+            >
               <img
                 src={
                   person.profile_path

@@ -9,7 +9,7 @@ export default function CardTv(props) {
     <Link href={`/tv/${tvData.id}`}  className="mr-8 last:mr-0">
       <li
         style={{ minWidth: "260px", maxWidth: "260px" }}
-        className="card relative p-6 rounded-md shadow-md bg-gray-900 text-gray-50"
+        className="card h-full relative p-6 rounded-md shadow-md bg-gray-900 text-gray-50"
       >
         <div className="front-content">
           <img

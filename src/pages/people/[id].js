@@ -5,9 +5,10 @@ import { useRouter } from "next/router";
 import Loader from "@/components/loader";
 import GoBackBtn from "@/components/goBackBtn";
 import SimilarMovies from "@/components/SimilarMovies";
+import NotFound from "@/components/notFound";
 
 import { initAxios } from "@/lib/axios";
-import NotFound from "@/components/notFound";
+import { calculateAge } from "@/lib/helpers";
 
 initAxios();
 
@@ -22,6 +23,12 @@ export default function PersonDetailsPage() {
       `https://api.themoviedb.org/3/person/${id}?append_to_response=images%2Ccombined_credits&language=en-US`;
 
     const { data, error, isLoading } = useSWR(requestUrl, fetchPersonData);
+    
+    const {
+      data: allGenres,
+      error: genresError,
+      isLoading: genresLoading,
+    } = useSWR(`https://api.themoviedb.org/3/genre/movie/list`, fetchGenres);
 
     async function fetchPersonData(url) {
       let data;
@@ -34,16 +41,7 @@ export default function PersonDetailsPage() {
           console.log(er);
         });
       return data;
-    }
-  
-    const {
-      data: allGenres,
-      error: genresError,
-      isLoading: genresLoading,
-    } = useSWR(
-      `https://api.themoviedb.org/3/genre/movie/list`,
-      fetchGenres
-    );
+    } 
   
     async function fetchGenres(url) {
       let data;
@@ -57,58 +55,43 @@ export default function PersonDetailsPage() {
         });
       return data;
     }
-  
-  function calculateAge(dateOfBirth) {
-    const birthDate = new Date(dateOfBirth);
-    const currentDate = new Date();
-
-    const dateDifference = currentDate - birthDate;
-
-    const ageDate = new Date(dateDifference);
-
-    const age = ageDate.getUTCFullYear() - 1970;
-
-    return age;
-  }
     
-    if (!id) {
-        return <NotFound />
+    if (isLoading) {
+      return <Loader />;
     }
 
-    return (
-      <div className="text-white px-4 md:px-32">
-        {isLoading && <Loader />}
-        {error && <NotFound />}
-        {data && (
-          <>
-            <GoBackBtn />
-            <h1 className="text-9xl font-extralight">{data.name}</h1>
-            <p>Person ID: {id}</p>
-            <p className="text-medium text-2xl">
-              Age: {calculateAge(data.birthday)}{" "}
-              <span className="italic">({data.birthday})</span>
-            </p>
-            <p className="text-medium text-2xl">
-              Place of birth: {data.place_of_birth}
-            </p>
-            <div>
-              <p className="text-xl font-semibold">Bio: </p>
-              <p>{data.biography}</p>
-            </div>
-            <div className="scroll-container flex flex-row overflow-y-hidden overflow-x-scroll w-64">
-              {data.images.profiles.map((profile) => {
-                return (
-                  <img
-                    src={baseUrlBig + profile.file_path}
-                    alt="person img"
-                    className="w-64"
-                  />
-                );
-              })}
-            </div>
-            <SimilarMovies data={data.combined_credits.cast} title="Participated in" />
-          </>
-        )}
+    if (error || !data) {
+      return <NotFound />;
+    }
+
+  return (
+    <div className="text-white px-4 md:px-32">
+      <GoBackBtn />
+      <h1 className="text-4xl font-extralight">{data.name}</h1>
+      <p className="text-2xl">Person ID: {id}</p>
+      <p className="text-2xl">
+        Age: {calculateAge(data.birthday)}{" "}
+        <span className="italic">({data.birthday})</span>
+      </p>
+      <p className="text-2xl">Place of birth: {data.place_of_birth}</p>
+      <div>
+        <p className="text-xl font-semibold">Bio:</p>
+        <p>{data.biography}</p>
       </div>
-    );
+      <div className="scroll-container flex flex-row overflow-x-scroll space-x-4 my-8">
+        {data.images.profiles.map((profile) => (
+          <img
+            src={baseUrlBig + profile.file_path}
+            alt="person img"
+            className="w-64"
+            key={profile.file_path}
+          />
+        ))}
+      </div>
+      <SimilarMovies
+        data={data.combined_credits.cast}
+        title="Participated in"
+      />
+    </div>
+  );
 }

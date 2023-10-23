@@ -79,7 +79,7 @@ export default function Home({ genres }) {
         </svg>
       )}
       <ul className="flex flex-row flex-wrap mt-12 justify-between gap-y-10">
-        {error && <NotFound />}
+        {(error || !data) && <NotFound />}
         {data &&
           data.films.map((mov) => {
             if (mov.overview.length == 0) {

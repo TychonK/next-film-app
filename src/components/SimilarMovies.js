@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 
 import NotFound from "./notFound";
@@ -9,7 +9,12 @@ export default function SimilarMovies({ data, title }) {
   }
     
   const sortedData = data.sort((a, b) => b.popularity - a.popularity);
-  console.log(sortedData)
+
+  const [showAll, setShowAll] = useState(false);
+
+  const toggleShowAll = () => {
+    setShowAll(!showAll);
+  };
 
   return (
     <div className="mb-8">
@@ -18,15 +23,16 @@ export default function SimilarMovies({ data, title }) {
         {title}
       </h2>
       <div className="mt-8 flex flex-row flex-wrap gap-12 justify-center">
-        {sortedData.slice(0, 8).map((movie) => (
+        {sortedData.map((movie, index) => (
           <Link
             href={
-              movie.media_type == "movie"
-                ? `/films/${movie.id}`
-                : `/tv/${movie.id}`
+              movie.media_type == "tv"
+                ? `/tv/${movie.id}`
+                : `/films/${movie.id}`
             }
             key={movie.id}
             className="rounded-lg overflow-hidden shadow-lg w-64 duration-200 hover:scale-105"
+            style={{ display: showAll || index < 8 ? "block" : "none" }}
           >
             <img
               src={
@@ -51,6 +57,12 @@ export default function SimilarMovies({ data, title }) {
           </Link>
         ))}
       </div>
+      <button
+        className="text-lg uppercase bg-violet-400 px-4 py-2 mt-8 mx-auto block rounded-md"
+        onClick={toggleShowAll}
+      >
+        {showAll ? "Show Less" : "Show All"}
+      </button>
     </div>
   );
 };

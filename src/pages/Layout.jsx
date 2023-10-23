@@ -14,9 +14,9 @@ const Layout = ({ children }) => {
   return (
     <>
       <Nav />
-      <main className={`${inter.className}` + `${path.includes('/films/') ||  path.includes('/people/') ? " bg-gray-900" : ""}` + " p-12 pl-16 pr-16"}>
+      <main className={`${inter.className}` + `${path.includes('/films/') ||  path.includes('/people/') ? " bg-gray-900" : ""}` + " py-12 px-8 md:px-12 lg:px-16"}>
               {children}
-          </main>
+      </main>
       <Footer />
     </>
   );
