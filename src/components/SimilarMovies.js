@@ -31,7 +31,7 @@ export default function SimilarMovies({ data, title }) {
                 : `/films/${movie.id}`
             }
             key={movie.id}
-            className="rounded-lg overflow-hidden shadow-lg w-64 duration-200 hover:scale-105"
+            className="rounded-lg overflow-hidden shadow-lg w-64 duration-200 group hover:scale-105"
             style={{ display: showAll || index < 8 ? "block" : "none" }}
           >
             <img
@@ -45,7 +45,7 @@ export default function SimilarMovies({ data, title }) {
             />
             <div className="p-4 h-full bg-gray-800">
               <h3
-                className="text-lg font-semibold truncate"
+                className="text-lg font-semibold truncate group-hover:underline"
                 title={movie.title || movie.name}
               >
                 {movie.title || movie.name}

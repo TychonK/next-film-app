@@ -17,7 +17,7 @@ export default function Crew({ castData }) {
           return (
             <Link href={`/people/${person.id}`} className="mr-8 last:mr-0">
               <li
-                className="flex flex-col justify-center h-full w-full p-4 duration-200 hover:scale-105 text-center rounded-md md:w-64 lg:w-80 xl:w-96 bg-gray-100 text-gray-800"
+                className="flex flex-col justify-center h-full w-full p-4 duration-200 group hover:scale-105 text-center rounded-md md:w-64 lg:w-80 xl:w-96 bg-gray-100 text-gray-800"
                 style={{ minWidth: "200px", maxWidth: "220px" }}
               >
                 <img
@@ -31,7 +31,7 @@ export default function Crew({ castData }) {
                 />
 
                 <div className="mt-4">
-                  <p className="text-xl font-bold leadi">{person.name}</p>
+                  <p className="text-xl font-bold leadi group-hover:underline">{person.name}</p>
                   <p className="font-medium text-xl">{person.character}</p>
                   <p className="italic">{person.job}</p>
                 </div>

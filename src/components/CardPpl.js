@@ -47,13 +47,13 @@ export default function CardPpl(props) {
           >
             {personData.name}
           </h2>
-          <p className="text-2xl text-center font-light mt-3">Widely known for</p>
-          <ul className="mt-2 list-disc list-inside text-center">
+          <p className="text-lg text-center font-medium mt-5">Widely known for</p>
+          <ul className="text-center">
             {personData.known_for.map((mov) => {
               return (
                 <Link href={`/films/${mov.id}`}>
-                  <li className="mt-4">
-                    <p className="underline inline text-xl font-light text-justify">{mov.title} ({ mov.release_date.slice(0,4)})</p>
+                  <li className="mt-3">
+                    <p className="underline inline text-lg font-light text-violet-300 text-justify">{mov.title} ({ mov.release_date.slice(0,4)})</p>
                   </li>
                 </Link>
               );

@@ -67,6 +67,20 @@ export default function PersonDetailsPage() {
   return (
     <div className="text-white px-4 md:px-32">
       <GoBackBtn />
+
+      <div
+        className="relative flex items-end justify-start w-full text-left bg-center bg-cover cursor-pointer h-96 md:col-span-2 lg:row-span-2 lg:h-full group dark:bg-gray-500"
+        style={{
+          backgroundImage: `linear-gradient(rgba(236, 72, 184, 0.3), rgba(236, 72, 184, 0.5)), url(${
+            baseUrlBig + data.images.profiles[0].file_path
+          })`,
+        }}
+      >
+        <h2 className="font-medium text-md group-hover:underline lg:text-2xl lg:font-semibold text-gray-100 p-5">
+            Visit the gallery
+        </h2>
+      </div>
+
       <h1 className="text-4xl font-extralight">{data.name}</h1>
       <p className="text-2xl">Person ID: {id}</p>
       <p className="text-2xl">

@@ -57,6 +57,16 @@ export default function FilmDetailPage() {
 
           <div className="flex flex-col xl:flex-row mt-10 bg-gray-950 rounded-md shadow-lg">
             <div className="w-full h-max-full xl:w-1/2">
+              <div
+                className="hidden xl:block w-full h-full rounded-lg shadow-lg bg-cover bg-center"
+                style={{
+                  backgroundImage: `url(${
+                    data.poster_path
+                      ? baseUrlBackdrop + data.poster_path
+                      : "/no-image.svg"
+                  })`,
+                }}
+              ></div>
               <img
                 src={
                   data.poster_path
@@ -64,7 +74,7 @@ export default function FilmDetailPage() {
                     : "/no-image.svg"
                 }
                 alt="Movie poster"
-                className="w-full rounded-lg shadow-lg"
+                className="xl:hidden h-full rounded-lg shadow-lg bg-cover bg-center"
               />
             </div>
 
@@ -118,9 +128,7 @@ export default function FilmDetailPage() {
               </div>
 
               <div>
-                <h2 className="text-2xl font-semibold">
-                  Production Companies
-                </h2>
+                <h2 className="text-2xl font-semibold">Production Companies</h2>
 
                 <div className="flex flex-row flex-wrap gap-8">
                   {data.production_companies.length == 0 ? (
@@ -147,11 +155,15 @@ export default function FilmDetailPage() {
 
                 {data.videos.results.length != 0 && (
                   <iframe
-                    width="560"
                     height="315"
-                    src={`https://www.youtube.com/embed/${data.videos.results.find((video) => video.type == "Trailer").key}`}
+                    src={`https://www.youtube.com/embed/${
+                      data.videos.results.find(
+                        (video) => video.type == "Trailer"
+                      ).key
+                    }`}
                     title="trailer"
                     allowFullScreen
+                    className="rounded-md mt-8 w-full"
                   ></iframe>
                 )}
               </div>
