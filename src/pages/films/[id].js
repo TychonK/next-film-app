@@ -239,7 +239,7 @@ export default function FilmDetailPage() {
             </div>
           </>
         )}
-        <SimilarMovies similarData={similarData} />
+        <SimilarMovies data={similarData} title="Recommended"/>
       </div>
     );
 };

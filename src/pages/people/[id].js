@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 
 import Loader from "@/components/loader";
 import GoBackBtn from "@/components/goBackBtn";
-import numeral from "numeral";
+import SimilarMovies from "@/components/SimilarMovies";
 
 import { initAxios } from "@/lib/axios";
 import NotFound from "@/components/notFound";
@@ -21,9 +21,9 @@ export default function PersonDetailsPage() {
     const requestUrl =
       `https://api.themoviedb.org/3/person/${id}?append_to_response=images%2Ccombined_credits&language=en-US`;
 
-    const { data, error, isLoading } = useSWR(requestUrl, fetchFilmData);
+    const { data, error, isLoading } = useSWR(requestUrl, fetchPersonData);
 
-    async function fetchFilmData(url) {
+    async function fetchPersonData(url) {
       let data;
       await axios
         .get(url)
@@ -35,6 +35,41 @@ export default function PersonDetailsPage() {
         });
       return data;
     }
+  
+    const {
+      data: allGenres,
+      error: genresError,
+      isLoading: genresLoading,
+    } = useSWR(
+      `https://api.themoviedb.org/3/genre/movie/list`,
+      fetchGenres
+    );
+  
+    async function fetchGenres(url) {
+      let data;
+      await axios
+        .get(url)
+        .then(function (res) {
+          data = res.data.genres;
+        })
+        .catch((er) => {
+          console.log(er);
+        });
+      return data;
+    }
+  
+  function calculateAge(dateOfBirth) {
+    const birthDate = new Date(dateOfBirth);
+    const currentDate = new Date();
+
+    const dateDifference = currentDate - birthDate;
+
+    const ageDate = new Date(dateDifference);
+
+    const age = ageDate.getUTCFullYear() - 1970;
+
+    return age;
+  }
     
     if (!id) {
         return <NotFound />
@@ -43,12 +78,16 @@ export default function PersonDetailsPage() {
     return (
       <div className="text-white px-4 md:px-32">
         {isLoading && <Loader />}
+        {error && <NotFound />}
         {data && (
           <>
             <GoBackBtn />
             <h1 className="text-9xl font-extralight">{data.name}</h1>
             <p>Person ID: {id}</p>
-            <p className="text-medium text-2xl">Born on: {data.birthday}</p>
+            <p className="text-medium text-2xl">
+              Age: {calculateAge(data.birthday)}{" "}
+              <span className="italic">({data.birthday})</span>
+            </p>
             <p className="text-medium text-2xl">
               Place of birth: {data.place_of_birth}
             </p>
@@ -67,10 +106,7 @@ export default function PersonDetailsPage() {
                 );
               })}
             </div>
-            <div>
-                        <p>Participated in:</p>  
-                       
-            </div>
+            <SimilarMovies data={data.combined_credits.cast} title="Participated in" />
           </>
         )}
       </div>

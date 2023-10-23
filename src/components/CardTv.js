@@ -1,12 +1,15 @@
+import Link from "next/link";
+
 export default function CardTv(props) {
   const {tvData, genres} = props
   const baseUrlImg = "https://image.tmdb.org/t/p/w500/";
   const baseUrlBackdrop = "https://image.tmdb.org/t/p/w780/";
   
-    return (
+  return (
+    <Link href={`/tv/${tvData.id}`}  className="mr-8 last:mr-0">
       <li
         style={{ minWidth: "260px", maxWidth: "260px" }}
-        className="card mr-8 last:mr-0 relative p-6 rounded-md shadow-md bg-gray-900 text-gray-50"
+        className="card relative p-6 rounded-md shadow-md bg-gray-900 text-gray-50"
       >
         <div className="front-content">
           <img
@@ -93,5 +96,6 @@ export default function CardTv(props) {
           <p className="text-center mt-2">{tvData.overview}</p>
         </div>
       </li>
-    );
+    </Link>
+  );
 }
