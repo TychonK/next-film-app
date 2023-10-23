@@ -14,10 +14,10 @@ export default function SimilarMovies({ data, title }) {
   return (
     <div className="mb-8">
       {!data && <NotFound />}
-      <h2 className="text-7xl font-semibold mt-16 break-normal break-all">
+      <h2 className="text-7xl text-center font-semibold mt-16 break-normal break-all">
         {title}
       </h2>
-      <div className="mt-8 flex flex-row flex-wrap gap-12 justify-between">
+      <div className="mt-8 flex flex-row flex-wrap gap-12 justify-center">
         {sortedData.slice(0, 8).map((movie) => (
           <Link
             href={

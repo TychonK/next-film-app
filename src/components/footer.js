@@ -15,7 +15,7 @@ export default function Footer() {
             </div>
             <ul className="flex flex-wrap items-center space-x-4 sm:space-x-8">
               <li>
-                <a rel="noopener noreferrer" href="#">
+                <a rel="noopener noreferrer" href="/terms_of_use.pdf">
                   Terms of Use
                 </a>
               </li>
