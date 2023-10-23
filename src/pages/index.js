@@ -97,9 +97,12 @@ export default function Home({ genresMov, genresTv }) {
 
   return (
     <>
-      <h1 className="text-6xl md:text-9xl uppercase font-medium leadi text-center text-transparent bg-clip-text bg-gradient-to-b from-purple-700 to-pink-600">
+      <h1 className="text-2xl md:text-8xl uppercase font-medium leadi text-center text-transparent bg-clip-text bg-gradient-to-b from-purple-700 to-pink-600">
         Trending
       </h1>
+      <h2 className="text-xl md:text-2xl uppercase font-medium leadi text-center text-transparent bg-clip-text bg-gradient-to-t from-purple-700 to-pink-600">
+        discover last week's trends <br/> in the world of cinema
+      </h2>
 
       <div className="relative rounded-md">
         <Title2 text="Movies" />
