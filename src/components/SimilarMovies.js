@@ -58,10 +58,10 @@ export default function SimilarMovies({ data, title }) {
         ))}
       </div>
       <button
-        className="text-lg uppercase bg-violet-400 px-4 py-2 mt-8 mx-auto block rounded-md"
+        className="text-lg bg-violet-400 duration-100 hover:bg-violet-500 px-4 py-2 mt-8 mx-auto block rounded-md"
         onClick={toggleShowAll}
       >
-        {showAll ? "Show Less" : "Show All"}
+        {showAll ? "show less" : "show all"}
       </button>
     </div>
   );
