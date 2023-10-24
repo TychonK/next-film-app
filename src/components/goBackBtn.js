@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 
-export default function GoBackBtn() {
+export default function GoBackBtn({ className }) {
   const router = useRouter();
   const handleGoBack = () => {
     router.back();
@@ -9,7 +9,7 @@ export default function GoBackBtn() {
   return (
     <button
       onClick={handleGoBack}
-      className="text-gray-400 duration-100 hover:text-gray-200 inline-flex font-medium items-center border-2 border-gray-400 rounded-md py-2 px-4"
+      className={"text-gray-400 duration-100 hover:text-gray-200 inline-flex font-medium items-center border-2 border-gray-400 rounded-md py-2 px-4" + " " + className}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

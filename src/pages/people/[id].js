@@ -122,7 +122,7 @@ export default function PersonDetailsPage() {
           <p className="text-2xl">Place of birth: {data.place_of_birth}</p>
           <p className="text-2xl">Known for: {data.known_for_department}</p>
           <div>
-            <p className="text-3xl font-semibold mt-3">Biography:</p>
+            <p className="text-3xl font-semibold mt-4">Biography:</p>
             <p
               className={`line-clamp-${
                 showFullText ? "none" : "6"
