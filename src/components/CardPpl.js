@@ -17,7 +17,7 @@ export default function CardPpl(props) {
             className="object-cover object-center w-full rounded-t-md h-72 bg-gray-500"
           />
           <h2
-            className="text-2xl text-center mt-2 font-extralight w-full"
+            className="text-2xl text-center mt-2 font-extralight w-full px-1 truncate"
             title={personData.name}
           >
             {personData.name}
@@ -53,7 +53,7 @@ export default function CardPpl(props) {
               return (
                 <li key={ mov.id } className="mt-3">
                     <p className="inline text-lg font-light text-violet-300 text-justify">{mov.title} ({ mov.release_date.slice(0,4)})</p>
-                  </li>
+                </li>
               );
             })}
           </ul>

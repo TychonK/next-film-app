@@ -99,7 +99,10 @@ export default function TvDetailsPage() {
                   .join(", ")}
               </p>
               <p className="text-lg">
-                Episode run time: {data.episode_run_time.length != 0 ? formatTime(data.episode_run_time) : "No data"}
+                Episode run time:{" "}
+                {data.episode_run_time.length != 0
+                  ? formatTime(data.episode_run_time)
+                  : "No data"}
               </p>
               <p className="text-lg">Show ID: {id}</p>
             </div>
@@ -158,8 +161,9 @@ export default function TvDetailsPage() {
                 <iframe
                   height="315"
                   src={`https://www.youtube.com/embed/${
-                    data.videos.results.find((video) => video.type == "Trailer")
-                      .key
+                    data.videos.results.find((video) => {
+                      return video.type == "Trailer" || video;
+                    }).key
                   }`}
                   title="trailer"
                   allowFullScreen
@@ -175,16 +179,25 @@ export default function TvDetailsPage() {
         <h2 className="text-7xl text-center font-semibold mt-16 relative pseudo-title">
           Cast
         </h2>
-        <ScrollContainer containerId="cast">
-          {data.credits.cast.length != 0 && <Cast castData={data.credits} />}
-        </ScrollContainer>
+        {data.credits.cast.length != 0 ? (
+          <ScrollContainer containerId="cast">
+            {data.credits.cast.length != 0 && <Cast castData={data.credits} />}
+          </ScrollContainer>
+        ) : (
+          <NotFound />
+        )}
+
         <h2 className="text-7xl text-center font-semibold mt-16 relative pseudo-title">
           Crew
         </h2>
         <div className="relative">
-          <ScrollContainer containerId="crew">
-            {data.credits.crew.length != 0 && <Crew castData={data.credits} />}
-          </ScrollContainer>
+          {data.credits.crew.length != 0 ? (
+            <ScrollContainer containerId="crew">
+              <Crew castData={data.credits} />
+            </ScrollContainer>
+          ) : (
+            <NotFound />
+          )}
         </div>
       </div>
 

@@ -158,7 +158,9 @@ export default function FilmDetailPage() {
                     height="315"
                     src={`https://www.youtube.com/embed/${
                       data.videos.results.find(
-                        (video) => video.type == "Trailer"
+                        (video) => {
+                          return video.type == "Trailer" || video
+                        }
                       ).key
                     }`}
                     title="trailer"

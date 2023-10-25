@@ -8,7 +8,7 @@ const baseUrlPerson = "https://image.tmdb.org/t/p/w500/";
 export default function Cast({ castData }) {
     const sortedCastData = castData.cast.sort(
       (a, b) => b.popularity - a.popularity
-    );
+  );
 
   return (
     <>
