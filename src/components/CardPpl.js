@@ -42,17 +42,21 @@ export default function CardPpl(props) {
           }}
         >
           <h2
-            className="text-4xl font-thin text-center"
+            className="text-4xl font-thin text-center break-words"
             title={personData.name}
           >
             {personData.name}
           </h2>
-          <p className="text-lg text-center font-medium mt-5">Widely known for</p>
+          <p className="text-lg text-center font-medium mt-5">
+            Widely known for
+          </p>
           <ul className="text-center">
             {personData.known_for.map((mov) => {
               return (
-                <li key={ mov.id } className="mt-3">
-                    <p className="inline text-lg font-light text-violet-300 text-justify">{mov.title} ({ mov.release_date.slice(0,4)})</p>
+                <li key={mov.id} className="mt-3">
+                  <p className="inline text-lg font-light text-violet-300 text-justify">
+                    {mov.title} ({mov.release_date.slice(0, 4)})
+                  </p>
                 </li>
               );
             })}

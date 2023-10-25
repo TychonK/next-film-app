@@ -116,9 +116,7 @@ export default function PersonDetailsPage() {
             ) : (
               <>
                 <p
-                  className={`line-clamp-${
-                    showFullText ? "none" : "6"
-                  } mt-2 text-justify`}
+                  className={`${showFullText ? "" : "line-clamp-6"} mt-2 text-justify`}
                 >
                   {data.biography}
                 </p>
