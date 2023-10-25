@@ -51,6 +51,8 @@ export default function Dicover({ genres }) {
     return dataObj;
   }
 
+  const sortedData = (data) => data.films.sort((a, b) => b.popularity - a.popularity);
+
   return (
     <>
       <h1 className="text-4xl font-bold leadi md:text-5xl">
@@ -81,7 +83,7 @@ export default function Dicover({ genres }) {
       <ul className="flex flex-row flex-wrap mt-12 justify-between gap-y-10">
         {error && <NotFound />}
         {data &&
-          data.films.map((mov) => {
+          sortedData(data).map((mov) => {
             if (mov.overview.length == 0) {
               return null;
             }
@@ -93,7 +95,7 @@ export default function Dicover({ genres }) {
               });
             });
 
-            return <Card movData={mov} genres={movGenres} />;
+            return <Card key={mov.id} movData={mov} genres={movGenres} />;
           })}
       </ul>
     </>

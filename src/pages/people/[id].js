@@ -17,59 +17,40 @@ initAxios();
 const baseUrlBig = "https://image.tmdb.org/t/p/original/";
 
 export default function PersonDetailsPage() {
-    const router = useRouter();
-    const { id } = router.query;
+  const router = useRouter();
+  const { id } = router.query;
 
-    const requestUrl =
-      `https://api.themoviedb.org/3/person/${id}?append_to_response=images%2Ccombined_credits&language=en-US`;
+  const requestUrl = `https://api.themoviedb.org/3/person/${id}?append_to_response=images%2Ccombined_credits&language=en-US`;
 
-    const { data, error, isLoading } = useSWR(requestUrl, fetchPersonData);
-    
-    const {
-      data: allGenres,
-      error: genresError,
-      isLoading: genresLoading,
-    } = useSWR(`https://api.themoviedb.org/3/genre/movie/list`, fetchGenres);
+  const { data, error, isLoading } = useSWR(requestUrl, fetchPersonData);
 
-    async function fetchPersonData(url) {
-      let data;
-      await axios
-        .get(url)
-        .then(function (res) {
-          data = res.data;
-        })
-        .catch((er) => {
-          console.log(er);
-        });
-      return data;
-    } 
   
-    async function fetchGenres(url) {
-      let data;
-      await axios
-        .get(url)
-        .then(function (res) {
-          data = res.data.genres;
-        })
-        .catch((er) => {
-          console.log(er);
-        });
-      return data;
+  async function fetchPersonData(url) {
+    let data;
+    await axios
+      .get(url)
+      .then(function (res) {
+        data = res.data;
+      })
+      .catch((er) => {
+        console.log(er);
+      });
+    return data;
   }
-  
-    const [showFullText, setShowFullText] = useState(false);
 
-    const toggleText = () => {
-      setShowFullText(!showFullText);
-    };
-    
-    if (isLoading) {
-      return <Loader />;
-    }
+  const [showFullText, setShowFullText] = useState(false);
 
-    if (error || !data) {
-      return <NotFound />;
-    }
+  const toggleText = () => {
+    setShowFullText(!showFullText);
+  };
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
+  if (error || !data) {
+    return <NotFound />;
+  }
 
   return (
     <div className="text-white px-4 md:px-32">
@@ -102,9 +83,9 @@ export default function PersonDetailsPage() {
                 d="M36.4444 22.5951V77.4051L77.4056 50L36.4444 22.5951Z"
                 fill="#ffffff"
                 stroke="#ffffff"
-                stroke-width="5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </svg>
           </div>

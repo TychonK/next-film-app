@@ -1,27 +1,24 @@
 import React from "react";
 
 export default function ScrollContainer({ children, containerId, btnDark }) {
-  
   const handleScrollForward = () => {
     const container = document.getElementById(containerId);
 
-    let scrollAmount
+    let scrollAmount;
 
     if (window.innerWidth < 768) {
       scrollAmount = 50;
-    }
-    else if (window.innerWidth < 1280) {
+    } else if (window.innerWidth < 1280) {
       scrollAmount = 584;
-    }
-    else {
+    } else {
       scrollAmount = 1168;
     }
 
-      container.scrollBy({
-        left: scrollAmount,
-        behavior: "smooth",
-      });
-    }
+    container.scrollBy({
+      left: scrollAmount,
+      behavior: "smooth",
+    });
+  };
 
   const handleScrollBack = () => {
     const container = document.getElementById(containerId);
@@ -40,8 +37,8 @@ export default function ScrollContainer({ children, containerId, btnDark }) {
       left: scrollAmount,
       behavior: "smooth",
     });
-  }
-    
+  };
+
   return (
     <div className="relative">
       <button
@@ -59,9 +56,9 @@ export default function ScrollContainer({ children, containerId, btnDark }) {
           className="w-16"
         >
           <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
             d="M15 19l-7-7 7-7"
           />
         </svg>
@@ -87,9 +84,9 @@ export default function ScrollContainer({ children, containerId, btnDark }) {
           className="w-16"
         >
           <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
             d="M9 5l7 7-7 7"
           />
         </svg>

@@ -120,7 +120,7 @@ export default function Home({ genresMov, genresTv }) {
                 });
               });
 
-              return <CardFilm movData={mov} genres={movGenres} />;
+              return <CardFilm key={mov.id} movData={mov} genres={movGenres} />;
             })}
         </ScrollContainer>
       </div>
@@ -141,7 +141,7 @@ export default function Home({ genresMov, genresTv }) {
                 });
               });
 
-              return <CardTv tvData={tv} genres={movGenres} />;
+              return <CardTv key={tv.id} tvData={tv} genres={movGenres} />;
             })}
         </ScrollContainer>
       </div>
@@ -154,7 +154,7 @@ export default function Home({ genresMov, genresTv }) {
         <ScrollContainer containerId="ppl" btnDark={true}>
           {pplData &&
             pplData.ppl.map((person) => {
-              return <CardPpl personData={person} />;
+              return <CardPpl key={person.id} personData={person} />;
             })}
         </ScrollContainer>
       </div>

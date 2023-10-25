@@ -51,11 +51,9 @@ export default function CardPpl(props) {
           <ul className="text-center">
             {personData.known_for.map((mov) => {
               return (
-                <Link href={`/films/${mov.id}`}>
-                  <li className="mt-3">
-                    <p className="underline inline text-lg font-light text-violet-300 text-justify">{mov.title} ({ mov.release_date.slice(0,4)})</p>
+                <li key={ mov.id } className="mt-3">
+                    <p className="inline text-lg font-light text-violet-300 text-justify">{mov.title} ({ mov.release_date.slice(0,4)})</p>
                   </li>
-                </Link>
               );
             })}
           </ul>
