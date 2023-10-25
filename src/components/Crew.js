@@ -10,10 +10,26 @@ export default function Crew({ castData }) {
     (a, b) => b.popularity - a.popularity
   );
 
+  const crewGroupedByPerson = {};
+
+  // Group crew members by their unique identifier (e.g., person.id)
+  sortedCrewData.forEach((person) => {
+    if (!crewGroupedByPerson[person.id]) {
+      crewGroupedByPerson[person.id] = {
+        ...person,
+        jobs: [person.job],
+      };
+    } else {
+      crewGroupedByPerson[person.id].jobs.push(person.job);
+    }
+  });
+
+  const crewList = Object.values(crewGroupedByPerson);
+
     return (
       <>
-        {(!sortedCrewData || sortedCrewData.length == 0) && <NotFound />}
-        {sortedCrewData.map((person) => {
+        {(!crewList || crewList.length == 0) && <NotFound />}
+        {crewList.map((person) => {
           return (
             <Link href={`/people/${person.id}`} className="mr-8 last:mr-0">
               <li
@@ -31,9 +47,11 @@ export default function Crew({ castData }) {
                 />
 
                 <div className="mt-4">
-                  <p className="text-xl font-bold leadi group-hover:underline">{person.name}</p>
+                  <p className="text-xl font-bold leadi group-hover:underline">
+                    {person.name}
+                  </p>
                   <p className="font-medium text-xl">{person.character}</p>
-                  <p className="italic">{person.job}</p>
+                  <p className="italic">{person.jobs.join(", ")}</p>
                 </div>
               </li>
             </Link>

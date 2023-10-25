@@ -80,7 +80,7 @@ export default function PersonDetailsPage() {
           className="flex flex-col justify-between text-left bg-center bg-cover cursor-pointer group bg-gray-500 p-4 rounded-md"
           style={{
             backgroundImage: `linear-gradient(rgba(50, 0, 114, 0.2), rgba(50, 0, 114, 0.4)), url(${
-              baseUrlBig + data.images.profiles[0].file_path
+              baseUrlBig + data.profile_path
             })`,
             minHeight: "210px",
             minWidth: "260px",
@@ -116,26 +116,39 @@ export default function PersonDetailsPage() {
           <h1 className="text-5xl font-extralight">{data.name}</h1>
           <p className="text-md italic mb-8 text-gray-400">Person ID: {id}</p>
           <p className="text-2xl">
-            Age: {calculateAge(data.birthday)}{" "}
-            <span className="italic">({data.birthday})</span>
+            Age:{" "}
+            {data.birthday ? (
+              <>
+                {calculateAge(data.birthday)}{" "}
+                <span className="italic">({data.birthday})</span>
+              </>
+            ) : (
+              "No data"
+            )}
           </p>
           <p className="text-2xl">Place of birth: {data.place_of_birth}</p>
           <p className="text-2xl">Known for: {data.known_for_department}</p>
           <div>
             <p className="text-3xl font-semibold mt-4">Biography:</p>
-            <p
-              className={`line-clamp-${
-                showFullText ? "none" : "6"
-              } mt-2 text-justify`}
-            >
-              {data.biography}
-            </p>
-            <button
-              onClick={toggleText}
-              className="text-violet-400 border border-violet-400 rounded-md p-2 hover:underline focus:outline-none mx-auto block mt-8"
-            >
-              {showFullText ? "Read Less" : "Read More"}
-            </button>
+            {!data.biography ? (
+              <NotFound />
+            ) : (
+              <>
+                <p
+                  className={`line-clamp-${
+                    showFullText ? "none" : "6"
+                  } mt-2 text-justify`}
+                >
+                  {data.biography}
+                </p>
+                <button
+                  onClick={toggleText}
+                  className="text-violet-400 border border-violet-400 rounded-md p-2 hover:underline focus:outline-none mx-auto block mt-8"
+                >
+                  {showFullText ? "Read Less" : "Read More"}
+                </button>
+              </>
+            )}
           </div>
         </div>
       </div>

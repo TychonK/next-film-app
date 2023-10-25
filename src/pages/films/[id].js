@@ -172,11 +172,13 @@ export default function FilmDetailPage() {
         </div>
 
         <div className="mb-8">
-          <h2 className="text-7xl text-center font-semibold mt-16">Cast</h2>
+          <h2 className="text-7xl text-center font-semibold mt-16 relative pseudo-title">
+            Cast
+          </h2>
           <ScrollContainer containerId="cast">
             {data.credits.cast.length != 0 && <Cast castData={data.credits} />}
           </ScrollContainer>
-          <h2 className="text-7xl text-center lg:text-center font-semibold mt-16">
+          <h2 className="text-7xl text-center lg:text-center font-semibold mt-16 relative pseudo-title">
             Crew
           </h2>
           <div className="relative">

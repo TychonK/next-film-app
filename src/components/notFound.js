@@ -1,6 +1,6 @@
 export default function NotFound() {
     return (
-      <div className="flex mt-10 items-center p-6 space-x-4 rounded-md bg-gray-900 text-gray-100">
+      <div className="flex mt-4 items-center p-6 space-x-4 rounded-md bg-gray-900 text-gray-100">
         <div className="flex items-center self-stretch justify-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"

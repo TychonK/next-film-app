@@ -4,7 +4,7 @@ import useSWR from "swr";
 
 import ScrollContainer from "@/components/ScrollContainer";
 import Loader from "@/components/loader";
-import Title2 from "@/components/Title2";
+import Title2 from "@/components/title2";
 import CardFilm from "@/components/CardFilm";
 import CardTv from "@/components/CardTv";
 import CardPpl from "@/components/CardPpl";

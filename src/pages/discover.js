@@ -21,7 +21,7 @@ export async function getStaticProps() {
   };
 }
 
-export default function Home({ genres }) {
+export default function Dicover({ genres }) {
   const router = useRouter();
   const { search } = router.query;
 
@@ -79,7 +79,7 @@ export default function Home({ genres }) {
         </svg>
       )}
       <ul className="flex flex-row flex-wrap mt-12 justify-between gap-y-10">
-        {(error || !data) && <NotFound />}
+        {error && <NotFound />}
         {data &&
           data.films.map((mov) => {
             if (mov.overview.length == 0) {

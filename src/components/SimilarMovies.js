@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import NotFound from "./notFound";
 
-export default function SimilarMovies({ data, title }) {
+export default function SimilarMovies({ data, title, type }) {
   if (!data || data.length === 0) {
     return <></>;
   }
@@ -19,14 +19,14 @@ export default function SimilarMovies({ data, title }) {
   return (
     <div className="mb-8">
       {!data && <NotFound />}
-      <h2 className="text-7xl text-center font-semibold mt-16 break-normal break-all">
+      <h2 className="text-7xl text-center font-semibold mt-16 break-normal break-all relative pseudo-title">
         {title}
       </h2>
       <div className="mt-8 flex flex-row flex-wrap gap-12 justify-center">
         {sortedData.map((movie, index) => (
           <Link
             href={
-              movie.media_type == "tv"
+              movie.media_type == "tv" || type == "tv"
                 ? `/tv/${movie.id}`
                 : `/films/${movie.id}`
             }

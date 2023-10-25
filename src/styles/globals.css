@@ -27,3 +27,14 @@ main {
   background-color: #0000001c;
   border-radius: 10px;
 }
+
+.pseudo-title::before {
+  content: "";
+  position: absolute;
+  margin-left: -2rem;
+  width: 8px;
+  top: 5px;
+  bottom: 5px;
+  background-color: rgb(139 92 246);
+  border-radius: 5px;
+}
