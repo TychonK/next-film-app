@@ -157,11 +157,9 @@ export default function FilmDetailPage() {
                   <iframe
                     height="315"
                     src={`https://www.youtube.com/embed/${
-                      data.videos.results.find(
-                        (video) => {
-                          return video.type == "Trailer" || video
-                        }
-                      ).key
+                      data.videos.results.find((video) => {
+                        return video.type == "Trailer";
+                      }).key || data.videos.results[0]
                     }`}
                     title="trailer"
                     allowFullScreen

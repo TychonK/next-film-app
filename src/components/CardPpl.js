@@ -52,10 +52,14 @@ export default function CardPpl(props) {
           </p>
           <ul className="text-center">
             {personData.known_for.map((mov) => {
+              console.log(mov.release_date);
               return (
                 <li key={mov.id} className="mt-3">
                   <p className="inline text-lg font-light text-violet-300 text-justify">
-                    {mov.title} ({mov.release_date.slice(0, 4)})
+                    {mov.media_type == "movie"
+                      ? `${mov.title} (${mov.release_date.slice(0,4)})`
+                      : `${mov.name} (${mov.first_air_date.slice(0,4)})`
+                    } 
                   </p>
                 </li>
               );
