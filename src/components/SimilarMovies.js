@@ -1,27 +1,63 @@
 import React, { useState } from "react";
 import Link from "next/link";
 
-import NotFound from "./notFound";
 
 export default function SimilarMovies({ data, title, type }) {
   if (!data || data.length === 0) {
     return <></>;
   }
-    
-  const sortedData = data.sort((a, b) => b.popularity - a.popularity);
 
   const [showAll, setShowAll] = useState(false);
+  const [filter, setFilter] = useState([]);
 
   const toggleShowAll = () => {
     setShowAll(!showAll);
   };
 
+  const toggleFilter = (filterType) => {
+    filter.includes(filterType)
+      ? setFilter(filter.filter((item) => item !== filterType))
+      : setFilter([...filter, filterType])
+   
+  };
+
+  const filteredData = data.filter((movie) => {
+    if (filter.length === 0) {
+      return true;
+    } else {
+      return filter.includes(movie.media_type);
+    }
+  });
+
+  const sortedData = filteredData.sort((a, b) => b.popularity - a.popularity);
+
   return (
     <div className="mb-8">
-      {!data && <NotFound />}
       <h2 className="text-7xl text-center font-semibold mt-16 break-normal break-all relative pseudo-title">
         {title}
       </h2>
+      <div className="flex items-center -mx-4 mt-8 space-x-8 text-xl sm:justify-center flex-nowrap text-gray-100">
+        <button
+          rel="noopener noreferrer"
+          href="#"
+          className={`flex items-center flex-shrink-0 px-5 py-2 border-b-4 text-gray-400 ${
+            filter.includes("movie") ? "border-violet-400" : "border-gray-700"
+          }`}
+          onClick={() => toggleFilter("movie")}
+        >
+          Movie
+        </button>
+        <button
+          rel="noopener noreferrer"
+          href="#"
+          className={`flex items-center flex-shrink-0 px-5 py-2 border-b-4 text-gray-400 ${
+            filter.includes("tv") ? "border-violet-400" : "border-gray-700"
+          }`}
+          onClick={() => toggleFilter("tv")}
+        >
+          TV show
+        </button>
+      </div>
       <div className="mt-8 flex flex-row flex-wrap gap-12 justify-center">
         {sortedData.map((movie, index) => (
           <Link
@@ -50,6 +86,14 @@ export default function SimilarMovies({ data, title, type }) {
               >
                 {movie.title || movie.name}
               </h3>
+
+              <p className="text-gray-200 italic">
+                Role:{" "}
+                {movie.character && movie.character.length != 0
+                  ? movie.character
+                  : "not specified"}
+              </p>
+
               <p className="text-gray-400">
                 {movie.release_date || movie.first_air_date}
               </p>

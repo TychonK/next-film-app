@@ -8,7 +8,6 @@ export async function fetchGenresMov() {
   await axios
     .get("https://api.themoviedb.org/3/genre/movie/list?language=en")
     .then((res) => {
-      console.log("genres fetch triggered");
       data.genres = res.data.genres;
     })
     .catch((er) => {
@@ -22,7 +21,6 @@ export async function fetchGenresTv() {
   await axios
     .get("https://api.themoviedb.org/3/genre/tv/list?language=en")
     .then((res) => {
-      console.log("genres fetch triggered");
       data.genres = res.data.genres;
     })
     .catch((er) => {

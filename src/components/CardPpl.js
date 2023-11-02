@@ -52,7 +52,6 @@ export default function CardPpl(props) {
           </p>
           <ul className="text-center">
             {personData.known_for.map((mov) => {
-              console.log(mov.release_date);
               return (
                 <li key={mov.id} className="mt-3">
                   <p className="inline text-lg font-light text-violet-300 text-justify">
