@@ -134,7 +134,7 @@ export default function TvDetailsPage() {
             <div>
               <h2 className="text-2xl font-semibold">Production Companies</h2>
 
-              <div className="flex flex-row flex-wrap gap-8">
+              <div className="flex flex-row flex-wrap gap-8 mt-4">
                 {data.production_companies.length == 0 ? (
                   <NotFound />
                 ) : (

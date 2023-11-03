@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 
-import useSWR from "swr";
-import axios from "axios";
-import { initAxios } from "@/lib/axios";
-
-initAxios();
-
-export default function SimilarMovies({ data, title, type }) {
+export default function Participation({ data, title, type }) {
   if (!data || data.length === 0) {
     return <></>;
   }
@@ -22,42 +16,63 @@ export default function SimilarMovies({ data, title, type }) {
   const toggleFilter = (filterType) => {
     filter.includes(filterType)
       ? setFilter(filter.filter((item) => item !== filterType))
-      : setFilter([...filter, filterType])
+      : setFilter([...filter, filterType]);
   };
 
-  const filteredData = data.filter((movie) => {
-    if (filter.length === 0) {
-      return true;
-    } else {
-      return filter.includes(movie.media_type);
-    }
-  });
+    const resultMap = {};
 
-  const sortedData = filteredData.sort((a, b) => b.popularity - a.popularity);
+    data.forEach((obj) => {
+      const id = obj.id;
+      if (!resultMap[id]) {
+        resultMap[id] = { id };
+      }
+
+      Object.keys(obj).forEach((key) => {
+        if (key !== "id" && !resultMap[id].hasOwnProperty(key)) {
+          resultMap[id][key] = obj[key];
+        }
+      });
+    });
+
+    const noDuplicateData = Object.values(resultMap);
+
+    const filteredData = noDuplicateData.filter((movie) => {
+      if (filter.length === 0) {
+        return true;
+      } else {
+        return filter.includes(movie.media_type);
+      }
+    });
+
+    const sortedData = filteredData.sort((a, b) => b.popularity - a.popularity);
 
   return (
     <div className="mb-8">
       <h2 className="text-7xl text-center font-semibold mt-16 break-normal break-all relative pseudo-title">
         {title}
       </h2>
-      {/* <div className="flex items-center -mx-4 mt-8 space-x-8 text-xl sm:justify-center flex-nowrap text-gray-100">
-        {genres.map((genre) => {
-          return (
-            <button
-              rel="noopener noreferrer"
-              href="#"
-              className={`flex items-center flex-shrink-0 px-5 py-2 border-b-4 text-gray-400 ${
-                filter.includes(genre.name)
-                  ? "border-violet-400"
-                  : "border-gray-700"
-              }`}
-              onClick={() => toggleFilter(genre.name)}
-            >
-              {genre.name}
-            </button>
-          );
-        })}
-      </div> */}
+      <div className="flex items-center -mx-4 mt-8 space-x-8 text-xl sm:justify-center flex-nowrap text-gray-100">
+        <button
+          rel="noopener noreferrer"
+          href="#"
+          className={`flex items-center flex-shrink-0 px-5 py-2 border-b-4 text-gray-400 ${
+            filter.includes("movie") ? "border-violet-400" : "border-gray-700"
+          }`}
+          onClick={() => toggleFilter("movie")}
+        >
+          Movie
+        </button>
+        <button
+          rel="noopener noreferrer"
+          href="#"
+          className={`flex items-center flex-shrink-0 px-5 py-2 border-b-4 text-gray-400 ${
+            filter.includes("tv") ? "border-violet-400" : "border-gray-700"
+          }`}
+          onClick={() => toggleFilter("tv")}
+        >
+          TV show
+        </button>
+      </div>
       <div className="mt-8 flex flex-row flex-wrap gap-12 justify-center">
         {sortedData.map((movie, index) => (
           <Link
@@ -91,9 +106,12 @@ export default function SimilarMovies({ data, title, type }) {
               >
                 {movie.title || movie.name}
               </h3>
-              {/* <div className="flex items-center text-xs">
-                <span>{movie.genre.join(", ")}</span>
-              </div> */}
+              {movie.character && movie.character.length != 0 && (
+                <p className="text-gray-200 italic">Role: {movie.character}</p>
+              )}
+              {movie.job && movie.job.length != 0 && (
+                <p className="text-gray-200 italic">Job: {movie.job}</p>
+              )}
               <p className="text-gray-400">
                 {movie.release_date || movie.first_air_date}
               </p>
@@ -109,4 +127,4 @@ export default function SimilarMovies({ data, title, type }) {
       </button>
     </div>
   );
-};
+}

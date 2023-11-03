@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 
 import Loader from "@/components/loader";
 import GoBackBtn from "@/components/goBackBtn";
-import SimilarMovies from "@/components/SimilarMovies";
+import Participation from "@/components/Participation";
 import NotFound from "@/components/notFound";
 
 import { initAxios } from "@/lib/axios";
@@ -116,7 +116,9 @@ export default function PersonDetailsPage() {
             ) : (
               <>
                 <p
-                  className={`${showFullText ? "" : "line-clamp-6"} mt-2 text-justify`}
+                  className={`${
+                    showFullText ? "" : "line-clamp-6"
+                  } mt-2 text-justify`}
                 >
                   {data.biography}
                 </p>
@@ -132,8 +134,8 @@ export default function PersonDetailsPage() {
         </div>
       </div>
 
-      <SimilarMovies
-        data={data.combined_credits.cast}
+      <Participation
+        data={[...data.combined_credits.cast, ...data.combined_credits.crew]}
         title="Participated in"
       />
     </div>

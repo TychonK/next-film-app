@@ -99,7 +99,9 @@ export default function FilmDetailPage() {
                     .map((country) => country.name)
                     .join(", ")}
                 </p>
-                <p className="text-lg">Lasts: {formatTime(data.runtime)}</p>
+                <p className="text-lg">
+                  Lasts: {data.runtime.length != 0 ? formatTime(data.runtime) : "no data"}
+                </p>
                 <p className="text-lg">Film ID: {id}</p>
               </div>
 
@@ -130,7 +132,7 @@ export default function FilmDetailPage() {
               <div>
                 <h2 className="text-2xl font-semibold">Production Companies</h2>
 
-                <div className="flex flex-row flex-wrap gap-8">
+                <div className="flex flex-row flex-wrap gap-8 mt-4">
                   {data.production_companies.length == 0 ? (
                     <NotFound />
                   ) : (
