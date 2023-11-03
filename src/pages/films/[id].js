@@ -50,6 +50,12 @@ export default function FilmDetailPage() {
     return <NotFound />
   }
 
+  const getDirector = data.credits.crew.filter((member) => {
+    return member.job.toLowerCase() === "director";
+  });
+
+  console.log(getDirector);
+
     return (
       <div className="text-white px-4">
         <div className="lg:px-32">
@@ -178,7 +184,7 @@ export default function FilmDetailPage() {
             Cast
           </h2>
           <ScrollContainer containerId="cast">
-            {data.credits.cast.length != 0 && <Cast castData={data.credits} />}
+            {data.credits.cast.length != 0 && <Cast castData={data.credits.cast} />}
           </ScrollContainer>
           <h2 className="text-7xl text-center lg:text-center font-semibold mt-16 relative pseudo-title">
             Crew
@@ -186,7 +192,7 @@ export default function FilmDetailPage() {
           <div className="relative">
             <ScrollContainer containerId="crew">
               {data.credits.crew.length != 0 && (
-                <Crew castData={data.credits} />
+                <Crew crewData={data.credits.crew} />
               )}
             </ScrollContainer>
           </div>

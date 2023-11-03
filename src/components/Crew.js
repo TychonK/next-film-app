@@ -5,15 +5,10 @@ import NotFound from "./notFound";
 
 const baseUrlPerson = "https://image.tmdb.org/t/p/w500/";
 
-export default function Crew({ castData }) {
-  const sortedCrewData = castData.crew.sort( // !!! cast.data.CREW
-    (a, b) => b.popularity - a.popularity
-  );
-
+export default function Crew({ crewData }) {
   const crewGroupedByPerson = {};
 
-  // Group crew members by their unique identifier (e.g., person.id)
-  sortedCrewData.forEach((person) => {
+  crewData.forEach((person) => {
     if (!crewGroupedByPerson[person.id]) {
       crewGroupedByPerson[person.id] = {
         ...person,
@@ -26,10 +21,28 @@ export default function Crew({ castData }) {
 
   const crewList = Object.values(crewGroupedByPerson);
 
+  function customSort(a, b) {
+    if (
+      (a.job.toLowerCase() === "director" && b.job.toLowerCase() !== "director") ||
+      (a.profile_path && !b.profile_path)
+    ) {
+      return -1;
+    } else if (
+      (a.job.toLowerCase() !== "director" && b.job.toLowerCase() === "director") ||
+      (!a.profile_path && b.profile_path)
+    ) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
+  const sortedCrew = crewList.sort(customSort);
+
     return (
       <>
-        {(!crewList || crewList.length == 0) && <NotFound />}
-        {crewList.map((person) => {
+        {(!sortedCrew || sortedCrew.length == 0) && <NotFound />}
+        {sortedCrew.map((person) => {
           return (
             <Link href={`/people/${person.id}`} className="mr-8 last:mr-0">
               <li

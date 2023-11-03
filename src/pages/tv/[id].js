@@ -181,7 +181,7 @@ export default function TvDetailsPage() {
         </h2>
         {data.credits.cast.length != 0 ? (
           <ScrollContainer containerId="cast">
-            {data.credits.cast.length != 0 && <Cast castData={data.credits} />}
+            {data.credits.cast.length != 0 && <Cast castData={data.credits.cast} />}
           </ScrollContainer>
         ) : (
           <NotFound />
@@ -193,7 +193,7 @@ export default function TvDetailsPage() {
         <div className="relative">
           {data.credits.crew.length != 0 ? (
             <ScrollContainer containerId="crew">
-              <Crew castData={data.credits} />
+              <Crew crewData={data.credits.crew} />
             </ScrollContainer>
           ) : (
             <NotFound />

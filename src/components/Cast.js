@@ -6,14 +6,26 @@ import NotFound from "./notFound";
 const baseUrlPerson = "https://image.tmdb.org/t/p/w500/";
 
 export default function Cast({ castData }) {
-    const sortedCastData = castData.cast.sort(
-      (a, b) => b.popularity - a.popularity
-  );
+    function customSort(a, b) {
+      if (
+        (a.profile_path && !b.profile_path)
+      ) {
+        return -1;
+      } else if (
+        (!a.profile_path && b.profile_path)
+      ) {
+        return 1;
+      } else {
+        return 0;
+      }
+    }
+
+    const sortedCast = castData.sort(customSort);
 
   return (
     <>
-      {(!sortedCastData || sortedCastData.length == 0) && <NotFound />}
-      {sortedCastData.map((person) => {
+      {(!sortedCast || sortedCast.length == 0) && <NotFound />}
+      {sortedCast.map((person) => {
         return (
           <Link href={`/people/${person.id}`} className="mr-8 last:mr-0">
             <li
@@ -31,7 +43,9 @@ export default function Cast({ castData }) {
               />
 
               <div className="mt-4">
-                <p className="text-xl font-bold leadi group-hover:underline">{person.name}</p>
+                <p className="text-xl font-bold leadi group-hover:underline">
+                  {person.name}
+                </p>
                 <p className="font-medium text-xl">{person.character}</p>
               </div>
             </li>
