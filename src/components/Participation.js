@@ -70,12 +70,12 @@ export default function Participation({ data, title, type }) {
             type="search"
             name="search"
             placeholder="Search..."
-            className="bg-transparent focus:outline-none focus:bg-gray-950 text-gray-100 p-3 w-full h-full border-violet-400 border-b-4"
+            className={`bg-transparent focus:outline-none focus:bg-gray-950 text-gray-100 p-3 w-full h-full border-b-4 ${search.length > 0 ? "border-violet-400" : "border-gray-700"}`}
             onChange={(e) => {
               handleSearchChange(e);
             }}
           />
-          <div className="flex items-center justify-center px-4 bg-violet-400 text-gray-800">
+          <div className="flex items-center justify-center px-4 bg-gray-700 text-gray-800">
             <svg
               fill="currentColor"
               viewBox="0 0 512 512"
@@ -106,7 +106,7 @@ export default function Participation({ data, title, type }) {
           TV show
         </button>
       </div>
-      <div className="mt-8 flex flex-row flex-wrap gap-12 justify-center">
+      <div className="mt-12 flex flex-row flex-wrap gap-12 justify-center">
         {searchedData.length == 0 ? (
           <NotFound />
         ) : (
