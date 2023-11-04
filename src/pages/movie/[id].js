@@ -51,12 +51,6 @@ export default function FilmDetailPage() {
     return <NotFound />
   }
 
-  const getDirector = data.credits.crew.filter((member) => {
-    return member.job.toLowerCase() === "director";
-  });
-
-  console.log(getDirector);
-
     return (
       <div className="text-white px-4">
         <div className="lg:px-32">

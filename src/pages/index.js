@@ -5,7 +5,7 @@ import useSWR from "swr";
 import ScrollContainer from "@/components/ScrollContainer";
 import Loader from "@/components/loader";
 import Title2 from "@/components/Title2";
-import CardFilm from "@/components/CardFilm";
+import CardFilm from "@/components/CardMovie";
 import CardTv from "@/components/CardTv";
 import CardPpl from "@/components/CardPpl";
 
@@ -42,16 +42,16 @@ export default function Home({ genresMov, genresTv }) {
   } = useSWR(
     "https://api.themoviedb.org/3/trending/tv/week?language=en-US",
     fetchTvData
-    );
-  
-    const {
-      data: pplData,
-      error: pplError,
-      isLoading: pplIsLoading,
-    } = useSWR(
-        "https://api.themoviedb.org/3/trending/person/week?language=en-US",
-        fetchPplData
-    );
+  );
+
+  const {
+    data: pplData,
+    error: pplError,
+    isLoading: pplIsLoading,
+  } = useSWR(
+    "https://api.themoviedb.org/3/trending/person/week?language=en-US",
+    fetchPplData
+  );
 
   async function fetchFilmData(url) {
     const dataObj = {};

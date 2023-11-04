@@ -36,7 +36,7 @@ export default function FavoriteBtn({ entityId, type}) {
       >
         {isFavorite ? (
           <>
-            <p className="ml-2">Remove</p>
+            <p className="mr-2">Remove from favorites</p>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -52,7 +52,7 @@ export default function FavoriteBtn({ entityId, type}) {
           </>
         ) : (
           <>
-            <p className="ml-2">Add to favorites</p>
+            <p className="mr-2">Add to favorites</p>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"

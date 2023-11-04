@@ -3,7 +3,7 @@ import axios from "axios";
 import useSWR from "swr";
 import { useRouter } from "next/router";
 
-import Card from "@/components/CardFilm";
+import Card from "@/components/CardMovie";
 import Placeholder from "@/components/placehoder";
 import NotFound from "@/components/notFound";
 
@@ -51,7 +51,8 @@ export default function Dicover({ genres }) {
     return dataObj;
   }
 
-  const sortedData = (data) => data.films.sort((a, b) => b.popularity - a.popularity);
+  const sortedData = (data) =>
+    data.films.sort((a, b) => b.popularity - a.popularity);
 
   return (
     <>

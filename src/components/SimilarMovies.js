@@ -64,7 +64,7 @@ export default function SimilarMovies({ data, title, type }) {
             href={
               movie.media_type == "tv" || type == "tv"
                 ? `/tv/${movie.id}`
-                : `/films/${movie.id}`
+                : `/movie/${movie.id}`
             }
             key={movie.id}
             className="rounded-lg overflow-hidden shadow-lg w-64 duration-200 group hover:scale-105"
