@@ -52,9 +52,10 @@ export default function TvDetailsPage() {
   return (
     <div className="text-white px-4">
       <div className="lg:px-32">
-        <GoBackBtn />
-        <FavoriteBtn entityId={id} type="tv" />
-
+        <div className="flex justify-between">
+          <GoBackBtn />
+          <FavoriteBtn entityId={id} type="tv" />
+        </div>
         <div className="flex flex-col xl:flex-row mt-10 bg-gray-950 rounded-md shadow-lg">
           <div className="w-full h-max-full xl:w-1/2">
             <div
