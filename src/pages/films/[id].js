@@ -10,6 +10,7 @@ import Cast from "@/components/Cast";
 import Crew from "@/components/Crew";
 import ScrollContainer from "@/components/ScrollContainer";
 import NotFound from "@/components/notFound";
+import FavoriteBtn from "@/components/FavoriteBtn";
 
 import { initAxios } from "@/lib/axios";
 import { formatTime } from "@/lib/helpers";
@@ -60,6 +61,7 @@ export default function FilmDetailPage() {
       <div className="text-white px-4">
         <div className="lg:px-32">
           <GoBackBtn />
+          <FavoriteBtn entityId={id} type="movie" />
 
           <div className="flex flex-col xl:flex-row mt-10 bg-gray-950 rounded-md shadow-lg">
             <div className="w-full h-max-full xl:w-1/2">
@@ -106,7 +108,10 @@ export default function FilmDetailPage() {
                     .join(", ")}
                 </p>
                 <p className="text-lg">
-                  Lasts: {data.runtime.length != 0 ? formatTime(data.runtime) : "no data"}
+                  Lasts:{" "}
+                  {data.runtime.length != 0
+                    ? formatTime(data.runtime)
+                    : "no data"}
                 </p>
                 <p className="text-lg">Film ID: {id}</p>
               </div>
@@ -184,7 +189,9 @@ export default function FilmDetailPage() {
             Cast
           </h2>
           <ScrollContainer containerId="cast">
-            {data.credits.cast.length != 0 && <Cast castData={data.credits.cast} />}
+            {data.credits.cast.length != 0 && (
+              <Cast castData={data.credits.cast} />
+            )}
           </ScrollContainer>
           <h2 className="text-7xl text-center lg:text-center font-semibold mt-16 relative pseudo-title">
             Crew

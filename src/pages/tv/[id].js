@@ -4,12 +4,12 @@ import { useRouter } from "next/router";
 
 import Loader from "@/components/loader";
 import GoBackBtn from "@/components/goBackBtn";
-import numeral from "numeral";
 import SimilarMovies from "@/components/SimilarMovies";
 import Cast from "@/components/Cast";
 import Crew from "@/components/Crew";
 import ScrollContainer from "@/components/ScrollContainer";
 import NotFound from "@/components/notFound";
+import FavoriteBtn from "@/components/FavoriteBtn";
 
 import { initAxios } from "@/lib/axios";
 import { formatTime } from "@/lib/helpers";
@@ -53,6 +53,7 @@ export default function TvDetailsPage() {
     <div className="text-white px-4">
       <div className="lg:px-32">
         <GoBackBtn />
+        <FavoriteBtn entityId={id} type="tv" />
 
         <div className="flex flex-col xl:flex-row mt-10 bg-gray-950 rounded-md shadow-lg">
           <div className="w-full h-max-full xl:w-1/2">
@@ -181,7 +182,9 @@ export default function TvDetailsPage() {
         </h2>
         {data.credits.cast.length != 0 ? (
           <ScrollContainer containerId="cast">
-            {data.credits.cast.length != 0 && <Cast castData={data.credits.cast} />}
+            {data.credits.cast.length != 0 && (
+              <Cast castData={data.credits.cast} />
+            )}
           </ScrollContainer>
         ) : (
           <NotFound />

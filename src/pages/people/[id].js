@@ -7,6 +7,7 @@ import Loader from "@/components/loader";
 import GoBackBtn from "@/components/goBackBtn";
 import Participation from "@/components/Participation";
 import NotFound from "@/components/notFound";
+import FavoriteBtn from "@/components/FavoriteBtn";
 
 import { initAxios } from "@/lib/axios";
 import { calculateAge } from "@/lib/helpers";
@@ -55,6 +56,8 @@ export default function PersonDetailsPage() {
   return (
     <div className="text-white px-4 md:px-32">
       <GoBackBtn />
+      <FavoriteBtn entityId={id} type="person" />
+
       <div className="flex flex-col lg:flex-row my-12 rounded-md bg-gray-950">
         <Link
           href={`/gallery/${id}?name=${data.name}`}

@@ -5,6 +5,8 @@ import { useState } from "react";
 
 import Headroom from "react-headroom";
 
+import FavoriteButton from "./Favorite";
+
 
 
 export default function Nav({ toggleMenu }) {
@@ -61,6 +63,9 @@ export default function Nav({ toggleMenu }) {
                 >
                   Discover
                 </Link>
+              </li>
+              <li className="flex">
+                <FavoriteButton />
               </li>
             </ul>
             <a
