@@ -57,7 +57,7 @@ export default function PersonDetailsPage() {
     <div className="text-white px-4 md:px-32">
       <div className="flex justify-between">
         <GoBackBtn />
-        <FavoriteBtn entityId={id} type="people" />
+        <FavoriteBtn entity={data} type="people" />
       </div>
 
       <div className="flex flex-col lg:flex-row my-12 rounded-md bg-gray-950">

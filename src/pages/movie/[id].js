@@ -56,7 +56,7 @@ export default function FilmDetailPage() {
         <div className="lg:px-32">
           <div className="flex justify-between">
             <GoBackBtn />
-            <FavoriteBtn entityId={id} type="movie" />
+            <FavoriteBtn entity={data} type="movie" />
           </div>
           <div className="flex flex-col xl:flex-row mt-10 bg-gray-950 rounded-md shadow-lg">
             <div className="w-full h-max-full xl:w-1/2">

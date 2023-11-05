@@ -14,7 +14,7 @@ export default function Favorites() {
 
     const toggleFavorite = (entityId, entityType) => {
       const updatedFavorites = favoriteFilms.filter(
-        (entity) => !(entity.id === entityId && entity.type === entityType)
+        (entity) => !(entity.data.id === entityId && entity.type === entityType)
       );
       setFavoriteFilms(updatedFavorites);
       localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
@@ -22,10 +22,10 @@ export default function Favorites() {
 
     return favoriteFilms.map((entity) => (
       <div>
-        <Link href={`/${entity.type}/${entity.id}`} key={entity.id}>
-          <p>{`Type: ${entity.type} id: ${entity.id}`}</p>
+        <Link href={`/${entity.type}/${entity.data.id}`} key={entity.data.id}>
+          <p>{`Type: ${entity.type} id: ${entity.data.id}`}</p>
         </Link>
-        <button className="bg-red-400" onClick={() => toggleFavorite(entity.id, entity.type)}>
+        <button className="bg-red-400" onClick={() => toggleFavorite(entity.data.id, entity.type)}>
           Remove from Favorites
         </button>
       </div>

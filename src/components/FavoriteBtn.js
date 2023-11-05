@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-export default function FavoriteBtn({ entityId, type}) {
+export default function FavoriteBtn({ entity, type}) {
     const [favoriteFilms, setFavoriteFilms] = useState([]);
 
     useEffect(() => { 
@@ -11,19 +11,19 @@ export default function FavoriteBtn({ entityId, type}) {
       }, []);
 
       const isFavorite = favoriteFilms.some(
-        (entity) => entity.id === entityId && entity.type === type
+        (e) => e.data.id === entity.id && e.type === type
       );
 
     const toggleFavorite = () => {
         
         if (isFavorite) {
             const updatedFavorites = favoriteFilms.filter(
-                (entity) => !(entity.id === entityId && entity.type === type)
+                (e) => !(e.data.id === entity.id && e.type === type)
             );
             setFavoriteFilms(updatedFavorites);
             localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
         } else {
-            const updatedFavorites = [...favoriteFilms, { id: entityId, type: type }];
+          const updatedFavorites = [...favoriteFilms, { data: entity, type: type }];
             setFavoriteFilms(updatedFavorites);
             localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
         }
