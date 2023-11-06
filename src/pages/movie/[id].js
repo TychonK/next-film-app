@@ -41,7 +41,13 @@ export default function FilmDetailPage() {
           console.log(er);
         });
         return data
-    }
+  }
+  
+   const keysToExclude = ["credits", "similar", "videos"];
+   const filteredObject = { ...data };
+   keysToExclude.forEach((key) => {
+     delete filteredObject[key];
+   });
   
   if (isLoading) {
     return <Loader />
@@ -56,7 +62,7 @@ export default function FilmDetailPage() {
         <div className="lg:px-32">
           <div className="flex justify-between">
             <GoBackBtn />
-            <FavoriteBtn entity={data} type="movie" />
+            <FavoriteBtn entity={filteredObject} type="movie" />
           </div>
           <div className="flex flex-col xl:flex-row mt-10 bg-gray-950 rounded-md shadow-lg">
             <div className="w-full h-max-full xl:w-1/2">
