@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { useRouter } from "next/router";
 
-export default function FavoriteButton() {
+export default function FavoriteLink() {
     const router = useRouter()
 
   return (
@@ -13,7 +13,7 @@ export default function FavoriteButton() {
           router.pathname == "/favorites"
             ? "text-violet-400 border-violet-400"
             : "text-white-400 border-white-400"
-        }` + " flex items-center px-4 -mb-1 border-b-2 border-transparent"
+        }` + " flex items-center text-center px-4 -mb-1 border-b-2 border-transparent"
       }
     >
       <svg

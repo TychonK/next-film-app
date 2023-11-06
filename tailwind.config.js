@@ -15,6 +15,10 @@ module.exports = {
       fontSize: {
         xxl: "14rem",
       },
+      zIndex: {
+        2: "2",
+        5: "5",
+      },
     },
   },
   plugins: [],

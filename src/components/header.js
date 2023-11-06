@@ -1,11 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
-import Headroom from "react-headroom";
-
-import FavoriteButton from "./Favorite";
+import FavoriteLink from "./FavoriteLink";
 
 
 
@@ -28,8 +26,7 @@ export default function Nav({ toggleMenu }) {
 
   return (
     <>
-      <Headroom>
-        <header className="p-4 bg-gray-800 text-gray-100">
+        <header className="p-4 bg-gray-800 text-gray-100 relative z-10">
           <div className="container flex justify-between lg:px-12 h-16 mx-auto relative nav">
             <ul className="items-stretch hidden space-x-3 lg:flex">
               <li className="flex">
@@ -65,7 +62,7 @@ export default function Nav({ toggleMenu }) {
                 </Link>
               </li>
               <li className="flex">
-                <FavoriteButton />
+                <FavoriteLink />
               </li>
             </ul>
             <a
@@ -143,7 +140,6 @@ export default function Nav({ toggleMenu }) {
             </button>
           </div>
         </header>
-      </Headroom>
     </>
   );
 }

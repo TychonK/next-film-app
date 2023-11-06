@@ -24,6 +24,11 @@ export default function NavMobile({close, open}) {
           Discover
         </Link>
       </li>
+      <li className="text-center text-3xl mt-4">
+        <Link href="/favorites" onClick={handleCloseMobileMenu}>
+          Favorites
+        </Link>
+      </li>
     </ul>
   );
 }
