@@ -13,9 +13,13 @@ export default function CardMov(props) {
       >
         <div className="front-content">
           <img
-            src={baseUrlImg + movData.poster_path}
+            src={
+              !movData.poster_path
+                ? "logo.svg"
+                : baseUrlImg + movData.poster_path
+            }
             alt="Movie poster"
-            className="object-cover object-center w-full rounded-md h-72 bg-gray-500"
+            className="object-cover object-center w-full rounded-md h-72 bg-gray-950"
           />
           <div className="mt-4">
             <span className="block text-xs font-medium tracki uppercase text-violet-400">
