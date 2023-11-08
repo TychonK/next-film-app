@@ -32,3 +32,7 @@
 .back-content::-webkit-scrollbar-track {
   background-color: #ffffff00;
 }
+
+.no-scroll-bar::-webkit-scrollbar {
+  display: none;
+}

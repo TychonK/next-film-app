@@ -1,7 +1,12 @@
-export default function Title2({ text }) {
+export default function Title2({ text, subText }) {
   return (
-    <h2 className="font-light uppercase mt-12 -mb-2 text-center text-6xl md:text-8xl lg:text-xxl text-transparent bg-clip-text bg-gradient-to-b from-gray-500 to-gray-900">
+    <h2 className="text-6xl ml-28 font-semibold break-normal break-all relative pseudo-title">
       {text}
+      {subText &&
+        <span class="bg-blue-100 uppercase text-blue-800 text-2xl font-semibold px-2.5 py-0.5 rounded bg-blue-200 text-blue-800 ml-4 align-middle">
+          {subText}
+        </span>
+      }
     </h2>
   );
 }

@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ScrollContainer({ children, containerId, btnDark }) {
+export default function ScrollContainer({ children, containerId, btnDark, addStyle }) {
   const handleScrollForward = () => {
     const container = document.getElementById(containerId);
 
@@ -40,7 +40,7 @@ export default function ScrollContainer({ children, containerId, btnDark }) {
   };
 
   return (
-    <div className="relative">
+    <div className="relative mb-12">
       <button
         onClick={handleScrollBack}
         className={
@@ -65,7 +65,7 @@ export default function ScrollContainer({ children, containerId, btnDark }) {
       </button>
       <ul
         id={containerId}
-        className="flex scroll-container mx-4 md:mx-20 mt-8 pb-3 overflow-y-hidden overflow-x-scroll rounded-md"
+        className={"flex scroll-container mx-4 md:mx-20 mt-8 pb-3 overflow-y-hidden overflow-x-scroll rounded-md" + " " + addStyle}
       >
         {children}
       </ul>

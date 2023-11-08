@@ -8,6 +8,7 @@ import Title2 from "@/components/Title2";
 import CardFilm from "@/components/CardMovie";
 import CardTv from "@/components/CardTv";
 import CardPpl from "@/components/CardPpl";
+import CardFeatured from "@/components/CardFeatured";
 
 import { fetchGenresMov, fetchGenresTv } from "@/lib/fetchGenres";
 import { initAxios } from "@/lib/axios";
@@ -51,7 +52,17 @@ export default function Home({ genresMov, genresTv }) {
   } = useSWR(
     "https://api.themoviedb.org/3/trending/person/week?language=en-US",
     fetchPplData
-  );
+    );
+  
+
+    const {
+      data: featuredData,
+      error: featuresErr,
+      isLoading: featuredIsLoading,
+    } = useSWR(
+      "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
+      fetchFeaturedData
+    );
 
   async function fetchFilmData(url) {
     const dataObj = {};
@@ -95,17 +106,25 @@ export default function Home({ genresMov, genresTv }) {
     return dataObj;
   }
 
+  async function fetchFeaturedData(url) {
+    const dataObj = {};
+
+    await axios
+      .get(url)
+      .then(function (res) {
+        dataObj.featured = res.data.results.slice(0, 10);
+        console.log(dataObj)
+      })
+      .catch((er) => {
+        console.log(er);
+      });
+    return dataObj;
+  }
+
   return (
     <>
-      <h1 className="text-2xl md:text-8xl uppercase font-medium leadi text-center text-transparent bg-clip-text bg-gradient-to-b from-purple-700 to-pink-600">
-        Trending
-      </h1>
-      <h2 className="text-xl md:text-2xl uppercase font-medium leadi text-center text-transparent bg-clip-text bg-gradient-to-t from-purple-700 to-pink-600">
-        discover last week's trends <br /> in the world of cinema
-      </h2>
-
       <div className="relative rounded-md">
-        <Title2 text="Movies" />
+        <Title2 text="Movies" subText="trending" />
 
         {filmIsLoading && <Loader />}
 
@@ -126,7 +145,7 @@ export default function Home({ genresMov, genresTv }) {
       </div>
 
       <div className="relative rounded-md">
-        <Title2 text="Series" />
+        <Title2 text="Series" subText="trending" />
 
         {tvIsLoading && <Loader />}
 
@@ -146,18 +165,39 @@ export default function Home({ genresMov, genresTv }) {
         </ScrollContainer>
       </div>
 
-      <div className="relative rounded-md">
-        <Title2 text="People" />
+      <div>
+        <Title2 text="Everyone loves" subText="top 10 rated" />
+
+        <div className="flex flex-wrap mt-8 justify-left">
+          {featuredIsLoading && <Loader />}
+          {featuredData &&
+            featuredData.featured.map((mov) => {
+              return <CardFeatured data={mov} />;
+            })}
+        </div>
+      </div>
+
+      <div className="relative rounded-md mt-12">
+        <Title2 text="People" subText="trending" />
 
         {pplIsLoading && <Loader />}
 
-        <ScrollContainer containerId="ppl" btnDark={true}>
+        <ScrollContainer
+          containerId="ppl"
+          btnDark={true}
+          addStyle={"no-scroll-bar"}
+        >
           {pplData &&
             pplData.ppl.map((person) => {
               return <CardPpl key={person.id} personData={person} />;
             })}
         </ScrollContainer>
       </div>
+
+      <div>
+        <Title2 text="Popular" subText="all time classic" />
+      </div>
+      <Title2 text="What to watch" subText="upcoming in theaters" />
     </>
   );
 }
