@@ -1,0 +1,40 @@
+import Link from "next/link";
+
+const baseUrlImg = "https://image.tmdb.org/t/p/w500/";
+
+export default function CardPopular({ data }) {
+    return (
+      <Link
+        href={`/movie/${data.id}`}
+        className="relative block max-w-2xs bg-white shadow-lg rounded-lg overflow-hidden group"
+      >
+        <div className="relative overflow-hidden">
+          <div className="bg-gradient-to-t from-black via-gray-800 to-transparent absolute inset-0"></div>
+          <img
+            src={baseUrlImg + data.poster_path}
+            alt="Film Poster"
+            className="w-full h-80 object-cover object-top transform group-hover:scale-105 transition-transform"
+          />
+        </div>
+        <div className="p-4 pb-10">
+          <div class="flex justify-between items-start">
+            <h2 className="text-2xl font-bold text-gray-800 line-clamp-2" title={data.title}>{data.title}</h2>
+            <div class="bg-yellow-400 font-bold rounded-xl p-2">
+              {data.vote_average.toFixed(1)}
+            </div>
+          </div>
+          <p className="text-gray-600 text-sm mt-2">
+            Release: {data.release_date.slice(0, 4)}
+          </p>
+          <p className="text-gray-600 text-sm">Popularity: {data.popularity}</p>
+          <p className="text-gray-600 text-sm mt-3 line-clamp-4">
+            {data.overview}
+          </p>
+
+          <p className="absolute bottom-2 left-1/2 -translate-x-1/2 text-sm text-center font-semibold text-cyan-600 group-hover:underline group-hover:text-cyan-900">
+            Details
+          </p>
+        </div>
+      </Link>
+    );
+}

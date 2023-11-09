@@ -6,10 +6,10 @@ export default function CardFeatured({ data }) {
     return (
       <Link
         href={`/movie/${data.id}`}
-        class="py-3 sm:max-w-xl  sm:mx-auto mb-20 group"
+        class="sm:max-w-lg mb-20 group"
       >
-        <div class="bg-white shadow-lg border-gray-100 border sm:rounded-3xl p-8 flex space-x-8 h-full">
-          <div class="h-40 overflow-visible w-1/2">
+        <div class="bg-white shadow-lg border-gray-100 border sm:rounded-3xl p-4 flex space-x-8 h-full">
+          <div class="h-32 overflow-visible w-1/2">
             <img
               class="rounded-3xl shadow-lg"
               src={baseUrlImg + data.poster_path}

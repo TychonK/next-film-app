@@ -19,6 +19,11 @@ module.exports = {
         2: "2",
         5: "5",
       },
+      maxWidth: {
+        "2xs": "300px",
+        "3xs": "280px",
+        "4xs": "260px",
+      },
     },
   },
   plugins: [],

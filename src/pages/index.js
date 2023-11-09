@@ -9,6 +9,7 @@ import CardFilm from "@/components/CardMovie";
 import CardTv from "@/components/CardTv";
 import CardPpl from "@/components/CardPpl";
 import CardFeatured from "@/components/CardFeatured";
+import CardPopular from "@/components/CardPopular";
 
 import { fetchGenresMov, fetchGenresTv } from "@/lib/fetchGenres";
 import { initAxios } from "@/lib/axios";
@@ -62,7 +63,16 @@ export default function Home({ genresMov, genresTv }) {
     } = useSWR(
       "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
       fetchFeaturedData
-    );
+    )
+  
+  const {
+    data: popularData,
+    error: popularErr,
+    isLoading: popularIsLoading,
+  } = useSWR(
+    "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1",
+    fetchPopularData
+  );
 
   async function fetchFilmData(url) {
     const dataObj = {};
@@ -99,6 +109,20 @@ export default function Home({ genresMov, genresTv }) {
       .get(url)
       .then(function (res) {
         dataObj.ppl = res.data.results;
+      })
+      .catch((er) => {
+        console.log(er);
+      });
+    return dataObj;
+  }
+
+  async function fetchPopularData(url) {
+    const dataObj = {};
+
+    await axios
+      .get(url)
+      .then(function (res) {
+        dataObj.popular = res.data.results;
       })
       .catch((er) => {
         console.log(er);
@@ -165,18 +189,6 @@ export default function Home({ genresMov, genresTv }) {
         </ScrollContainer>
       </div>
 
-      <div>
-        <Title2 text="Everyone loves" subText="top 10 rated" />
-
-        <div className="flex flex-wrap mt-8 justify-left">
-          {featuredIsLoading && <Loader />}
-          {featuredData &&
-            featuredData.featured.map((mov) => {
-              return <CardFeatured data={mov} />;
-            })}
-        </div>
-      </div>
-
       <div className="relative rounded-md mt-12">
         <Title2 text="People" subText="trending" />
 
@@ -194,10 +206,33 @@ export default function Home({ genresMov, genresTv }) {
         </ScrollContainer>
       </div>
 
-      <div>
-        <Title2 text="Popular" subText="all time classic" />
+      <div className="mb-12">
+        <Title2 text="Everyone loves" subText="top 10 rated" />
+
+        <div className="flex flex-wrap mt-8 gap-x-10 gap-y-4">
+          {featuredIsLoading && <Loader />}
+          {featuredData &&
+            featuredData.featured.map((mov) => {
+              return <CardFeatured data={mov} />;
+            })}
+        </div>
       </div>
-      <Title2 text="What to watch" subText="upcoming in theaters" />
+
+      <div className="mb-12">
+        <Title2 text="What to watch" subText="popular now" />
+
+        <div className="flex flex-wrap mt-8 gap-10">
+          {popularIsLoading && <Loader />}
+          {popularData &&
+            popularData.popular.map((mov) => {
+              return <CardPopular data={mov} />;
+            })}
+        </div>
+      </div>
+
+      <div>
+        <Title2 text="What to watch" subText="upcoming in theaters" />
+      </div>
     </>
   );
 }
