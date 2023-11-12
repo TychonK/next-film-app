@@ -2,6 +2,11 @@
   -webkit-perspective: 1000px; /* Webkit prefix for perspective */
   perspective: 1000px;
 }
+@supports not (-webkit-appearance: none) {
+  .card {
+    transform-style: preserve-3d;
+  }
+}
 
 .front-content, .back-content {
   -webkit-backface-visibility: hidden;
