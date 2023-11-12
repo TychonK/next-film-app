@@ -33,4 +33,11 @@ function formatTime(minutes) {
   return formattedTime;
 }
 
-export { calculateAge, formatTime };
+const calculateBackgroundColor = (voteAverage) => {
+  const percentage = (voteAverage / 10) * 100;
+  const red = 255;
+  const green = (255 * percentage) / 100;
+  return `rgb(${red}, ${green}, 0)`;
+};
+
+export { calculateAge, formatTime, calculateBackgroundColor };

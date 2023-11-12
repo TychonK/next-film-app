@@ -24,6 +24,9 @@ module.exports = {
         "3xs": "280px",
         "4xs": "260px",
       },
+      spacing: {
+        'slider': "500px",
+      }
     },
   },
   plugins: [],

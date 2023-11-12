@@ -10,6 +10,7 @@ import CardTv from "@/components/CardTv";
 import CardPpl from "@/components/CardPpl";
 import CardFeatured from "@/components/CardFeatured";
 import CardPopular from "@/components/CardPopular";
+import Carousel from "@/components/Carousel";
 
 import { fetchGenresMov, fetchGenresTv } from "@/lib/fetchGenres";
 import { initAxios } from "@/lib/axios";
@@ -72,7 +73,16 @@ export default function Home({ genresMov, genresTv }) {
   } = useSWR(
     "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1",
     fetchPopularData
-  );
+    )
+  
+   const {
+     data: upcomingData,
+     error: upcomingErr,
+     isLoading: upcomingIsLoading,
+   } = useSWR(
+     "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1",
+     fetchUpcomingData
+   );
 
   async function fetchFilmData(url) {
     const dataObj = {};
@@ -137,7 +147,20 @@ export default function Home({ genresMov, genresTv }) {
       .get(url)
       .then(function (res) {
         dataObj.featured = res.data.results.slice(0, 10);
-        console.log(dataObj)
+      })
+      .catch((er) => {
+        console.log(er);
+      });
+    return dataObj;
+  }
+
+  async function fetchUpcomingData(url) {
+    const dataObj = {};
+
+    await axios
+      .get(url)
+      .then(function (res) {
+        dataObj.upcoming = res.data.results.slice(0, 7);
       })
       .catch((er) => {
         console.log(er);
@@ -147,6 +170,12 @@ export default function Home({ genresMov, genresTv }) {
 
   return (
     <>
+      <div className="mb-12">
+        <Title2 text="What to watch" subText="upcoming in theaters" />
+        {upcomingIsLoading && <Loader />}
+        {upcomingData && <Carousel data={upcomingData.upcoming} />}
+      </div>
+
       <div className="relative rounded-md">
         <Title2 text="Movies" subText="trending" />
 
@@ -224,14 +253,10 @@ export default function Home({ genresMov, genresTv }) {
         <div className="flex flex-wrap mt-8 gap-10">
           {popularIsLoading && <Loader />}
           {popularData &&
-            popularData.popular.map((mov) => {
+            popularData.popular.slice(0, 15).map((mov) => {
               return <CardPopular data={mov} />;
             })}
         </div>
-      </div>
-
-      <div>
-        <Title2 text="What to watch" subText="upcoming in theaters" />
       </div>
     </>
   );

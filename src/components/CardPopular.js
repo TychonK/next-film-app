@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { calculateBackgroundColor } from "@/lib/helpers";
+
 const baseUrlImg = "https://image.tmdb.org/t/p/w500/";
 
 export default function CardPopular({ data }) {
@@ -8,7 +10,7 @@ export default function CardPopular({ data }) {
         href={`/movie/${data.id}`}
         className="relative block max-w-2xs bg-white shadow-lg rounded-lg overflow-hidden group"
       >
-        <div className="relative overflow-hidden">
+        <div className="relative overflow-hidden" key={data.id}>
           <div className="bg-gradient-to-t from-black via-gray-800 to-transparent absolute inset-0"></div>
           <img
             src={baseUrlImg + data.poster_path}
@@ -17,9 +19,19 @@ export default function CardPopular({ data }) {
           />
         </div>
         <div className="p-4 pb-10">
-          <div class="flex justify-between items-start">
-            <h2 className="text-2xl font-bold text-gray-800 line-clamp-2" title={data.title}>{data.title}</h2>
-            <div class="bg-yellow-400 font-bold rounded-xl p-2">
+          <div className="flex justify-between items-start">
+            <h2
+              className="text-2xl font-bold text-gray-800 line-clamp-2"
+              title={data.title}
+            >
+              {data.title}
+            </h2>
+            <div
+              className="font-bold rounded-xl p-2"
+              style={{
+                backgroundColor: calculateBackgroundColor(data.vote_average),
+              }}
+            >
               {data.vote_average.toFixed(1)}
             </div>
           </div>
