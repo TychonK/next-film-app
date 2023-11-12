@@ -8,21 +8,23 @@
   backface-visibility: hidden;
   -webkit-transition: 0.6s;
   transition: 0.6s;
+  -webkit-transform: translateZ(0); /* Force hardware acceleration */
+  transform: translateZ(0); /* Force hardware acceleration */
 }
 
 .back-content {
-  -webkit-transform: rotateY(180deg);
-  transform: rotateY(180deg);
+  -webkit-transform: rotateY(-180deg) translateZ(0); /* Force hardware acceleration */
+  transform: rotateY(-180deg) translateZ(0); /* Force hardware acceleration */
 }
 
 .card:hover .front-content {
-  -webkit-transform: rotateY(-180deg);
-  transform: rotateY(-180deg);
+  -webkit-transform: rotateY(-180deg) translateZ(0); /* Force hardware acceleration */
+  transform: rotateY(-180deg) translateZ(0); /* Force hardware acceleration */
 }
 
 .card:hover .back-content {
-  -webkit-transform: rotateY(0);
-  transform: rotateY(0);
+  -webkit-transform: rotateY(0) translateZ(0); /* Force hardware acceleration */
+  transform: rotateY(0) translateZ(0); /* Force hardware acceleration */
 }
 
 .back-content::-webkit-scrollbar {
