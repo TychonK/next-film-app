@@ -20,7 +20,7 @@ export default function Carousel({ data }) {
     }
 
   return (
-    <div className="mt-8 mx-4 md:mx-20 rounded-md overflow-hidden">
+    <div className="mt-8 md:mx-20 rounded-md overflow-hidden">
       <Slider {...settings}>
         {data.map((item) => (
           <Link

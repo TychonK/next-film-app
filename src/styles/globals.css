@@ -31,10 +31,16 @@ main {
 .pseudo-title::before {
   content: "";
   position: absolute;
-  margin-left: -2rem;
+  margin-left: -1rem;
   width: 8px;
   top: 5px;
   bottom: 5px;
   background-color: rgb(139 92 246);
   border-radius: 5px;
+}
+
+@media (min-width: 768px) { 
+  .pseudo-title::before {
+    margin-left: -2rem;
+  }
 }
