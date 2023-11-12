@@ -6,7 +6,7 @@ export default function CardTv(props) {
   const baseUrlBackdrop = "https://image.tmdb.org/t/p/w780/";
   
   return (
-    <Link href={`/tv/${tvData.id}`} className="mr-8 last:mr-0">
+    <Link href={`/tv/${tvData.id}`}>
       <li
         style={{ minWidth: "260px", maxWidth: "260px" }}
         className="card h-full relative p-6 rounded-md shadow-md bg-gray-900 text-gray-50"

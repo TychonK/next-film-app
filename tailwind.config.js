@@ -24,9 +24,15 @@ module.exports = {
         "3xs": "280px",
         "4xs": "260px",
       },
+      minWidth: {
+        "4xs": "260px",
+      },
       spacing: {
-        'slider': "500px",
-      }
+        slider: "500px",
+      },
+      minHeight: {
+        default: "500px",
+      },
     },
   },
   plugins: [],

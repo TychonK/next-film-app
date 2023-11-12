@@ -3,21 +3,21 @@ import { calculateBackgroundColor } from "@/lib/helpers";
 
 const baseUrlImg = "https://image.tmdb.org/t/p/w500/";
 
-export default function CardFeatured({ data }) {
+export default function CardFeatured({ data, index }) {
     return (
-      <Link href={`/movie/${data.id}`} className="sm:max-w-lg mb-20 group">
+      <Link href={`/movie/${data.id}`} className="sm:max-w-lg group">
         <div
-          className="bg-white shadow-lg border-gray-100 border sm:rounded-3xl p-4 flex space-x-8 h-full"
+          className="bg-white shadow-lg border-gray-100 border sm:rounded-3xl p-4 flex space-x-8 relative"
           key={data.id}
         >
-          <div className="h-32 overflow-visible w-1/2">
+         
             <img
-              className="rounded-3xl shadow-lg"
+              className="w-1/2 rounded-3xl shadow-lg"
               src={baseUrlImg + data.poster_path}
               alt="Movie poster"
             />
-          </div>
-          <div className="flex flex-col w-1/2 space-y-4">
+        
+          <div className="flex flex-col w-1/2 space-y-4 relative z-10">
             <div className="flex justify-between items-start">
               <h2 className="text-2xl font-bold">{data.title}</h2>
               <div
@@ -39,6 +39,9 @@ export default function CardFeatured({ data }) {
             <div className="flex text-xl font-bold group-hover:underline">
               More
             </div>
+          </div>
+          <div className="absolute z-2 right-0 bottom-0 leading-none text-bold text-blue-200 opacity-20 text-xxl">
+            {index + 1}
           </div>
         </div>
       </Link>

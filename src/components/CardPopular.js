@@ -44,7 +44,7 @@ export default function CardPopular({ data }) {
           </p>
 
           <p className="absolute bottom-2 left-1/2 -translate-x-1/2 text-sm text-center font-semibold text-cyan-600 group-hover:underline group-hover:text-cyan-900">
-            Details
+            more
           </p>
         </div>
       </Link>

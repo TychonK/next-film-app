@@ -4,8 +4,9 @@ import useSWR from "swr";
 
 import ScrollContainer from "@/components/ScrollContainer";
 import Loader from "@/components/loader";
+import Placeholder from "@/components/placehoder";
 import Title2 from "@/components/Title2";
-import CardFilm from "@/components/CardMovie";
+import CardMov from "@/components/CardMovie";
 import CardTv from "@/components/CardTv";
 import CardPpl from "@/components/CardPpl";
 import CardFeatured from "@/components/CardFeatured";
@@ -172,16 +173,22 @@ export default function Home({ genresMov, genresTv }) {
     <>
       <div className="mb-12">
         <Title2 text="What to watch" subText="upcoming in theaters" />
-        {upcomingIsLoading && <Loader />}
+        {upcomingIsLoading && (
+          <Placeholder className="mt-8 mx-4 md:mx-20 min-h-default" />
+        )}
         {upcomingData && <Carousel data={upcomingData.upcoming} />}
       </div>
 
       <div className="relative rounded-md">
         <Title2 text="Movies" subText="trending" />
-
-        {filmIsLoading && <Loader />}
-
         <ScrollContainer containerId="movie" btnDark={true}>
+          {filmIsLoading &&
+            Array.from({ length: 20 }).map((_, index) => (
+              <Placeholder
+                key={index}
+                className="mr-8 last:mr-0 min-w-4xs max-w-4xs"
+              />
+            ))}
           {filmData &&
             filmData.films.map((mov) => {
               const movGenres = [];
@@ -192,17 +199,18 @@ export default function Home({ genresMov, genresTv }) {
                 });
               });
 
-              return <CardFilm key={mov.id} movData={mov} genres={movGenres} />;
+              return <CardMov key={mov.id} movData={mov} genres={movGenres} />;
             })}
         </ScrollContainer>
       </div>
 
       <div className="relative rounded-md">
         <Title2 text="Series" subText="trending" />
-
-        {tvIsLoading && <Loader />}
-
         <ScrollContainer containerId="tv" btnDark={true}>
+          {tvIsLoading &&
+            Array.from({ length: 20 }).map((_, index) => (
+              <Placeholder key={index} className="min-w-4xs max-w-4xs" />
+            ))}
           {tvData &&
             tvData.tv.map((tv) => {
               const movGenres = [];
@@ -220,14 +228,15 @@ export default function Home({ genresMov, genresTv }) {
 
       <div className="relative rounded-md mt-12">
         <Title2 text="People" subText="trending" />
-
-        {pplIsLoading && <Loader />}
-
         <ScrollContainer
           containerId="ppl"
           btnDark={true}
           addStyle={"no-scroll-bar"}
         >
+          {pplIsLoading &&
+            Array.from({ length: 20 }).map((_, index) => (
+              <Placeholder key={index} className="min-w-4xs max-w-4xs" />
+            ))}
           {pplData &&
             pplData.ppl.map((person) => {
               return <CardPpl key={person.id} personData={person} />;
@@ -236,21 +245,29 @@ export default function Home({ genresMov, genresTv }) {
       </div>
 
       <div className="mb-12">
-        <Title2 text="Everyone loves" subText="top 10 rated" />
+        <Title2
+          text="Everyone loves"
+          subText="top 10 rated"
+          className="text-center"
+        />
 
-        <div className="flex flex-wrap mt-8 gap-x-10 gap-y-4">
+        <div className="flex flex-wrap mt-8 mx-20 gap-12 justify-around">
           {featuredIsLoading && <Loader />}
           {featuredData &&
-            featuredData.featured.map((mov) => {
-              return <CardFeatured data={mov} />;
+            featuredData.featured.map((mov, index) => {
+              return <CardFeatured data={mov} index={index} />;
             })}
         </div>
       </div>
 
       <div className="mb-12">
-        <Title2 text="What to watch" subText="popular now" />
+        <Title2
+          text="What to watch"
+          subText="popular now"
+          className="text-center"
+        />
 
-        <div className="flex flex-wrap mt-8 gap-10">
+        <div className="flex flex-wrap justify-around mt-8 gap-16 mx-20">
           {popularIsLoading && <Loader />}
           {popularData &&
             popularData.popular.slice(0, 15).map((mov) => {

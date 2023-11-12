@@ -7,7 +7,6 @@ export default function CardPpl(props) {
   return (
     <Link
       href={`/people/${personData.id}`}
-      className="mr-8 last:mr-0"
     >
       <div
         className="max-w-lg mx-auto rounded-lg p-4 hover:scale-105 duration-300 group"
