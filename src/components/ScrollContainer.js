@@ -40,7 +40,7 @@ export default function ScrollContainer({ children, containerId, btnDark, addSty
   };
 
   return (
-    <div className="relative mb-12">
+    <div className="relative">
       <button
         onClick={handleScrollBack}
         className={

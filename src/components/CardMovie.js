@@ -7,19 +7,18 @@ export default function CardMov(props) {
   
   return (
     <Link href={`/movie/${movData.id}`} className="card-container">
-      <li
-        
-        className="card w-card/sm md:w-card relative p-2 md:p-6 rounded-md shadow-lg bg-gray-900 text-gray-50"
-      >
+      <li className="card w-card/sm md:w-card relative p-2 md:p-6 rounded-md shadow-lg bg-gray-900 text-gray-50">
         <div className="front-content">
           <img
             src={
               !movData.poster_path
-                ? "logo.svg"
+                ? "film.svg"
                 : baseUrlImg + movData.poster_path
             }
             alt="Movie poster"
-            className="object-cover object-center w-full rounded-md md:h-72 bg-gray-950"
+            className={`${
+              !movData.poster_path ? "object-contain" : "object-cover"
+            } object-center w-full rounded-md h-72 bg-gray-950`}
           />
           <div className="mt-4">
             <span className="block text-xs font-medium tracki uppercase text-violet-400">
@@ -32,7 +31,7 @@ export default function CardMov(props) {
               {movData.title}
             </h2>
             <div className="flex items-center text-xs">
-              <span className="line-clamp-1">{genres.join(", ")}</span>
+              <span className="line-clamp-1">{genres.length > 0 ? genres.join(", ") : "No genres data"}</span>
             </div>
             <div className="flex items-center space-x-2 text-yellow-500">
               <svg
@@ -64,7 +63,7 @@ export default function CardMov(props) {
         </div>
 
         <div
-          className="back-content absolute top-0 bottom-0 left-0 right-0 p-4 overflow-y-scroll rounded-md"
+          className="hidden md:block back-content absolute top-0 bottom-0 left-0 right-0 p-4 overflow-y-scroll rounded-md"
           style={{
             backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(${
               baseUrlBackdrop + movData.backdrop_path

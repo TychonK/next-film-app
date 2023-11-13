@@ -43,13 +43,13 @@ export default function Favorites() {
   if (!(favoriteFilms.length > 0)) {
     return (
       <>
-        <h1 className="text-4xl font-bold leading-md:text-5xl">
+        <h1 className="text-center text-2xl md:text-left md:text-4xl font-bold leading-md:text-5xl">
           There is nothing in this section yet, go ahead and find something you
           like
         </h1>
         <img
           src="/film.svg"
-          className="absolute inset-x-1/2 inset-y-1/2 -translate-y-1/3 -translate-x-1/2 w-80 text-gray-100 fill-gray-400"
+          className="absolute inset-x-1/2 inset-y-1/2 -translate-y-1/3 -translate-x-1/2 w-64 md:w-80 text-gray-100 fill-gray-400"
         />
       </>
     );

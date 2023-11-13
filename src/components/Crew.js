@@ -45,10 +45,7 @@ export default function Crew({ crewData }) {
         {sortedCrew.map((person) => {
           return (
             <Link href={`/people/${person.id}`}>
-              <li
-                className="flex flex-col justify-center h-full w-full p-4 duration-200 group hover:scale-105 text-center rounded-md md:w-64 lg:w-80 xl:w-96 bg-gray-100 text-gray-800"
-                style={{ minWidth: "200px", maxWidth: "220px" }}
-              >
+              <li className="h-full w-card/sm md:w-card justify-center p-2 md:p-4 duration-200 group hover:scale-105 text-center rounded-md bg-gray-100 text-gray-800">
                 <img
                   src={
                     person.profile_path
@@ -56,14 +53,16 @@ export default function Crew({ crewData }) {
                       : "/male-icon.svg"
                   }
                   alt={person.name}
-                  className="self-center flex-shrink-0 w-48 bg-center bg-cover rounded-md bg-gray-500"
+                  className="self-center flex-shrink-0 w-full rounded-md bg-gray-500"
                 />
 
                 <div className="mt-4">
                   <p className="text-xl font-bold leadi group-hover:underline">
                     {person.name}
                   </p>
-                  <p className="font-medium text-xl">{person.character}</p>
+                  <p className="font-medium text-gray-500 text-xl">
+                    {person.character}
+                  </p>
                   <p className="italic">{person.jobs.join(", ")}</p>
                 </div>
               </li>

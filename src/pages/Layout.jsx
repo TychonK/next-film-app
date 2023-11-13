@@ -16,16 +16,29 @@ const Layout = ({ children }) => {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   const closeMenu = (data) => {
+    const htmlElement = document.documentElement;
+    if (mobileOpen) {
+    htmlElement.style.overflow = "visible"
+  } else {
+    htmlElement.style.overflow = "hidden"
+  }
     setMobileOpen(data)
   }
 
   const toggle = () => {
+    const htmlElement = document.documentElement;
+  
+  if (mobileOpen) {
+    htmlElement.style.overflow = "visible"
+  } else {
+    htmlElement.style.overflow = "hidden"
+  }
     setMobileOpen(!mobileOpen)
   }
 
   return (
-    <div className={'overflow-x-hidden' + " " + `${mobileOpen && "overflow-y-hidden"}`}>
-      <Nav toggleMenu={ toggle }/>
+    <div className={'overflow-x-hidden'}>
+      <Nav toggleMenu={toggle} menuState={ mobileOpen } />
       <NavMobile  close={ closeMenu } open={mobileOpen} />
       <main
         className={`${inter.className}` + `${path.includes('/movie/') || path.includes('/tv/') || path.includes('/people/') || path.includes('/gallery/') ? " bg-gray-900" : ""}` + " " + "py-8 md:py-12 px-4 sm:px-8 md:px-12 lg:px-16"}

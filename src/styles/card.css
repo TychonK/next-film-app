@@ -1,5 +1,5 @@
-
-.card {
+@media (min-width: 768px) { 
+  .card {
   -webkit-perspective: 1000px; /* Webkit prefix for perspective */
   perspective: 1000px;
 }
@@ -45,7 +45,9 @@
 
 .back-content::-webkit-scrollbar-track {
   background-color: #ffffff00;
+} 
 }
+
 
 .no-scroll-bar::-webkit-scrollbar {
   display: none;

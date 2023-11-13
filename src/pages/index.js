@@ -171,7 +171,7 @@ export default function Home({ genresMov, genresTv }) {
 
   return (
     <>
-      <div className="mb-12">
+      <div className="mb-8 md:mb-12">
         <Title2 text="What to watch" subText="upcoming in theaters" />
         {upcomingIsLoading && (
           <Placeholder className="mt-8 mx-4 md:mx-20 min-h-default" />
@@ -179,7 +179,7 @@ export default function Home({ genresMov, genresTv }) {
         {upcomingData && <Carousel data={upcomingData.upcoming} />}
       </div>
 
-      <div className="relative rounded-md">
+      <div className="relative rounded-md mb-8 md:mb-12">
         <Title2 text="Movies" subText="trending" />
         <ScrollContainer containerId="movie" btnDark={true}>
           {filmIsLoading &&
@@ -204,7 +204,7 @@ export default function Home({ genresMov, genresTv }) {
         </ScrollContainer>
       </div>
 
-      <div className="relative rounded-md">
+      <div className="relative rounded-md mb-8 md:mb-12">
         <Title2 text="Series" subText="trending" />
         <ScrollContainer containerId="tv" btnDark={true}>
           {tvIsLoading &&
@@ -226,12 +226,9 @@ export default function Home({ genresMov, genresTv }) {
         </ScrollContainer>
       </div>
 
-      <div className="relative rounded-md mt-12">
+      <div className="relative rounded-md mb-8 md:mb-12">
         <Title2 text="People" subText="trending" />
-        <ScrollContainer
-          containerId="ppl"
-          btnDark={true}
-        >
+        <ScrollContainer containerId="ppl" btnDark={true}>
           {pplIsLoading &&
             Array.from({ length: 20 }).map((_, index) => (
               <Placeholder key={index} className="min-w-4xs max-w-4xs" />
@@ -243,11 +240,11 @@ export default function Home({ genresMov, genresTv }) {
         </ScrollContainer>
       </div>
 
-      <div className="mb-12">
+      <div className="mb-8 md:mb-12">
         <Title2
           text="Everyone loves"
           subText="top 10 rated"
-          className="text-center"
+          className="md:text-center"
         />
 
         <div className="flex flex-wrap mt-4 md:mt-8 md:mx-20 gap-12 justify-around">
@@ -259,7 +256,7 @@ export default function Home({ genresMov, genresTv }) {
         </div>
       </div>
 
-      <div className="mb-12">
+      <div className="mb-8 md:mb-12">
         <Title2
           text="What to watch"
           subText="popular now"

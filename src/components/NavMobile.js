@@ -8,8 +8,8 @@ export default function NavMobile({close, open}) {
   return (
     <ul
       className={`${
-        open ? "left-0" : "left-full"
-      } duration-700 lg:hidden bg-gray-700 fixed z-10 top-24 right-0 py-12 px-8 text-white font-extralight rounded-b-md`}
+        open ? "left-0 bottom-0 py-32" : "left-full bottom-full p-0"
+      } duration-700 lg:hidden bg-gray-700 fixed z-10 top-0 right-0 text-white font-extralight rounded-b-md`}
     >
       <li className="flex justify-center">
         <img src="/logo.svg" className="w-10 h-10" />
