@@ -8,8 +8,8 @@ export default function CardMov(props) {
   return (
     <Link href={`/movie/${movData.id}`} className="card-container">
       <li
-        style={{ minWidth: "260px", maxWidth: "260px" }}
-        className="card relative p-6 rounded-md shadow-lg bg-gray-900 text-gray-50"
+        
+        className="card w-card/sm md:w-card relative p-2 md:p-6 rounded-md shadow-lg bg-gray-900 text-gray-50"
       >
         <div className="front-content">
           <img
@@ -19,7 +19,7 @@ export default function CardMov(props) {
                 : baseUrlImg + movData.poster_path
             }
             alt="Movie poster"
-            className="object-cover object-center w-full rounded-md h-72 bg-gray-950"
+            className="object-cover object-center w-full rounded-md md:h-72 bg-gray-950"
           />
           <div className="mt-4">
             <span className="block text-xs font-medium tracki uppercase text-violet-400">
@@ -51,14 +51,14 @@ export default function CardMov(props) {
                 {")"}
               </span>
             </div>
-            <div className="h-28">
+            <div className="hidden h-28 md:block">
               <p className="max-h-full text-justify fading-text overflow-hidden">
                 {movData.overview}
               </p>
             </div>
           </div>
 
-          <p className="text-2xl font-semibold m-0 text-center align-top">
+          <p className="hidden md:block text-2xl font-semibold m-0 text-center align-top">
             ...
           </p>
         </div>

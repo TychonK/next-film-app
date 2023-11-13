@@ -12,7 +12,7 @@ const MovieCard = ({ data, type, toggleFavorite }) => (
         <div className="absolute inset-0 z-2 transition duration-300 ease-in-out bg-gradient-to-t from-black via-gray-900 to-transparent"></div>
             <Link
                 href={`movie/${data.id}`}
-                className="relative block cursor-pointer group z-2 px-10 pt-10 space-y-6">
+                className="relative block cursor-pointer group z-2 px-4 pt-4 md:px-10 md:pt-10 space-y-6">
           <div className="poster__info align-self-end w-full">
             <div className="h-32"></div>
             <div className="space-y-6 detail_info">
@@ -94,7 +94,7 @@ const TvCard = ({ data, type, toggleFavorite }) => (
       <div className="absolute inset-0 z-2 transition duration-300 ease-in-out bg-gradient-to-t from-black via-gray-900 to-transparent"></div>
       <Link
         href={`tv/${data.id}`}
-        className="relative block cursor-pointer group z-2 px-10 pt-10 space-y-6"
+        className="relative block cursor-pointer group z-2 px-4 pt-4 md:px-10 md:pt-10 space-y-6"
       >
         <div className="poster__info align-self-end w-full">
           <div className="h-32"></div>
@@ -171,23 +171,19 @@ const TvCard = ({ data, type, toggleFavorite }) => (
 const PplCard = ({ data, type, toggleFavorite }) => (
   <div
     key={data.id}
-    className="flex max-w-sm bg-white shadow-md rounded-lg overflow-hidden hover:scale-105 hover:shadow-2xl ease-in-out duration-500"
+    className="flex w-max-w-sm bg-white shadow-md rounded-lg overflow-hidden hover:scale-105 hover:shadow-2xl ease-in-out duration-500"
   >
     <div className="overflow-hidden rounded-xl relative shadow-lg text-white">
       <div className="absolute inset-0 z-2 transition duration-300 ease-in-out bg-gradient-to-t from-black via-gray-900 to-transparent"></div>
       <Link
         href={`people/${data.id}`}
-        className="relative block cursor-pointer group z-2 px-10 pt-10 space-y-6"
+        className="relative block cursor-pointer group z-2 px-4 pt-4 md:px-10 md:pt-10 space-y-6"
       >
         <div className="poster__info align-self-end w-full">
           <div className="h-32"></div>
           <div className="space-y-6 detail_info">
             <div className="flex flex-col space-y-2 inner">
-              <h3
-                className="text-2xl font-bold text-white"
-              >
-                {data.name}
-              </h3>
+              <h3 className="text-2xl font-bold text-white">{data.name}</h3>
               <div className="mb-0 text-lg text-gray-400">
                 {data.known_for_department}
               </div>

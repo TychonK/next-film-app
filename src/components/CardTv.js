@@ -8,14 +8,13 @@ export default function CardTv(props) {
   return (
     <Link href={`/tv/${tvData.id}`}>
       <li
-        style={{ minWidth: "260px", maxWidth: "260px" }}
-        className="card h-full relative p-6 rounded-md shadow-md bg-gray-900 text-gray-50"
+        className="card w-card/sm md:w-card h-full relative p-2 md:p-6 rounded-md shadow-md bg-gray-900 text-gray-50"
       >
         <div className="front-content">
           <img
             src={baseUrlImg + tvData.poster_path}
             alt="Movie poster"
-            className="object-cover object-center w-full rounded-md h-72 bg-gray-500"
+            className="object-cover object-center w-full rounded-md md:h-72 bg-gray-500"
           />
           <div className="mt-4">
             <span className="block text-xs font-medium tracki uppercase text-violet-400">
@@ -44,14 +43,14 @@ export default function CardTv(props) {
                 {")"}
               </span>
             </div>
-            <div className="h-28">
+            <div className="hidden md:block h-28">
               <p className="max-h-full text-justify fading-text overflow-hidden">
                 {tvData.overview}
               </p>
             </div>
           </div>
 
-          <p className="text-2xl font-semibold m-0 text-center align-top">
+          <p className="hidden md:block text-2xl font-semibold m-0 text-center align-top">
             ...
           </p>
         </div>

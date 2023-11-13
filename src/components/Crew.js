@@ -44,7 +44,7 @@ export default function Crew({ crewData }) {
         {(!sortedCrew || sortedCrew.length == 0) && <NotFound />}
         {sortedCrew.map((person) => {
           return (
-            <Link href={`/people/${person.id}`} className="mr-8 last:mr-0">
+            <Link href={`/people/${person.id}`}>
               <li
                 className="flex flex-col justify-center h-full w-full p-4 duration-200 group hover:scale-105 text-center rounded-md md:w-64 lg:w-80 xl:w-96 bg-gray-100 text-gray-800"
                 style={{ minWidth: "200px", maxWidth: "220px" }}

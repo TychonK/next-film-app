@@ -23,15 +23,18 @@ module.exports = {
         "2xs": "300px",
         "3xs": "280px",
         "4xs": "260px",
+        "5xs": "120px",
       },
       minWidth: {
         "4xs": "260px",
       },
       spacing: {
-        slider: "500px",
+        "card/sm": "160px",
+        "card": "260px",
+        "slider": "500px",
       },
       minHeight: {
-        default: "500px",
+        "default": "500px",
       },
     },
   },

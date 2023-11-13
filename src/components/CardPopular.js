@@ -8,14 +8,14 @@ export default function CardPopular({ data }) {
     return (
       <Link
         href={`/movie/${data.id}`}
-        className="relative block max-w-2xs bg-white shadow-lg rounded-lg overflow-hidden group"
+        className="relative block w-card/sm md:w-card bg-white shadow-lg rounded-lg overflow-hidden group"
       >
         <div className="relative overflow-hidden" key={data.id}>
           <div className="bg-gradient-to-t from-black via-gray-800 to-transparent absolute inset-0"></div>
           <img
             src={baseUrlImg + data.poster_path}
             alt="Film Poster"
-            className="w-full h-80 object-cover object-top transform group-hover:scale-105 transition-transform"
+            className="w-full md:h-80 object-cover object-top transform group-hover:scale-105 transition-transform"
           />
         </div>
         <div className="p-4 pb-10">
