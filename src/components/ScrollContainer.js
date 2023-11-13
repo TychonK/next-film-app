@@ -67,7 +67,7 @@ export default function ScrollContainer({ children, containerId, btnDark, addSty
       <ul
         id={containerId}
         className={
-          "flex scroll-container md:mx-20 mt-8 pb-3 overflow-y-hidden overflow-x-scroll rounded-md gap-2 md:gap-8" +
+          "flex scroll-container md:mx-20 mt-4 md:mt-8 pb-3 overflow-y-hidden overflow-x-scroll rounded-md gap-2 md:gap-8" +
           " " +
           addStyle
         }

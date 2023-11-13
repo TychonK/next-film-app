@@ -28,7 +28,7 @@ const Layout = ({ children }) => {
       <Nav toggleMenu={ toggle }/>
       <NavMobile  close={ closeMenu } open={mobileOpen} />
       <main
-        className={`${inter.className}` + `${path.includes('/movie/') || path.includes('/tv/') || path.includes('/people/') || path.includes('/gallery/') ? " bg-gray-900" : ""}` + " py-12 px-4 sm:px-8 md:px-12 lg:px-16"}
+        className={`${inter.className}` + `${path.includes('/movie/') || path.includes('/tv/') || path.includes('/people/') || path.includes('/gallery/') ? " bg-gray-900" : ""}` + " " + "py-8 md:py-12 px-4 sm:px-8 md:px-12 lg:px-16"}
         
       >
               {children}

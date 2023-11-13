@@ -18,16 +18,16 @@ export default function CardPopular({ data }) {
             className="w-full md:h-80 object-cover object-top transform group-hover:scale-105 transition-transform"
           />
         </div>
-        <div className="p-4 pb-10">
+        <div className="p-2 pb-8 md:p-4 md:pb-10">
           <div className="flex justify-between items-start">
             <h2
-              className="text-2xl font-bold text-gray-800 line-clamp-2"
+              className="text-lg md:text-2xl font-bold text-gray-800 line-clamp-2 break-words"
               title={data.title}
             >
               {data.title}
             </h2>
             <div
-              className="font-bold rounded-xl p-2"
+              className="font-bold rounded-xl p-1.5 md:p-2"
               style={{
                 backgroundColor: calculateBackgroundColor(data.vote_average),
               }}

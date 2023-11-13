@@ -250,7 +250,7 @@ export default function Home({ genresMov, genresTv }) {
           className="text-center"
         />
 
-        <div className="flex flex-wrap mt-8 md:mx-20 gap-12 justify-around">
+        <div className="flex flex-wrap mt-4 md:mt-8 md:mx-20 gap-12 justify-around">
           {featuredIsLoading && <Loader />}
           {featuredData &&
             featuredData.featured.map((mov, index) => {
@@ -266,7 +266,7 @@ export default function Home({ genresMov, genresTv }) {
           className="md:text-center"
         />
 
-        <div className="flex flex-wrap justify-around mt-8 gap-y-4 md:gap-16 md:mx-20">
+        <div className="flex flex-wrap justify-around mt-4 md:mt-8 gap-y-4 md:gap-16 md:mx-20">
           {popularIsLoading && <Loader />}
           {popularData &&
             popularData.popular.slice(0, 15).map((mov) => {
