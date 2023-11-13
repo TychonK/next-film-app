@@ -58,13 +58,13 @@ export default function FilmDetailPage() {
   }
 
     return (
-      <div className="text-white px-4">
+      <div className="text-white">
         <div className="lg:px-32">
           <div className="flex justify-between">
             <GoBackBtn />
             <FavoriteBtn entity={filteredObject} type="movie" />
           </div>
-          <div className="flex flex-col xl:flex-row mt-10 bg-gray-950 rounded-md shadow-lg">
+          <div className="flex flex-col xl:flex-row mt-4 md:mt-10 bg-gray-950 rounded-md shadow-lg">
             <div className="w-full h-max-full xl:w-1/2">
               <div
                 className="hidden xl:block w-full h-full rounded-lg shadow-lg bg-cover bg-center"
@@ -83,68 +83,66 @@ export default function FilmDetailPage() {
                     : "/no-image.svg"
                 }
                 alt="Movie poster"
-                className="xl:hidden h-full rounded-lg shadow-lg bg-cover bg-center"
+                className="xl:hidden w-full h-full rounded-lg shadow-lg bg-cover bg-center"
               />
             </div>
 
-            <div className="w-full py-8 px-12 xl:w-1/2">
-              <h1 className="text-4xl font-semibold mb-4">
+            <div className="w-full p-4 md:py-8 md:px-12 xl:w-1/2">
+              <h1 className="text-xl md:text-4xl font-semibold md:mb-4">
                 {data.title}
                 <span className="font-thin"> ({data.original_title})</span>
               </h1>
-              <p className="text-gray-400 text-lg mb-8">
+              <p className="text-gray-400 text-base md:text-lg mb-4 md:mb-8">
                 {data.tagline || "No tagline available"}
               </p>
-              <div className="mb-8">
-                <p className="text-lg">
+              <div className="mb-4 md:mb-8 text-base md:text-lg">
+                <p>
                   Genres: {data.genres.map((genre) => genre.name).join(", ")}
                 </p>
-                <p className="text-lg">
-                  Original language: {data.original_language.toUpperCase()}
-                </p>
-                <p className="text-lg">
+                <p>Original language: {data.original_language.toUpperCase()}</p>
+                <p>
                   Film origin:{" "}
                   {data.production_countries
                     .map((country) => country.name)
                     .join(", ")}
                 </p>
-                <p className="text-lg">
+                <p>
                   Lasts:{" "}
                   {data.runtime.length != 0
                     ? formatTime(data.runtime)
                     : "no data"}
                 </p>
-                <p className="text-lg">Film ID: {id}</p>
+                <p>Film ID: {id}</p>
               </div>
 
-              <div className="mb-8">
-                <p className="text-lg">
+              <div className="mb-4 md:mb-8 text-base md:text-lg">
+                <p>
                   Budget:{" "}
                   {data.budget !== 0
                     ? numeral(data.budget).format("$ 0,0[.]00")
                     : "No data"}
                 </p>
-                <p className="text-lg">
+                <p>
                   Revenue:{" "}
                   {data.revenue !== 0
                     ? numeral(data.revenue).format("$ 0,0[.]00")
                     : "No data"}
                 </p>
-                <p className="text-lg">
+                <p>
                   User's score: {data.vote_average.toFixed(1)} (vote count{" "}
                   {data.vote_count})
                 </p>
-                <p className="text-lg">Release date: {data.release_date}</p>
+                <p>Release date: {data.release_date}</p>
               </div>
-              <div className="mb-8">
-                <h2 className="text-2xl font-semibold mb-4">Overview</h2>
-                <p className="text-lg">{data.overview}</p>
+              <div className="mb-4 md:mb-8">
+                <h2 className="text-2xl font-semibold md:mb-4">Overview</h2>
+                <p className="text-base md:text-lg">{data.overview}</p>
               </div>
 
               <div>
                 <h2 className="text-2xl font-semibold">Production Companies</h2>
 
-                <div className="flex flex-row flex-wrap gap-8 mt-4">
+                <div className="flex flex-row flex-wrap gap-3 md:gap-8 mt-4">
                   {data.production_companies.length == 0 ? (
                     <NotFound />
                   ) : (
@@ -186,7 +184,7 @@ export default function FilmDetailPage() {
         </div>
 
         <div className="mb-8">
-          <h2 className="text-7xl text-center font-semibold mt-16 relative pseudo-title">
+          <h2 className="text-5xl md:text-7xl text-center font-semibold mt-8 md:mt-16 relative pseudo-title">
             Cast
           </h2>
           <ScrollContainer containerId="cast">
@@ -194,7 +192,7 @@ export default function FilmDetailPage() {
               <Cast castData={data.credits.cast} />
             )}
           </ScrollContainer>
-          <h2 className="text-7xl text-center lg:text-center font-semibold mt-16 relative pseudo-title">
+          <h2 className="text-5xl md:text-7xl text-center font-semibold mt-8 md:mt-16 relative pseudo-title">
             Crew
           </h2>
           <div className="relative">

@@ -9,7 +9,7 @@ export default function GoBackBtn({ className }) {
   return (
     <button
       onClick={handleGoBack}
-      className={"text-gray-400 duration-100 hover:text-gray-200 inline-flex font-medium items-center border-2 border-gray-400 rounded-md py-2 px-4" + " " + className}
+      className={"text-gray-400 duration-100 hover:text-gray-200 inline-flex font-medium items-center border-2 border-gray-400 rounded-md p-1.5 md:py-2 md:px-4" + " " + className}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

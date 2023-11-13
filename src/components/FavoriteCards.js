@@ -171,7 +171,7 @@ const TvCard = ({ data, type, toggleFavorite }) => (
 const PplCard = ({ data, type, toggleFavorite }) => (
   <div
     key={data.id}
-    className="flex w-max-w-sm bg-white shadow-md rounded-lg overflow-hidden hover:scale-105 hover:shadow-2xl ease-in-out duration-500"
+    className="flex max-w-sm bg-white shadow-md rounded-lg overflow-hidden hover:scale-105 hover:shadow-2xl ease-in-out duration-500"
   >
     <div className="overflow-hidden rounded-xl relative shadow-lg text-white">
       <div className="absolute inset-0 z-2 transition duration-300 ease-in-out bg-gradient-to-t from-black via-gray-900 to-transparent"></div>

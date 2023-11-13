@@ -32,7 +32,7 @@ export default function FavoriteBtn({ entity, type}) {
     return (
       <button
         onClick={toggleFavorite}
-        className="ml-auto text-gray-400 duration-100 hover:text-gray-200 flex font-medium items-center py-2 px-4 border-2 rounded-md border-gray-400"
+        className="ml-auto text-gray-400 duration-100 hover:text-gray-200 flex font-medium items-center p-1.5 md:py-2 md:px-4 border-2 rounded-md border-gray-400"
       >
         {isFavorite ? (
           <>

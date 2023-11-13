@@ -16,10 +16,10 @@ export default function SimilarMovies({ data, title, type }) {
 
   return (
     <div className="mb-8">
-      <h2 className="text-7xl text-center font-semibold mt-16 break-normal break-all relative pseudo-title">
+      <h2 className="text-5xl md:text-7xl text-center font-semibold mt-8 md:mt-16 break-normal break-all relative pseudo-title">
         {title}
       </h2>
-      <div className="mt-8 flex flex-row flex-wrap gap-12 justify-center">
+      <div className="mt-4 md:mt-8 flex flex-row flex-wrap gap-4 md:gap-12 justify-center">
         {sortedData.map((movie, index) => (
           <Link
             href={
@@ -28,12 +28,11 @@ export default function SimilarMovies({ data, title, type }) {
                 : `/movie/${movie.id}`
             }
             key={movie.id}
-            className="rounded-lg overflow-hidden shadow-lg w-64 duration-200 group hover:scale-105"
+            className="rounded-lg overflow-hidden shadow-lg w-card/sm md:w-64 duration-200 group hover:scale-105"
             style={{ display: showAll || index < 8 ? "block" : "none" }}
           >
             <div
-              className="image-container"
-              style={{ height: "384px", overflow: "hidden" }}
+              className="image-container overflow-hidden"
             >
               <img
                 src={
@@ -42,7 +41,7 @@ export default function SimilarMovies({ data, title, type }) {
                     : "/film.svg"
                 }
                 alt={movie.title}
-                className="bg-gray-950 h-full"
+                className="bg-gray-950 h-64 md:h-96"
               />
             </div>
             <div className="p-4 h-full bg-gray-800">

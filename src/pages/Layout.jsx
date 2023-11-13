@@ -24,7 +24,7 @@ const Layout = ({ children }) => {
   }
 
   return (
-    <div className='overflow-x-hidden relative'>
+    <div className={'overflow-x-hidden' + " " + `${mobileOpen && "overflow-y-hidden"}`}>
       <Nav toggleMenu={ toggle }/>
       <NavMobile  close={ closeMenu } open={mobileOpen} />
       <main
