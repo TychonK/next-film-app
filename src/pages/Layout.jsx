@@ -36,10 +36,6 @@ const Layout = ({ children }) => {
     setMobileOpen(!mobileOpen)
   }
 
-  if (loading) {
-    console.log(loading)
-  }
-
   return (
     <div className={'overflow-x-hidden'}>
       <Nav toggleMenu={toggle} menuState={ mobileOpen } />
