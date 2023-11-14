@@ -24,7 +24,7 @@ const baseUrlPerson = "https://image.tmdb.org/t/p/w500/";
 export default function FilmDetailPage() {
   const router = useRouter();
   const { id } = router.query;
-    
+ 
     const { data, error, isLoading } = useSWR(
       `https://api.themoviedb.org/3/movie/${id}?append_to_response=similar%2Ccredits%2Cvideos&language=en-US`,
       fetchFilmData
@@ -83,7 +83,8 @@ export default function FilmDetailPage() {
                     : "/no-image.svg"
                 }
                 alt="Movie poster"
-                className="xl:hidden w-full h-full rounded-lg shadow-lg bg-cover bg-center"
+                className="block xl:hidden w-full rounded-lg shadow-lg object-cover object-center"
+                style={{minHeight: "490px"}}
               />
             </div>
 

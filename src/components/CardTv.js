@@ -56,7 +56,7 @@ export default function CardTv(props) {
         </div>
 
         <div
-          className="back-content absolute top-0 bottom-0 left-0 right-0 p-4 overflow-y-scroll rounded-md"
+          className="hidden md:block back-content absolute top-0 bottom-0 left-0 right-0 p-4 overflow-y-scroll rounded-md"
           style={{
             backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(${
               baseUrlBackdrop + tvData.backdrop_path
