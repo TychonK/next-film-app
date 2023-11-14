@@ -47,7 +47,7 @@ export default function Gallery() {
       <>
         <div className="relative">
           <GoBackBtn className="xl:absolute xl:top-1/2 xl:-translate-y-1/2 mb-4 xl:mb-0" />
-          <h2 className="text-white font-extralight text-center text-6xl mb-8">
+          <h2 className="text-white font-extralight text-center text-4xl md:text-6xl mb-8">
             {name
               ? `Gallery for ${name}`
               : `Gallery for ID ${id} (Name not available)`}

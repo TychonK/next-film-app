@@ -198,8 +198,10 @@ export default function FilmDetailPage() {
           </h2>
           <div className="relative">
             <ScrollContainer containerId="crew">
-              {data.credits.crew.length != 0 && (
+              {data.credits.crew.length != 0 ? (
                 <Crew crewData={data.credits.crew} />
+              ) : (
+                <NotFound />
               )}
             </ScrollContainer>
           </div>
