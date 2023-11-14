@@ -60,13 +60,13 @@ export default function PersonDetailsPage() {
   }
 
   return (
-    <div className="text-white px-4 md:px-32">
+    <div className="text-white md:px-32">
       <div className="flex justify-between">
         <GoBackBtn />
         <FavoriteBtn entity={filteredObject} type="people" />
       </div>
 
-      <div className="flex flex-col lg:flex-row my-12 rounded-md bg-gray-950">
+      <div className="flex flex-col lg:flex-row my-4 md:my-10 rounded-md bg-gray-950">
         <Link
           href={`/gallery/${id}?name=${data.name}`}
           className="flex flex-col justify-between text-left bg-center bg-cover cursor-pointer group bg-gray-500 p-4 rounded-md"
@@ -104,24 +104,26 @@ export default function PersonDetailsPage() {
             Visit the gallery
           </h2>
         </Link>
-        <div className="py-8 px-12">
-          <h1 className="text-5xl font-extralight">{data.name}</h1>
-          <p className="text-md italic mb-8 text-gray-400">Person ID: {id}</p>
-          <p className="text-2xl">
-            Age:{" "}
-            {data.birthday ? (
-              <>
-                {calculateAge(data.birthday)}{" "}
-                <span className="italic">({data.birthday})</span>
-              </>
-            ) : (
-              "No data"
-            )}
-          </p>
-          <p className="text-2xl">Place of birth: {data.place_of_birth}</p>
-          <p className="text-2xl">Known for: {data.known_for_department}</p>
-          <div>
-            <p className="text-3xl font-semibold mt-4">Biography:</p>
+        <div className="p-4 md:py-8 md:px-12">
+          <h1 className="text-4xl md:text-5xl font-extralight">{data.name}</h1>
+          <p className="text-md italic mb-4 text-gray-400">Person ID: {id}</p>
+          <div className="text-lg md:text-2xl">
+            <p>
+              Age:{" "}
+              {data.birthday ? (
+                <>
+                  {calculateAge(data.birthday)}{" "}
+                  <span className="italic">({data.birthday})</span>
+                </>
+              ) : (
+                "No data"
+              )}
+            </p>
+            <p>Place of birth: {data.place_of_birth}</p>
+            <p>Known for: {data.known_for_department}</p>
+          </div>
+          <div className="mt-4">
+            <p className="text-3xl font-semibold">Biography:</p>
             {!data.biography ? (
               <NotFound />
             ) : (
@@ -135,7 +137,7 @@ export default function PersonDetailsPage() {
                 </p>
                 <button
                   onClick={toggleText}
-                  className="text-violet-400 border border-violet-400 rounded-md p-2 hover:underline focus:outline-none mx-auto block mt-8"
+                  className="text-violet-400 border border-violet-400 rounded-md p-2 hover:underline focus:outline-none mx-auto block mt-4 md:mt-8"
                 >
                   {showFullText ? "Read Less" : "Read More"}
                 </button>
@@ -147,7 +149,7 @@ export default function PersonDetailsPage() {
 
       <Participation
         data={[...data.combined_credits.cast, ...data.combined_credits.crew]}
-        title="Participated in"
+        title="Participated in:"
       />
     </div>
   );

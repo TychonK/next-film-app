@@ -60,22 +60,24 @@ export default function Participation({ data, title, type }) {
     })
 
   return (
-    <div className="mb-8">
-      <h2 className="text-7xl text-center font-semibold mt-16 break-normal break-all relative pseudo-title">
+    <div className="my-8 md:my-12">
+      <h2 className="text-4xl md:text-7xl text-center font-semibold break-normal break-all relative pseudo-title">
         {title}
       </h2>
-      <div className="flex items-center -mx-4 mt-8 space-x-8 text-xl sm:justify-center flex-nowrap text-gray-100">
+      <div className="flex flex-wrap items-center mt-4 md:mt-8 space-x-8 text-xl sm:justify-center text-gray-100">
         <div className="flex overflow-hidden rounded-md bg-gray-900 text-gray-100">
           <input
             type="search"
             name="search"
             placeholder="Search..."
-            className={`bg-transparent focus:outline-none focus:bg-gray-950 text-gray-100 p-3 w-full h-full border-b-4 ${search.length > 0 ? "border-violet-400" : "border-gray-700"}`}
+            className={`bg-transparent focus:outline-none focus:bg-gray-950 text-gray-100 p-3 w-full h-full border-b-4 ${
+              search.length > 0 ? "border-violet-400" : "border-gray-700"
+            }`}
             onChange={(e) => {
               handleSearchChange(e);
             }}
           />
-          <div className="flex items-center justify-center px-4 bg-gray-700 text-gray-800">
+          <div className="flex items-center justify-center bg-gray-700 px-4 text-gray-800">
             <svg
               fill="currentColor"
               viewBox="0 0 512 512"
@@ -106,7 +108,7 @@ export default function Participation({ data, title, type }) {
           TV show
         </button>
       </div>
-      <div className="mt-12 flex flex-row flex-wrap gap-12 justify-center">
+      <div className="mt-8 md:mt-12 flex flex-row flex-wrap gap-4 md:gap-12 justify-center">
         {searchedData.length == 0 ? (
           <NotFound />
         ) : (
@@ -118,12 +120,11 @@ export default function Participation({ data, title, type }) {
                   : `/movie/${movie.id}`
               }
               key={movie.id}
-              className="rounded-lg overflow-hidden shadow-lg w-64 duration-200 group hover:scale-105"
+              className="rounded-lg overflow-hidden shadow-lg w-card/sm md:w-64 duration-200 group hover:scale-105"
               style={{ display: showAll || index < 8 ? "block" : "none" }}
             >
               <div
-                className="image-container"
-                style={{ height: "384px", overflow: "hidden" }}
+                className="image-container overflow-hidden"
               >
                 <img
                   src={
@@ -132,7 +133,7 @@ export default function Participation({ data, title, type }) {
                       : "/film.svg"
                   }
                   alt={movie.title}
-                  className="bg-gray-950 h-full"
+                  className="bg-gray-950 h-64 md:h-96"
                 />
               </div>
               <div className="p-4 h-full bg-gray-800">

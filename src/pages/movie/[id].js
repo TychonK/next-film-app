@@ -189,9 +189,11 @@ export default function FilmDetailPage() {
             Cast
           </h2>
           <ScrollContainer containerId="cast">
-            {data.credits.cast.length != 0 && (
+            {data.credits.cast.length != 0 ? (
               <Cast castData={data.credits.cast} />
-            )}
+            )  : (
+                <NotFound />
+              )}
           </ScrollContainer>
           <h2 className="text-5xl md:text-7xl text-center font-semibold mt-8 md:mt-16 relative pseudo-title">
             Crew

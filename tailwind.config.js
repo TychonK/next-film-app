@@ -30,11 +30,15 @@ module.exports = {
       },
       spacing: {
         "card/sm": "160px",
-        "card": "260px",
-        "slider": "500px",
+        card: "260px",
+        slider: "500px",
       },
       minHeight: {
-        "default": "500px",
+        default: "500px",
+      },
+      transitionDuration: {
+        1500: "1500ms",
+        2000: "2000ms",
       },
     },
   },
