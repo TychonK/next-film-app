@@ -38,7 +38,7 @@ const Layout = ({ children }) => {
 
   return (
     <div className={'overflow-x-hidden'}>
-      <Nav toggleMenu={toggle} menuState={ mobileOpen } />
+      <Nav toggleMenu={toggle} closeMenu={closeMenu} menuState={ mobileOpen } />
       <NavMobile close={closeMenu} open={mobileOpen} />
       
       <main

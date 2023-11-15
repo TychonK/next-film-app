@@ -95,12 +95,12 @@ export default function TvDetailsPage() {
             </p>
             <div className="mb-4 md:mb-8 text-base md:text-lg">
               <p className="text-lg">
-                Genres: {data.genres.map((genre) => genre.name).join(", ")}
+                Genres: {data.genres.length != 0 ? data.genres.map((genre) => genre.name).join(", ") : "nodata" }
               </p>
-              <p>Original language: {data.original_language.toUpperCase()}</p>
+              <p>Original language: {data.original_language.length != 0 ? data.original_language.toUpperCase() : "nodata" }</p>
               <p>
                 Show origin:{" "}
-                {data.production_countries
+                {data.production_countries.length == 0 ? "no data" : data.production_countries
                   .map((country) => country.name)
                   .join(", ")}
               </p>
@@ -127,14 +127,14 @@ export default function TvDetailsPage() {
                   : "No data"}
               </p>
               <p>
-                User's score: {data.vote_average.toFixed(1)} (vote count{" "}
-                {data.vote_count})
+                User's score: {data.vote_average.length != 0 ? data.vote_average.toFixed(1) : "no data"} (vote count{" "}
+                {data.vote_count || 0})
               </p>
-              <p>First air: {data.first_air_date}</p>
+              <p>First air: {data.first_air_date.length != 0 ? data.first_air_date : "no data"}</p>
             </div>
             <div className="mb-4 md:mb-8">
               <h2 className="text-2xl font-semibold md:mb-4">Overview</h2>
-              <p className="text-base md:text-lg">{data.overview}</p>
+              <p className="text-base md:text-lg">{data.overview.length != 0 ? data.overview : "no data"}</p>
             </div>
 
             <div>
@@ -179,7 +179,7 @@ export default function TvDetailsPage() {
             </div>
           </div>
         </div>
-      </div>
+      </div> 
 
       <div className="mb-8">
         <h2 className="text-5xl md:text-7xl text-center font-semibold mt-8 md:mt-16 relative pseudo-title">

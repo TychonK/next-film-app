@@ -7,7 +7,7 @@ import FavoriteLink from "./FavoriteLink";
 
 
 
-export default function Nav({ toggleMenu, menuState }) {
+export default function Nav({ toggleMenu, closeMenu, menuState }) {
   const [query, setQuery] = useState("")
 
   const router = useRouter();
@@ -21,7 +21,7 @@ export default function Nav({ toggleMenu, menuState }) {
   };
 
   const handleSubmit = () => {
-    toggleMenu();
+    closeMenu();
     router.push(`/discover?search=${query}`);
   };
 

@@ -68,7 +68,7 @@ export default function PersonDetailsPage() {
 
       <div className="flex flex-col lg:flex-row my-4 md:my-10 rounded-md bg-gray-950">
         <Link
-          href={`/gallery/${id}?name=${data.name}`}
+          href={data.images.profiles.length == 0 ? "#" : `/gallery/${id}?name=${data.name}`}
           className="flex flex-col justify-between text-left bg-center bg-cover cursor-pointer group bg-gray-500 p-4 rounded-md"
           style={{
             backgroundImage: `linear-gradient(rgba(50, 0, 114, 0.2), rgba(50, 0, 114, 0.4)), url(${
@@ -116,11 +116,11 @@ export default function PersonDetailsPage() {
                   <span className="italic">({data.birthday})</span>
                 </>
               ) : (
-                "No data"
+                "no data"
               )}
             </p>
-            <p>Place of birth: {data.place_of_birth}</p>
-            <p>Known for: {data.known_for_department}</p>
+            <p>Place of birth: {data.place_of_birth || "no data"}</p>
+            <p>Known for: {data.known_for_department || "no data"}</p>
           </div>
           <div className="mt-4">
             <p className="text-3xl font-semibold">Biography:</p>
