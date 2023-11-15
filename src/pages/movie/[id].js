@@ -84,7 +84,7 @@ export default function FilmDetailPage() {
                 }
                 alt="Movie poster"
                 className="block xl:hidden w-full rounded-lg shadow-lg object-cover object-center"
-                style={{minHeight: "490px"}}
+                style={{ minHeight: "490px" }}
               />
             </div>
 
@@ -98,14 +98,18 @@ export default function FilmDetailPage() {
               </p>
               <div className="mb-4 md:mb-8 text-base md:text-lg">
                 <p>
-                  Genres: {data.genres.map((genre) => genre.name).join(", ")}
+                  Genres:{" "}
+                  {data.genres.length != 0 ? data.genres.map((genre) => genre.name).join(", ") : "no data"}
                 </p>
-                <p>Original language: {data.original_language.toUpperCase()}</p>
+                <p>
+                  Original language:{" "}
+                  {data.original_language.length != 0 ? data.original_language.toUpperCase() : "no data"}
+                </p>
                 <p>
                   Film origin:{" "}
-                  {data.production_countries
+                  {data.production_countries != 0 ? data.production_countries
                     .map((country) => country.name)
-                    .join(", ")}
+                    .join(", ") : "no data"}
                 </p>
                 <p>
                   Lasts:{" "}
@@ -121,23 +125,25 @@ export default function FilmDetailPage() {
                   Budget:{" "}
                   {data.budget !== 0
                     ? numeral(data.budget).format("$ 0,0[.]00")
-                    : "No data"}
+                    : "no data"}
                 </p>
                 <p>
                   Revenue:{" "}
                   {data.revenue !== 0
                     ? numeral(data.revenue).format("$ 0,0[.]00")
-                    : "No data"}
+                    : "no data"}
                 </p>
                 <p>
-                  User's score: {data.vote_average.toFixed(1)} (vote count{" "}
-                  {data.vote_count})
+                  User's score: {data.vote_average.toFixed(1).length != 0 ? data.vote_average.toFixed(1) : "no data"}{" "}
+                  (vote count {data.vote_count || 0})
                 </p>
-                <p>Release date: {data.release_date}</p>
+                <p>Release date: {data.release_date.length != 0 ? data.release_date : "no data"}</p>
               </div>
               <div className="mb-4 md:mb-8">
                 <h2 className="text-2xl font-semibold md:mb-4">Overview</h2>
-                <p className="text-base md:text-lg">{data.overview}</p>
+                <p className="text-base md:text-lg">
+                  {data.overview.length != 0 ? data.overview : "no data"} 
+                </p>
               </div>
 
               <div>
@@ -191,9 +197,9 @@ export default function FilmDetailPage() {
           <ScrollContainer containerId="cast">
             {data.credits.cast.length != 0 ? (
               <Cast castData={data.credits.cast} />
-            )  : (
-                <NotFound />
-              )}
+            ) : (
+              <NotFound />
+            )}
           </ScrollContainer>
           <h2 className="text-5xl md:text-7xl text-center font-semibold mt-8 md:mt-16 relative pseudo-title">
             Crew

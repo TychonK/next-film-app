@@ -67,7 +67,7 @@ export default function ScrollContainer({ children, containerId, btnDark, addSty
       <ul
         id={containerId}
         className={
-          "flex scroll-container md:mx-20 mt-4 md:mt-8 pb-3 overflow-y-hidden overflow-x-scroll rounded-md gap-2 md:gap-8" +
+          "flex scroll-container md:mx-20 mt-4 md:mt-8 pb-3 overflow-x-scroll rounded-md gap-2 md:gap-8" +
           " " +
           addStyle
         }
@@ -77,7 +77,8 @@ export default function ScrollContainer({ children, containerId, btnDark, addSty
       <button
         onClick={handleScrollForward}
         className={
-          "absolute top-1/2 -translate-y-1/2 right-0 duration-100 hover:text-blue-500 active:text-violet-700 hidden md:block" + " " + 
+          "absolute top-1/2 -translate-y-1/2 right-0 duration-100 hover:text-blue-500 active:text-violet-700 hidden md:block" +
+          " " +
           `${btnDark ? "text-gray-900" : "text-white"}`
         }
       >
