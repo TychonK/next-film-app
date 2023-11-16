@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import useSWR from "swr";
 import { useRouter } from "next/router";
@@ -40,6 +40,21 @@ export default function PersonDetailsPage() {
   }
 
   const [showFullText, setShowFullText] = useState(false);
+  const [showFullButton, setShowFullButton] = useState(true);
+
+  const textRef = useRef(null);
+
+  useEffect(() => {
+    if (textRef.current) {
+      const lineHeight = parseInt(getComputedStyle(textRef.current).lineHeight);
+      const maxHeight = lineHeight * 6;
+      const actualHeight = textRef.current.clientHeight;
+
+      if (actualHeight <= maxHeight) {
+        setShowFullButton(false);
+      }
+    }
+  }, []);
 
   const toggleText = () => {
     setShowFullText(!showFullText);
@@ -68,7 +83,11 @@ export default function PersonDetailsPage() {
 
       <div className="flex flex-col lg:flex-row my-4 md:my-10 rounded-md bg-gray-950">
         <Link
-          href={data.images.profiles.length == 0 ? "#" : `/gallery/${id}?name=${data.name}`}
+          href={
+            data.images.profiles.length == 0
+              ? "#"
+              : `/gallery/${id}?name=${data.name}`
+          }
           className="flex flex-col justify-between text-left bg-center bg-cover cursor-pointer group bg-gray-500 p-4 rounded-md"
           style={{
             backgroundImage: `linear-gradient(rgba(50, 0, 114, 0.2), rgba(50, 0, 114, 0.4)), url(${
@@ -129,18 +148,22 @@ export default function PersonDetailsPage() {
             ) : (
               <>
                 <p
+                  ref={textRef}
                   className={`${
                     showFullText ? "" : "line-clamp-6"
                   } mt-2 text-justify`}
                 >
                   {data.biography}
                 </p>
-                <button
-                  onClick={toggleText}
-                  className="text-violet-400 border border-violet-400 rounded-md p-2 hover:underline focus:outline-none mx-auto block mt-4 md:mt-8"
-                >
-                  {showFullText ? "Read Less" : "Read More"}
-                </button>
+
+                {showFullButton && (
+                  <button
+                    onClick={toggleText}
+                    className="text-violet-400 border border-violet-400 rounded-md p-2 hover:underline focus:outline-none mx-auto block mt-4 md:mt-8"
+                  >
+                    {showFullText ? "Read Less" : "Read More"}
+                  </button>
+                )}
               </>
             )}
           </div>
