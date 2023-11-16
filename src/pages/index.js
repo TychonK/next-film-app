@@ -161,7 +161,7 @@ export default function Home({ genresMov, genresTv }) {
     await axios
       .get(url)
       .then(function (res) {
-        dataObj.upcoming = res.data.results.slice(0, 7);
+        dataObj.upcoming = res.data.results.slice(0, 10);
       })
       .catch((er) => {
         console.log(er);

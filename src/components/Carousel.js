@@ -45,7 +45,7 @@ export default function Carousel({ data }) {
                   backgroundColor: calculateBackgroundColor(item.vote_average),
                 }}
               >
-                {item.vote_average.toFixed(1)}
+                {item.vote_average == 0 ? "not rated" : item.vote_average.toFixed(1)}
               </div>
             </div>
             <div
