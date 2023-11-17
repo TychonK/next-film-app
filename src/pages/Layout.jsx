@@ -17,10 +17,10 @@ const Layout = ({ children }) => {
 
   const closeMenu = (data) => {
     const htmlElement = document.documentElement;
-    if (mobileOpen) {
-    htmlElement.style.overflow = "visible"
-  } else {
-    htmlElement.style.overflow = "hidden"
+    if (!mobileOpen) {
+      htmlElement.style.overflow = "visible"
+    } else {
+      htmlElement.style.overflow = "hidden"
   }
     setMobileOpen(data)
   }
