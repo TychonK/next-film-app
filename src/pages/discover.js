@@ -1,104 +1,277 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import axios from "axios";
 import useSWR from "swr";
 import { useRouter } from "next/router";
 
-import CardMov from "@/components/CardMovie";
-import Placeholder from "@/components/placehoder";
 import NotFound from "@/components/notFound";
+import Loader from "@/components/loader";
 
-import { fetchGenresMov } from "@/lib/fetchGenres";
+import MovieCard from '@/components/discover/MovieCard';
+import TvShowCard from '@/components/discover/TvShowCard';
+import PersonCard from "@/components/discover/PersonCard";
+
+import { fetchGenresMov, fetchGenresTv } from "@/lib/fetchGenres";
 import { initAxios } from "@/lib/axios";
 
 initAxios();
 
 export async function getStaticProps() {
-  const allGenres = await fetchGenresMov();
+  const allGenresMov = await fetchGenresMov();
+  const allGenresTv = await fetchGenresTv();
   return {
     props: {
-      genres: allGenres.genres,
+      genresMov: allGenresMov.genres,
+      genresTv: allGenresTv.genres
     },
   };
 }
 
-export default function Dicover({ genres }) {
+export default function Dicover({ genresMov, genresTv }) {
   const router = useRouter();
   const { search } = router.query;
-
-  const { data, error, isLoading } = useSWR(
-    `https://api.themoviedb.org/3/search/movie?query=${search}&include_adult=false&language=en-US`,
-    fetchData
-  );
 
   async function fetchData(url) {
     const dataObj = {};
 
-    if (search == undefined || search == "") {
-      return;
+    console.log(url)
+
+    if (!url) {
+      return
     }
 
     await axios
       .get(url)
       .then(function (res) {
-        dataObj.films = res.data.results;
+        dataObj.results = res.data.results.slice(0, 5);
       })
       .catch((er) => {
         console.log(er);
       });
-    if (dataObj.films.length == 0) {
-      throw new Error("No films found by such query");
-    }
+    
     return dataObj;
   }
 
-  const sortedData = (data) =>
-    data.films.sort((a, b) => b.popularity - a.popularity);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchType, setSearchType] = useState("multi");
+  const [searchYear, setSearchYear] = useState("");
+  const [searchRequest, setSearchRequest] = useState(null);
+
+  useEffect(() => {
+    if (search && search.length != 0) {
+      setSearchTerm(search);
+      setSearchType("multi");
+      setSearchRequest(
+        `https://api.themoviedb.org/3/search/multi?query=${search}&include_adult=false&language=en-US&page=1`
+      );
+    } else {
+      return
+    }
+  }, [search])
+
+  const handleSearch = () => {
+    setSearchRequest(
+      `https://api.themoviedb.org/3/search/${searchType}` +
+        `?query=${searchTerm}` +
+        `${
+          (searchType === "tv" || searchType === "movie") ?
+          `&year=${searchYear}` : ""
+        }` +
+        `&include_adult=false&language=en-US&page=1`
+    );
+  };
+
+   const handleSearchTypeChange = (type) => {
+     setSearchType(type);
+   };
+
+  const handleSearchYearChange = (year) => {
+    setSearchYear(year);
+  };
+
+   const generateYearOptions = () => {
+     const currentYear = new Date().getFullYear();
+     const years = Array.from(
+       { length: currentYear - 1899 },
+       (_, index) => currentYear - index
+     );
+     return years.map((year) => (
+       <option key={year} value={year}>
+         {year}
+       </option>
+     ));
+   };
+
+  const { data, error, isLoading } = useSWR(
+     searchRequest,
+    fetchData, 
+   );
 
   return (
     <>
-      <h1 className="text-center text-2xl md:text-left md:text-4xl font-bold leadi md:text-5xl">
-        {!search ? (
-          "Search for movies and more..."
-        ) : (
-          <>
-            The search results for{" "}
-            <span className="italic underline">{search}</span>
-          </>
-        )}
-      </h1>
+      <div className="flex justify-center items-center">
+        <input
+          type="text"
+          placeholder="Search..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:border-blue-300 text-gray-700"
+        />
+      </div>
 
-      {!search && (
-        <svg
-          viewBox="0 0 512 512"
-          className="absolute inset-x-1/2 inset-y-1/2 -translate-y-1/4 md:-translate-y-1/2 -translate-x-1/2 w-64 md:w-80 text-gray-100 fill-gray-400"
+      <div className="flex justify-center mt-4">
+        <span
+          onClick={() => handleSearchTypeChange("movie")}
+          className={`cursor-pointer px-4 py-2 ${
+            searchType === "movie" ? "bg-purple-600 text-white" : "bg-gray-300"
+          } rounded-l`}
         >
-          <path d="M479.6,399.716l-81.084-81.084-62.368-25.767A175.014,175.014,0,0,0,368,192c0-97.047-78.953-176-176-176S16,94.953,16,192,94.953,368,192,368a175.034,175.034,0,0,0,101.619-32.377l25.7,62.2L400.4,478.911a56,56,0,1,0,79.2-79.195ZM48,192c0-79.4,64.6-144,144-144s144,64.6,144,144S271.4,336,192,336,48,271.4,48,192ZM456.971,456.284a24.028,24.028,0,0,1-33.942,0l-76.572-76.572-23.894-57.835L380.4,345.771l76.573,76.572A24.028,24.028,0,0,1,456.971,456.284Z"></path>
-        </svg>
-      )}
-      <ul className="flex flex-row flex-wrap justify-center mt-8 md:mt-12 gap-4 md:gap-10">
-        {error && <NotFound />}
+          Movie
+        </span>
+        <span
+          onClick={() => handleSearchTypeChange("tv")}
+          className={`cursor-pointer px-4 py-2 ${
+            searchType === "tv" ? "bg-purple-600 text-white" : "bg-gray-300"
+          }`}
+        >
+          TV
+        </span>
+        <span
+          onClick={() => handleSearchTypeChange("person")}
+          className={`cursor-pointer px-4 py-2 ${
+            searchType === "person" ? "bg-purple-600 text-white" : "bg-gray-300"
+          }`}
+        >
+          People
+        </span>
+        <span
+          onClick={() => handleSearchTypeChange("multi")}
+          className={`cursor-pointer px-4 py-2 ${
+            searchType === "multi" ? "bg-purple-600 text-white" : "bg-gray-300"
+          } rounded-r`}
+        >
+          All
+        </span>
 
-        {isLoading &&
-          Array.from({ length: 20 }).map((_, index) => (
-            <Placeholder key={index} className="min-w-4xs max-w-4xs" />
-          ))}
-
-        {data &&
-          sortedData(data).map((mov) => {
-            if (mov.overview.length == 0) {
-              return null;
+        <div className="ml-4">
+          <label
+            className={`text-gray-700 ${
+              searchType == "multi" || searchType == "person"
+                ? "opacity-30"
+                : ""
+            }`}
+          >
+            Year:
+          </label>
+          <select
+            value={searchYear}
+            disabled={
+              (searchType == "multi" || searchType == "person") && "disabled"
             }
-            const movGenres = [];
+            onChange={(e) => handleSearchYearChange(e.target.value)}
+            className="px-4 py-2 ml-2 border border-gray-300 rounded focus:outline-none focus:ring focus:border-blue-300 text-gray-700 disabled:opacity-20"
+          >
+            <option key="default" value={""}>
+              ...
+            </option>
+            {generateYearOptions()}
+          </select>
+        </div>
+        <button
+          onClick={handleSearch}
+          className="bg-purple-600 text-white px-4 py-2 rounded focus:outline-none focus:ring focus:border-blue-300"
+        >
+          Search
+        </button>
+      </div>
 
-            mov.genre_ids.forEach((id) => {
-              genres.forEach((genre) => {
-                genre.id == id && movGenres.push(genre.name);
-              });
-            });
+      {isLoading && <Loader />}
+      {error && <p>Error loading data</p>}
 
-            return <CardMov key={mov.id} movData={mov} genres={movGenres} />;
-          })}
-      </ul>
+      {data && (
+        <div>
+          {data.results.length > 0 && (
+            <>
+              {data.results.filter((result) => result.media_type === "movie")
+                .length > 0 && (
+                <div>
+                  <h2>Movies</h2>
+                  <div className="divide-y divide-gray-200">
+                    {data.results
+                      .filter((result) => result.media_type === "movie")
+                      .map((movie) => (
+                        <MovieCard key={movie.id} movie={movie} />
+                      ))}
+                  </div>
+                </div>
+              )}
+
+              {data.results.filter((result) => result.media_type === "tv")
+                .length > 0 && (
+                <div>
+                  <h2>TV Shows</h2>
+                  <div className="divide-y divide-gray-200">
+                    {data.results
+                      .filter((result) => result.media_type === "tv")
+                      .map((tvShow) => (
+                        <TvShowCard key={tvShow.id} tvShow={tvShow} />
+                      ))}
+                  </div>
+                </div>
+              )}
+
+              {data.results.filter((result) => result.media_type === "person")
+                .length > 0 && (
+                <div>
+                  <h2>People</h2>
+                  <div className="divide-y divide-gray-200">
+                    {data.results
+                      .filter((result) => result.media_type === "person")
+                      .map((person) => (
+                        <PersonCard key={person.id} person={person} />
+                      ))}
+                  </div>
+                </div>
+              )}
+            </>
+          )}
+
+          {data.results.length > 0 &&
+            searchRequest.includes("search/movie") && (
+              <div>
+                <h2>Movies</h2>
+                <div className="divide-y divide-gray-200">
+                  {data.results.map((movie) => (
+                    <MovieCard key={movie.id} movie={movie} />
+                  ))}
+                </div>
+              </div>
+            )}
+
+          {data.results.length > 0 && searchRequest.includes("search/tv") && (
+            <div>
+              <h2>TV shows</h2>
+              <div className="divide-y divide-gray-200">
+                {data.results.map((tvShow) => (
+                  <TvShowCard key={tvShow.id} tvShow={tvShow} />
+                ))}
+              </div>
+            </div>
+          )}
+
+          {data.results.length > 0 &&
+            searchRequest.includes("search/person") && (
+              <div>
+                <h2>People</h2>
+                <div className="divide-y divide-gray-200">
+                  {data.results.map((person) => (
+                    <PersonCard key={person.id} person={person} />
+                  ))}
+                </div>
+              </div>
+            )}
+          {data.results.length === 0 && <NotFound />}
+        </div>
+      )}
     </>
   );
 }

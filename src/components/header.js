@@ -101,11 +101,12 @@ export default function Nav({ toggleMenu, closeMenu, menuState }) {
                     handleSubmit();
                   }
                 }}
+                disabled={router.pathname.includes('/discover') && "disabled"}
                 value={query}
                 type="search"
                 name="Search"
                 placeholder="Search..."
-                className="w-32 py-2 pl-10 text-base rounded-md sm:w-auto focus:outline-none bg-gray-800 text-gray-100 focus:bg-gray-900"
+                className="w-32 py-2 pl-10 text-base rounded-md sm:w-auto focus:outline-none bg-gray-800 text-gray-100 focus:bg-gray-900 disabled:opacity-20"
               />
             </div>
             <button
