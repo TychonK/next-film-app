@@ -187,6 +187,20 @@ export default function Dicover({ genresMov, genresTv }) {
       {isLoading && <Loader />}
       {error && <p>Error loading data</p>}
 
+      {!data && (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="h-64 w-64 stroke-gray-300 fill-transparent block mx-auto absolute top-1/2 left-1/2 -translate-x-1/2"
+        >
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="23" y1="23" x2="16.65" y2="16.65"></line>
+        </svg>
+      )}
+
       {data && (
         <div>
           {data.results.length > 0 && (
