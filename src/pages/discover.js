@@ -104,13 +104,19 @@ export default function Dicover({ genresMov, genresTv }) {
   const { data, error, isLoading } = useSWR(
      searchRequest,
     fetchData, 
-   );
+  );
+  
+    const getRandomImage = () => {
+      const images = ["search-1.jpg", "search-2.jpg", "search-3.jpg"];
+      const randomIndex = Math.floor(Math.random() * images.length);
+      return images[randomIndex];
+    };
 
   return (
     <>
       <div
         className="w-screen bg-cover bg-center p-32 -mt-12 -mx-16 h-slider relative"
-        style={{ backgroundImage: "url(/search-1.jpg)" }}
+        style={{ backgroundImage: `url(/${getRandomImage()})` }}
       >
         <div className="absolute top-0 left-0 right-0 bottom-0 bg-violet-950 opacity-70 z-1" />
         <div className="relative z-10 text-white">
