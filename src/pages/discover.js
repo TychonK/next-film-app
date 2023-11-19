@@ -108,14 +108,27 @@ export default function Dicover({ genresMov, genresTv }) {
 
   return (
     <>
-      <div className="flex justify-center items-center">
-        <input
-          type="text"
-          placeholder="Search..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:border-blue-300 text-gray-700"
-        />
+      <div
+        className="w-screen bg-cover bg-center p-32 -mt-12 -mx-16 h-slider relative"
+        style={{ backgroundImage: "url(/search-1.jpg)" }}
+      >
+        <div className="absolute top-0 left-0 right-0 bottom-0 bg-violet-950 opacity-70 z-1" />
+        <div className="relative z-10 text-white">
+          <h1 className="text-5xl font-light">Search for movies, actors and more</h1>
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="px-4 py-2 mt-8 border-gray-300 rounded-l-full focus:outline-none focus:ring focus:border-blue-300 text-gray-700"
+          />
+          <button
+            onClick={handleSearch}
+            className="bg-purple-600 text-white px-4 py-2 rounded-r-full focus:outline-none"
+          >
+            Search
+          </button>
+        </div>
       </div>
 
       <div className="flex justify-center mt-4">
@@ -186,20 +199,6 @@ export default function Dicover({ genresMov, genresTv }) {
 
       {isLoading && <Loader />}
       {error && <p>Error loading data</p>}
-
-      {!data && (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="h-64 w-64 stroke-gray-300 fill-transparent block mx-auto absolute top-1/2 left-1/2 -translate-x-1/2"
-        >
-          <circle cx="11" cy="11" r="8"></circle>
-          <line x1="23" y1="23" x2="16.65" y2="16.65"></line>
-        </svg>
-      )}
 
       {data && (
         <div>
