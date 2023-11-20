@@ -6,7 +6,6 @@ import { useState } from "react";
 import FavoriteLink from "./FavoriteLink";
 
 
-
 export default function Nav({ toggleMenu, closeMenu, menuState }) {
   const [query, setQuery] = useState("")
 
@@ -27,7 +26,7 @@ export default function Nav({ toggleMenu, closeMenu, menuState }) {
 
   return (
     <>
-      <header className="p-4 bg-gray-800 text-gray-100 relative z-20">
+      <header className="p-4 bg-gray-800 text-gray-100 relative z-30">
         <div className="container flex justify-between lg:px-12 h-16 mx-auto relative nav">
           <ul className="items-stretch hidden space-x-3 lg:flex">
             <li className="flex">
@@ -70,7 +69,7 @@ export default function Nav({ toggleMenu, closeMenu, menuState }) {
             rel="noopener noreferrer"
             href="/"
             aria-label="Back to homepage"
-            className="flex items-center"
+            className="hidden lg:flex items-center"
           >
             <img
               src="/logo.svg"
@@ -101,7 +100,7 @@ export default function Nav({ toggleMenu, closeMenu, menuState }) {
                     handleSubmit();
                   }
                 }}
-                disabled={router.pathname.includes('/discover') && "disabled"}
+                disabled={router.pathname.includes("/discover") && "disabled"}
                 value={query}
                 type="search"
                 name="Search"

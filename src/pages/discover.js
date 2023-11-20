@@ -116,32 +116,37 @@ export default function Dicover() {
   return (
     <>
       <div
-        className="w-screen bg-cover bg-center p-32 -mt-12 -mx-16 h-slider relative"
+        className="w-screen bg-cover bg-center -mt-8 md:-mt-12 -ml-4 sm:-ml-8 md:-ml-12 lg:-ml-16 px-6 md:px-32 pt-10 md:pt-32 pb-16 relative rounded-b-xl overflow-hidden"
         style={{ backgroundImage: `url(/${image})` }}
       >
-        <div className="absolute top-0 left-0 right-0 bottom-0 bg-violet-950 opacity-50 z-1" />
+        <div className="absolute top-0 left-0 right-0 bottom-0 bg-rose-900 opacity-70 z-1" />
         <div className="relative z-10 text-white">
-          <h1 className="text-5xl font-light drop-shadow">
-            Search for movies, actors and more
+          <h1 className="text-5xl drop-shadow">
+            Discover movies, actors and more...
           </h1>
           <input
             type="text"
             placeholder="Search..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="p-4 mt-12 border-gray-300 rounded-l-full focus:outline-none focus:ring focus:border-blue-300 text-gray-700"
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleSearch();
+              }
+            }}
+            className="py-3 px-4 mt-12 md:w-1/2 border-gray-300 rounded-l-full focus:outline-none focus:ring focus:border-blue-300 text-gray-700"
           />
           <button
             onClick={handleSearch}
-            className="p-4 bg-purple-600 text-white rounded-r-full h-full focus:outline-none"
+            className="p-3 bg-purple-600 text-white rounded-r-full h-full focus:outline-none"
           >
             Search
           </button>
         </div>
-        <div className="flex mt-4 relative z-10">
+        <div className="flex flex-wrap gap-y-3 mt-4 relative z-10">
           <span
             onClick={() => handleSearchTypeChange("movie")}
-            className={`cursor-pointer px-4 py-2 ${
+            className={`cursor-pointer px-2 sm:px-4 py-2 ${
               searchType === "movie" ? "bg-purple-600 text-white" : "bg-white"
             } rounded-l-full`}
           >
@@ -149,7 +154,7 @@ export default function Dicover() {
           </span>
           <span
             onClick={() => handleSearchTypeChange("tv")}
-            className={`cursor-pointer px-4 py-2 ${
+            className={`cursor-pointer px-2 sm:px-4 py-2 ${
               searchType === "tv" ? "bg-purple-600 text-white" : "bg-white"
             }`}
           >
@@ -157,7 +162,7 @@ export default function Dicover() {
           </span>
           <span
             onClick={() => handleSearchTypeChange("person")}
-            className={`cursor-pointer px-4 py-2 ${
+            className={`cursor-pointer px-2 sm:px-4 py-2 ${
               searchType === "person" ? "bg-purple-600 text-white" : "bg-white"
             }`}
           >
@@ -165,7 +170,7 @@ export default function Dicover() {
           </span>
           <span
             onClick={() => handleSearchTypeChange("multi")}
-            className={`cursor-pointer px-4 py-2 ${
+            className={`cursor-pointer px-2 sm:px-4 py-2 ${
               searchType === "multi" ? "bg-purple-600 text-white" : "bg-white"
             }`}
           >
@@ -189,7 +194,7 @@ export default function Dicover() {
           </div>
           <button
             onClick={handleSearch}
-            className="bg-purple-600 ml-4 text-white px-4 py-2 rounded-full focus:outline-none focus:ring focus:border-blue-300"
+            className="bg-purple-600 mx-auto sm:ml-4 text-white px-4 py-2 rounded-full focus:outline-none focus:ring focus:border-blue-300"
           >
             Apply
           </button>
@@ -197,6 +202,15 @@ export default function Dicover() {
       </div>
 
       <div className="py-8">
+        {(!data && !isLoading) ||
+          (!isLoading && data.results.length == 0 && (
+            <svg
+              viewBox="0 0 512 512"
+              className="w-64 h-64 mx-auto fill-gray-300"
+            >
+              <path d="M479.6,399.716l-81.084-81.084-62.368-25.767A175.014,175.014,0,0,0,368,192c0-97.047-78.953-176-176-176S16,94.953,16,192,94.953,368,192,368a175.034,175.034,0,0,0,101.619-32.377l25.7,62.2L400.4,478.911a56,56,0,1,0,79.2-79.195ZM48,192c0-79.4,64.6-144,144-144s144,64.6,144,144S271.4,336,192,336,48,271.4,48,192ZM456.971,456.284a24.028,24.028,0,0,1-33.942,0l-76.572-76.572-23.894-57.835L380.4,345.771l76.573,76.572A24.028,24.028,0,0,1,456.971,456.284Z"></path>
+            </svg>
+          ))}
         {isLoading && <Loader />}
         {error && <p>Error loading data</p>}
 
@@ -282,7 +296,7 @@ export default function Dicover() {
                   </div>
                 </div>
               )}
-            {data.results.length === 0 && <NotFound />}
+            {data.results.length === 0 && searchTerm.length > 0 && <NotFound />}
           </div>
         )}
       </div>
