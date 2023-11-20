@@ -16,23 +16,24 @@ const Layout = ({ children }) => {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   const closeMenu = (data) => {
-    const htmlElement = document.documentElement;
-    if (!mobileOpen) {
-      htmlElement.style.overflow = "visible"
-    } else {
-      htmlElement.style.overflow = "hidden"
-  }
+    const htmlElement = document.documentElement
+
+    htmlElement.style.overflow = "visible" 
+    
     setMobileOpen(data)
   }
 
   const toggle = () => {
-    const htmlElement = document.documentElement;
+    const htmlElement = document.documentElement
   
-  if (mobileOpen) {
+    if (mobileOpen) {
+    console.log("set visible")
     htmlElement.style.overflow = "visible"
-  } else {
+    } else {
+      console.log("set hidden")
     htmlElement.style.overflow = "hidden"
-  }
+    }
+    
     setMobileOpen(!mobileOpen)
   }
 
