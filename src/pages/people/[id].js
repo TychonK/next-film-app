@@ -50,11 +50,11 @@ export default function PersonDetailsPage() {
       const maxHeight = lineHeight * 6;
       const actualHeight = textRef.current.clientHeight;
 
-      if (actualHeight <= maxHeight) {
+      if (actualHeight < maxHeight) {
         setShowFullButton(false);
       }
     }
-  }, []);
+  }, [data]);
 
   const toggleText = () => {
     setShowFullText(!showFullText);
