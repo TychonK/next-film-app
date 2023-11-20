@@ -134,11 +134,11 @@ export default function Dicover() {
                 handleSearch();
               }
             }}
-            className="py-3 px-4 mt-12 md:w-1/2 border-gray-300 rounded-l-full focus:outline-none focus:ring focus:border-blue-300 text-gray-700"
+            className="py-3 px-2 sm:px-4 mt-12 w-40 md:w-1/2 border-gray-300 rounded-l-full focus:outline-none focus:ring focus:border-blue-300 text-gray-700"
           />
           <button
             onClick={handleSearch}
-            className="p-3 bg-purple-600 text-white rounded-r-full h-full focus:outline-none"
+            className="py-3 px-2 sm:px-4 bg-purple-600 text-white rounded-r-full h-full focus:outline-none"
           >
             Search
           </button>
@@ -204,13 +204,13 @@ export default function Dicover() {
       <div className="py-8">
         {((!data && !isLoading) ||
           (!isLoading && data.results.length == 0)) && (
-            <svg
-              viewBox="0 0 512 512"
-              className="w-64 h-64 mx-auto fill-gray-300"
-            >
-              <path d="M479.6,399.716l-81.084-81.084-62.368-25.767A175.014,175.014,0,0,0,368,192c0-97.047-78.953-176-176-176S16,94.953,16,192,94.953,368,192,368a175.034,175.034,0,0,0,101.619-32.377l25.7,62.2L400.4,478.911a56,56,0,1,0,79.2-79.195ZM48,192c0-79.4,64.6-144,144-144s144,64.6,144,144S271.4,336,192,336,48,271.4,48,192ZM456.971,456.284a24.028,24.028,0,0,1-33.942,0l-76.572-76.572-23.894-57.835L380.4,345.771l76.573,76.572A24.028,24.028,0,0,1,456.971,456.284Z"></path>
-            </svg>
-          )}
+          <svg
+            viewBox="0 0 512 512"
+            className="w-64 h-64 mx-auto fill-gray-300"
+          >
+            <path d="M479.6,399.716l-81.084-81.084-62.368-25.767A175.014,175.014,0,0,0,368,192c0-97.047-78.953-176-176-176S16,94.953,16,192,94.953,368,192,368a175.034,175.034,0,0,0,101.619-32.377l25.7,62.2L400.4,478.911a56,56,0,1,0,79.2-79.195ZM48,192c0-79.4,64.6-144,144-144s144,64.6,144,144S271.4,336,192,336,48,271.4,48,192ZM456.971,456.284a24.028,24.028,0,0,1-33.942,0l-76.572-76.572-23.894-57.835L380.4,345.771l76.573,76.572A24.028,24.028,0,0,1,456.971,456.284Z"></path>
+          </svg>
+        )}
         {isLoading && <Loader />}
         {error && <p>Error loading data</p>}
 
