@@ -6,7 +6,7 @@ export default function Document() {
     <Html lang="en">
       <Head>
         <title>Next film App | Search films, series and actors online</title>
-        <meta>
+        <meta name="description">
           Next.js film application. Searching all the nesessary information
           about any film, series and actor.
         </meta>
